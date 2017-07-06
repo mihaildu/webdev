@@ -1,0 +1,4 @@
+# bootstrap src: .css files are in less/
+# variables (e.g. font dir) are in less/variables.less
+# to compile bootstrap
+grunt dist

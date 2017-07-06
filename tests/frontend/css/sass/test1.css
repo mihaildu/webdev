@@ -1,0 +1,31 @@
+/* all paragraphs from inside main have pink color */
+#main p {
+    //color: pink;
+}
+
+/* all divs inside main have red background */
+#main div {
+    //background-color: red;
+}
+
+/* both at the same time */
+/* this won't work, you have to type both */
+/* works with sass */
+#main {
+    p {
+	color: pink;
+    }
+    div {
+	background-color: red;
+    }
+}
+
+/* this doesn't work */
+#main p, div {
+    //color: pink;
+}
+
+/* this works, but you have to type #main twice */
+#main p, #main div {
+    //color: pink;
+}

@@ -1,0 +1,91 @@
+* {
+    border: 1px solid red;
+}
+
+.cdiv, .cdiv2 {
+    width: 100px;
+    height: 100px;
+}
+
+.cdiv3 {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: -102px;
+    left: 105px;
+}
+
+/* apparently a left margin of auto centers it */
+.cdiv4 {
+    width: auto;
+    height: 200px;
+    margin: 0 200px;
+}
+
+.my_class.my_subclass {
+    color: red;
+}
+
+.float_left, .float_right {
+    width: 120px;
+    height: 120px;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+/*
+*  clear: both will move the start position of the box
+*    until there's nothing on both left and right
+*/
+.clear_text {
+    clear: both;
+}
+
+#parent_div {
+    float: none;
+    clear: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 410px;
+}
+
+.child_div {
+    height: 100px;
+    width: 100px;
+    color: blue;
+    float: left;
+}
+
+.special_child_div {
+    float: left;
+    height: 200px;
+    width: 100px;
+    color: blue;
+}
+
+/* this applies for all ul inside child_div */
+/* this will make the list horizontal, but it removes the markers */
+.inside li {
+    display: inline;
+}
+
+/* markers can still be added using :before */
+/* careful with special chars - charset="utf-8" in <head> */
+.inside li:before {
+    content: "° ";
+}
+
+/* this makes the list horizontal, without removing the markers */
+.horz li {
+    float: left;
+    width: 80px;
+    list-style-position: inside;
+    list-style-type: circle;
+    padding-left: 2px;
+}

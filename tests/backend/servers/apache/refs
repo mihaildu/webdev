@@ -1,0 +1,45 @@
+# this is apache2 under debian systems
+# TODO apache setup
+
+# apache configuration (the conf describes where stuff is located)
+/etc/apache2
+/etc/apache2/apache2.conf
+
+# restarting apache2
+# for status to work a cli browser is needed (lynx)
+/etc/init.d/apache2 start/stop/restart
+apache2ctl start/stop/restart/status
+
+# looking for apache2 procs
+ps -e | grep apache
+
+# logs - rotation + compression
+/var/log/apache2/
+# errors
+/var/log/apache2/error.log
+/var/log/apache2/access.log
+
+# apache2 was using "sites" for dirs with web docs
+# you can change root of web docs here
+# this is called document root
+# TODO document on this
+/etc/apache2/sites-available/
+# don't forget to enable it
+/etc/apache2/sites-enabled/
+
+# tools for apache2
+a2disconf
+a2dissite
+a2enmod
+a2dismod
+a2enconf
+a2ensite
+a2query
+
+# listing loaded modules
+apache2ctl -M
+
+# showing server status
+apache2ctl status/fullstatus
+# or if configured properly (TODO)
+http://127.0.0.1/server-status

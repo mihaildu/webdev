@@ -1,0 +1,63 @@
+/*
+* {
+    border: 1px solid red;
+}
+*/
+
+/* settings applied to the middle buttons */
+#options {
+    /* center horizontally */
+    text-align: center;
+
+    /* official settings for centering buttons */
+    /* it's better to use navbar-btn */
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-right: 15px;
+}
+
+#run {
+    float: right;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#test {
+    margin-top: 150px;
+}
+
+/* the official fix for navbar */
+/* default height for navbar is 50px */
+/* I need 1px more for border */
+/* this is from jumbotron theme */
+.clear-navbar {
+    margin-top: 51px;
+}
+
+/* in bootstrap v4 border-0? */
+.code-area, .result-area {
+    border: 1px solid #d3d3d3;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/* the tag in each code area */
+.tag {
+    float: right;
+}
+
+/* code area text input */
+textarea {
+    /* this seems weird to be enabled by default */
+    resize: none;
+    border: none;
+    width: 100%;
+    /* why */
+    height: 99.6%;
+}
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 99.6%;
+}

@@ -1,0 +1,21 @@
+# javascript = interpreted
+# interpreters for javascript: rhino, node.js
+# node.js = more than just an interpreter (runtime env)
+
+# node.js can be installed from repos (on old linux distro up until v0.12)
+sudo apt-get install nodejs
+
+# to get newest version of node (v8.x) - on newer linux distros
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node --version
+
+# running a javascript with node
+node file.js
+
+# you can also start the cli/repl
+node
+
+# npm = node packet manager
+# TODO npm installation (might come by default with nodejs)
+npm --version

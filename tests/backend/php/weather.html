@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="description" content="This site is all about tests"/>
+	<meta name="keywords" content="test, tests"/>
+
+	<title>Weather Scrapper</title>
+
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="weather.css">
+    </head>
+    <body>
+	<div id="first-segment" class="container-fluid">
+	    <div class="row centered-row">
+		<div class="col-md-6 col-md-offset-3">
+		    <h1 class="general-text">Weather Scrapper</h1>
+		    <p class="lead general-text">
+			Enter your city to get the weather
+		    </p>
+		    <!--
+			 we don't need a form if we
+			 are going to use javascript;
+			 but then it won't work with enter key;
+			 this is still a weird way to do it
+		       -->
+		    <!-- method="post", action="scrapper.php" -->
+		    <form method="post">
+			<div class="form-group">
+			    <!-- col-xs-8 -->
+			    <div class="input-group centered">
+				<input type="text" class="form-control"
+				       name="city_name"
+				       placeholder="City name"
+				       id="city-input">
+			    </div>
+			</div>
+			<button id="submit-btn" type="submit"
+				class="btn btn-success">
+			    <!-- onclick="get_weather()" -->
+			    Submit
+			</button>
+			<div id="loading-div" class="centered"></div>
+		    </form>
+		</div>
+	    </div>
+	    <!--
+		 this had a weird "responsive" behaviour
+		 TODO investigate
+	       -->
+	    <div class="row">
+		<div id="result" class="alert alert-success centered"></div>
+	    </div>
+	</div>
+
+	<script src="jquery-2.2.3.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="weather.js"></script>
+    </body>
+</html>

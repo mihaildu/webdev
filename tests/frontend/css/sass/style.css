@@ -1,0 +1,96 @@
+/* you can have normal css in here */
+.my_class {
+  background-color: red; }
+
+/* you can have definitions inside definitions */
+#main p {
+  color: pink; }
+#main div {
+  background-color: red; }
+
+/* you can also reference parent selectors */
+a {
+  color: #2f2f2f;
+  text-decoration: none; }
+  a:hover {
+    color: #7f7f7f; }
+
+/* you also have namespaces */
+/* e.g. the font namespace */
+.nspc {
+  font-family: Times;
+  font-size: 22px;
+  font-weight: bold; }
+
+/* single line comments are deleted from the css file */
+/* variables */
+.box1 {
+  background-color: lime;
+  width: 100px;
+  height: 100px; }
+
+/* content property - css */
+/* this only works with :before and :after */
+p.ctn1 {
+  color: lime; }
+
+p.ctn2:before {
+  content: "."; }
+
+/* doing the same in sass */
+/* TODO check this out - doesn't really work */
+p.ctn6 {
+  color: blue; }
+
+.ctn5 p {
+  color: blue; }
+  .ctn5 p:before {
+    content: ">"; }
+
+p.ctn3 {
+  /* font size/line height */
+  /* line height = e.g. space between lines in a paragraph */
+  font: 10px/8px; }
+
+/* you can also set alpha for colors - old css */
+p.ctn4 {
+  color: rgba(255, 0, 0, 0.25); }
+
+/* functions */
+.func1 {
+  color: red; }
+
+.func2 {
+  color: red; }
+
+/* mixins */
+/* what's the difference between these and placeholders */
+/* it just seems like variables and some minimal functionality */
+.mixin-test {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff0000; }
+
+/* they can also take arguments */
+.mixin-test-2 {
+  color: green;
+  background-color: pink; }
+
+/* placeholders */
+/* we won't use error on it's own */
+/* we'll just extend classes from it */
+.serious-error {
+  border: 1px #00f;
+  background-color: #fdd; }
+
+.serious-error {
+  color: aqua; }
+
+/* partials TODO _filename.scss
+ * I just assume _name.scss files are not compiled if you use
+ * sass input-dir:output-dir
+ * you can define stuff in them, and them @import in the main file.
+ */
+
+/*# sourceMappingURL=style.css.map */

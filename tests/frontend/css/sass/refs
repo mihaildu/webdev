@@ -1,0 +1,30 @@
+# to install sass you need ruby
+# TODO cmd to install ruby
+
+# once you have ruby (and rubygem) install sass
+gem install sass
+sudo su -c "gem install sass"
+sass -v
+
+# automatically update css files from ./css when files from ./scss change
+# this should make a .map file to map .scss and .css files
+# TODO test this
+sass --watch scss:css
+
+# also works on individual files
+# every time a change is made to style.scss
+# style.css is updated
+sass --watch style.scss:style.css
+
+# turn .scss into css
+sass input.scss output.css
+
+# updating gem
+# TODO test these
+gem install rubygems-update
+update_rubygems
+gem update --system
+
+# interactive shell
+sass -i
+>> 1px + 1px + 1px

@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- the head can always be taken from example.com-->
+    <!-- style for <html> & <body> seems to be added automatically -->
+
+    <!-- base url for all relative paths?? -->
+    <!-- <base href="http://www.test.com/"/> -->
+    <!-- redirect after 1 sec -->
+    <!-- <meta http-equiv="refresh" content="1; url=http://www.example.com"/>
+      -->
+
+    <!-- what charset to use -->
+    <meta charset="utf-8"/>
+    <!-- what's on this page - for bots I assume; in this case text -->
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <!-- this is for mobile users -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- description for bots I assume -->
+    <meta name="description" content="This site is all about ..."/>
+    <!-- keywords for bots I assume -->
+    <meta name="keywords" content="test, tests"/>
+
+    <title>This is the title (up in browser)</title>
+
+    <!-- you can also add CSS code here, although sep file is pref -->
+    <style type="text/css">
+      body {
+      background-color:silver;
+      }
+    </style>
+
+    <!-- you can also add javascript here, uncomment below -->
+    <script type="text/javascript">
+      <!-- document.write("Hello world") -->
+    </script>
+
+    <!-- or add via src -->
+    <!-- <script type="text/javascript" src="file.js"> -->
+    <!-- </script>  -->
+  </head>
+  <body>
+    <h1 align="center">This page has examples for HTML!</h1>
+    <br><br>
+    HTML document should be between &lt;html&gt; tags. Optional at the
+    beginning: !doctype html.
+    <br><br>
+    HTML docs should have head & body. Example for head in src.<br>
+    There are tags between &lt; and &gt; and attributes of tags.<br>
+    To escape special chars & lt ; (less than). Look at src.<br>
+    <p>This is a paragraph. Basic tags:</p>
+    br = newline<br>
+    p = paragraph<br>
+    div = group smth to apply some changes<br>
+    span = same as div, but inline<br>
+    h1 = header size 1<br>
+    h2 = header size 2 ... etc until h6<br>
+    <br><br>
+    Special chars (& + special + ;):<br>
+    lt = &lt;<br>
+    gt = &gt;<br>
+    nbsp = space<br>
+    <br><br>
+    For more html tags/refs:<br>
+    <a href="http://www.tizag.com/htmlT/reference/htmlreference.php"
+       style="display:block">tizag refs</a>
+    <a href="https://www.w3schools.com/tags/default.asp"
+       style="display:block">w3schools refs</a>
+    <a href="https://www.w3.org/TR/html5/introduction.html"
+       style="display:block">official docs</a>
+    Also, look below.
+    <br><br>
+
+    This is an example of a form:
+    <form name="my_form" action="" method="post">
+      <input type="text" size="20" placeholder="Type your name here"
+	     name="my_name">
+      <input type="submit" value="Submit Button">
+    </form>
+    <br><br>
+
+    This is an example of uploading a file:<br>
+    <input type="file" name="upload_file">
+    <br><br>
+
+    This is an example of a <i>select</i> list:<br>
+    <select>
+      <option value="v1">This is option 1</option>
+      <option value="v2">This is option 2</option>
+    </select>
+    <br><br>
+
+    This is an example of using an audio file:<br>
+    <!-- controls means show controls gui -->
+    <audio controls style="width:400px">
+      <source src="old/tmp_matt.mp3" type="audio/mpeg">
+    </audio>
+    <br><br>
+
+    This is an example of a table:
+    <table>
+      <tr>
+	<th>Heading 1</th>
+	<th>Heading 2</th>
+      </tr>
+      <tr>
+	<td>Row 1, Col 1</td>
+	<td>Row 1, Col 2</td>
+      </tr>
+      <tr>
+	<td>Row 2, Col 1</td>
+	<td>Row 2, Col 2</td>
+      </tr>
+    </table>
+    <br><br>
+
+    <!-- Adding borders to table -->
+    <style type="text/css">
+      table {
+	  border-collapse: collapse;
+      }
+      td, th {
+	  border: 1px solid black;
+	  padding: 8px;
+      }
+    </style>
+
+    This is an example of an image:<br>
+    <img src="old/pic.jpg">
+    <br><br>
+    <pre>This is pre-formatted text</pre>
+    <br><br>
+
+    Showing something from youtube in a frame:<br>
+    <iframe width="560" height="315"
+	    src="https://www.youtube.com/embed/XBKHjB1_uiQ"
+	    frameborder="0" allowfullscreen>
+    </iframe>
+    <br><br>
+
+    This is a horizontal rule:<br>
+    Before
+    <hr>
+    After
+    <br><br>
+
+    Some text formatting:<br>
+    This text is <b>bold</b>.<br>
+    This text is also <strong>bold</strong>.<br>
+    This text is <i>italic</i>.<br>
+    This text is also <em>italic</em> (or emphasized).<br>
+    This text is <u>underlined</u>.<br>
+    This text is <strike>striked</strike>.<br>
+    This text is in <sup>superscript</sup>.<br>
+    This text is in <sub>subscript</sub>.<br>
+    This text is <marquee>marquee</marquee>
+    <br><br>
+
+    This is an unordered list:<br>
+    <ul>
+      <li>Element 1</li>
+      <li>Element 2</li>
+      <li>Element 3</li>
+    </ul>
+    <br><br>
+
+    <!-- type = "A", "1", "a", "i", "I" -->
+    This is an ordered list:<br>
+    <ol start="1" type="I">
+      <li>Element 1</li>
+      <li>Element 2</li>
+    </ol>
+    <br><br>
+
+    This is a text area:<br>
+    <textarea placeholder="Type some nasty text here"></textarea>
+    <br><br>
+
+    <!-- same name means can't be both selected at the same time -->
+    <!-- label allows you to click on text -->
+    These are some radio buttons:<br>
+    <label>
+      <input type="radio" name="my_radio">Option 1<br>
+    </label>
+    <label>
+      <input type="radio" name="my_radio">Option 2<br>
+    </label>
+  </body>
+</html>

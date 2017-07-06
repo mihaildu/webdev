@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="This site is all about tests"/>
+    <meta name="keywords" content="test, tests"/>
+
+    <title>Code Player</title>
+
+    <!-- modified bootstrap with no focus for btn-default -->
+    <link rel="stylesheet" type="text/css" href="bootstrapcp.min.css"/>
+    <link rel="stylesheet" type="text/css" href="codeplayer.css">
+
+  </head>
+  <body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <!-- parent -->
+      <div class="container-fluid">
+
+	<!-- header -->
+	<div class="navbar-header">
+	  <a class="navbar-brand" href="#">Code Player</a>
+	  <!-- collapsed stuff -->
+	  <button type="button" class="navbar-toggle collapsed"
+		  data-toggle="collapse"
+		  data-target="#navmenu"
+		  aria-expanded="false">
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	</div>
+
+	<!-- everything else -->
+	<div class="collapse navbar-collapse" id="navmenu">
+
+	  <!-- run button -->
+	  <div id="run">
+	    <button class="btn btn-default" onclick="run()">
+	      Run
+	    </button>
+	  </div>
+
+	  <!-- middle buttons -->
+	  <!-- alternative is navbar-btn to center vertically -->
+	  <div id="options">
+	    <button id="html-btn" class="btn btn-default active"
+		    onclick="change_html()">
+	      HTML
+	    </button>
+	    <button id="css-btn" class="btn btn-default active"
+		    onclick="change_css()">
+	      CSS
+	    </button>
+	    <button id="js-btn" class="btn btn-default active"
+		    onclick="change_js()">
+	      JS
+	    </button>
+	  </div>
+	</div>
+      </div>
+    </nav>
+
+    <div class="container-fluid clear-navbar">
+      <div class="row">
+	<div id="html-area" class="col-md-3 code-area">
+	  <!-- this looks stupid and ugly
+	  <div class="tag">
+	    HTML
+	  </div>
+	  -->
+	  <textarea id="html-input"
+		    placeholder="Type HTML code here"></textarea>
+	</div>
+	<div id="css-area" class="col-md-3 code-area">
+	  <textarea id="css-input"
+		    placeholder="Type CSS code here"></textarea>
+	</div>
+	<div id="js-area" class="col-md-3 code-area">
+	  <textarea id="js-input"
+		    placeholder="Type JS code here"></textarea>
+	</div>
+	<div class="col-md-3 result-area">
+	  <iframe id="result"></iframe>
+	</div>
+      </div>
+    </div>
+
+    <script src="jquery-2.2.3.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="codeplayer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="This site is all about tests"/>
+    <meta name="keywords" content="test, tests"/>
+
+    <title>Landing Page Example</title>
+
+    <!-- this is how you import bootstrap classes -->
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css"/>
+
+    <!-- our own css, imported afterwards in case we want to overwrite smth -->
+    <link rel="stylesheet" type="text/css" href="landing.css">
+
+  </head>
+  <!-- #navmenu -->
+  <body data-spy="scroll" data-target="#navmenu">
+
+    <!-- add a navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+	<!-- header -->
+	<div class="navbar-header">
+	  <a class="navbar-brand" href="#">The App</a>
+	  <!-- collapsed stuff -->
+	  <!-- adjusted @grid-float-breakpoint to collapse earlier -->
+	  <button type="button" class="navbar-toggle collapsed"
+		  data-toggle="collapse"
+		  data-target="#navmenu"
+		  aria-expanded="false">
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  </button>
+	</div>
+
+	<!-- collapsing area -->
+	<div class="collapse navbar-collapse" id="navmenu">
+	  <!-- links -->
+	  <ul class="nav navbar-nav">
+	    <li class="active">
+	      <a href="#first-segment">Home</a>
+	    </li>
+	    <li>
+	      <a href="#second-segment">About</a>
+	    </li>
+	    <li>
+	      <a href="#third-segment">Download the App</a>
+	    </li>
+	  </ul>
+
+	  <!-- login form -->
+	  <form class="navbar-form navbar-right" method="post">
+	    <div class="form-group">
+		<input type="email" class="form-control" name="email"
+		     placeholder="Email">
+	    </div>
+	    <div class="form-group">
+		<input type="password" class="form-control" name="pass"
+		     placeholder="Password">
+	    </div>
+	    <button type="submit" class="btn btn-success">Log in</button>
+	  </form>
+
+	</div>
+      </div>
+    </nav>
+
+    <!-- first segment, with a background image -->
+    <div id="first-segment">
+      <div class="container" id="first-container">
+	<div class="row">
+	  <!-- info -->
+	  <h1 id="title-first-segment">The App</h1>
+	  <h5>
+	    This is the app that you need in your life!
+	  </h5>
+	  <div class="row" id="description-fix">
+	    <!-- TODO fix the margins and paddings -->
+	    <div class="col-xs-10 center-col" >
+	      <p id="description-title-first-seg">
+		This app uses advanced responsive scalable technologies to
+		deliver high performing solutions to our clients. The cloud
+		infrastructure is based on state of the art artificial
+		intelligence algorithms.
+	      </p>
+	    </div>
+	  </div>
+
+	  <!-- subscription -->
+	  <p id="mailing-list-text">Interested? Join our mailing list!</p>
+	  <form method="post">
+	    <!-- this should prob have fixed width instead of col-md-8 -->
+	    <div class="form-group">
+	      <div class="input-group col-xs-8 center-form">
+		<span class="input-group-addon">@</span>
+		<input type="email" class="form-control" name="sub_email"
+		       placeholder="Your email">
+	      </div>
+	    </div>
+	    <button type="submit" class="btn btn-success">Submit</button>
+	  </form>
+	</div>
+      </div>
+    </div>
+
+    <!-- second segment -->
+    <div id="second-segment">
+      <div class="container-fluid" id="second-container">
+	<div class="row">
+	  <h1 id="title-second-segment">
+	    This App is Awesome
+	  </h1>
+	  <h5 id="info-title-second-seg">
+	    Even more reasons why this is the best app
+	  </h5>
+
+	  <!-- the 3 cols -->
+	  <div class="container-fluid">
+	  <div class="row" id="row-second-seg">
+	    <div class="col-md-4">
+	      <h2>
+		<span class="glyphicon glyphicon-music"></span>
+		Reason 1
+	      </h2>
+	      <p class="reason-second-seg">
+		Upper Pine Bottom State Park is a 5-acre (2.0 ha) Pennsylvania
+		state park in Lycoming County, Pennsylvania in the United
+		States. The park is in Cummings Township on Pennsylvania Route
+		44 and is surrounded by the Tiadaghton State Forest. It is on
+		Upper Pine Bottom Run, which gave the park its name and is a
+		tributary of Pine Creek. Upper Pine Bottom State Park is in
+		the Pine Creek Gorge, where the streams have cut through five
+		major rock formations from the Devonian and Carboniferous
+		periods.
+	      </p>
+	    </div>
+	    <div class="col-md-4">
+	      <h2>
+		<span class="glyphicon glyphicon-film"></span>
+		Reason 2
+	      </h2>
+	      <p class="reason-second-seg">
+		Upper Pine Bottom State Park is a 5-acre (2.0 ha) Pennsylvania
+		state park in Lycoming County, Pennsylvania in the United
+		States. The park is in Cummings Township on Pennsylvania Route
+		44 and is surrounded by the Tiadaghton State Forest. It is on
+		Upper Pine Bottom Run, which gave the park its name and is a
+		tributary of Pine Creek. Upper Pine Bottom State Park is in
+		the Pine Creek Gorge, where the streams have cut through five
+		major rock formations from the Devonian and Carboniferous
+		periods.
+	      </p>
+	    </div>
+	    <div class="col-md-4">
+	      <h2>
+		<span class="glyphicon glyphicon-star-empty"></span>
+		Reason 3
+	      </h2>
+	      <p class="reason-second-seg">
+		Upper Pine Bottom State Park is a 5-acre (2.0 ha) Pennsylvania
+		state park in Lycoming County, Pennsylvania in the United
+		States. The park is in Cummings Township on Pennsylvania Route
+		44 and is surrounded by the Tiadaghton State Forest. It is on
+		Upper Pine Bottom Run, which gave the park its name and is a
+		tributary of Pine Creek. Upper Pine Bottom State Park is in
+		the Pine Creek Gorge, where the streams have cut through five
+		major rock formations from the Devonian and Carboniferous
+		periods.
+	      </p>
+	    </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="third-segment">
+      <div class="container" id="third-container">
+	<div class="row">
+	  <h1 id="title-third-segment">
+	    Download the App!
+	  </h1>
+	  <h5>
+	    Click on the image below
+	  </h5>
+	  <a href="#">
+	    <img src="google_play.svg" id="google-play">
+	  </a>
+	</div>
+      </div>
+    </div>
+
+    <!-- load required scripts -->
+    <script src="jquery-2.2.3.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script>
+      //$("#first-segment").css("height", $(window).height());
+    </script>
+  </body>
+</html>

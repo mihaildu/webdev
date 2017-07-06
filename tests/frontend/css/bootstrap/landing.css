@@ -1,0 +1,114 @@
+/* debugging stuff */
+/*
+* {
+    border: 1px solid red;
+}
+*/
+
+/* navbar stuff */
+.navbar {
+    margin-bottom: 0;
+}
+
+
+/* first segment stuff */
+#first-segment {
+    width: 100%;
+    min-height: 628px;
+    min-width: 628px;
+
+    background-image: url(landing_bg.jpg);
+    background-repeat: no-repeat;
+    /* width, height */
+    //background-size: 100% auto;
+    background-size: cover;
+    /* this puts the image in the center of the div all the time */
+    //background-position: center center;
+    /* this makes the image stay the same, even when you scroll */
+    //background-attachment: fixed;
+}
+
+#first-container {
+    width: 600px;
+    text-align: center;
+}
+
+#title-first-segment {
+    margin-top: 0;
+    padding-top: 150px;
+}
+
+#description-title-first-seg {
+    font-size: 12px;
+    white-space: wrap;
+}
+
+#description-fix {
+    //padding-left: 15px;
+    //padding-right: 15px;
+}
+
+#mailing-list-text {
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.center-form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* second segment stuff */
+#second-segment {
+    min-height: 608px;
+}
+
+#second-container {
+    text-align: center;
+}
+
+#title-second-segment {
+    margin-top: 0;
+    padding-top: 100px;
+}
+
+#info-title-second-seg {
+    font-size: 16px;
+}
+
+#row-second-seg {
+    margin-top: 70px;
+}
+
+.reason-second-seg {
+    text-align: left;
+    text-indent: 20px;
+}
+
+
+/* third segment stuff */
+#third-segment {
+    width: 100%;
+    min-height: 392px;
+    background-color: #99ccff;
+}
+
+#third-container {
+    text-align: center;
+}
+
+#title-third-segment {
+    padding-top: 100px;
+}
+
+#google-play {
+    width: 300px;
+    height: auto;
+}
+
+.center-col {
+    float: none;
+    margin: auto auto;
+}

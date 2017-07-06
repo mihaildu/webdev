@@ -1,0 +1,49 @@
+<!-- todo app -->
+<html ng-app="todo_app">
+  <link rel="stylesheet" type="text/css" href="test1.css">
+  <body>
+    Here we play with controllers.
+
+    <!-- we need to use "as" to give it a name -->
+    <!-- the controller seems to be just a namespace -->
+    <div ng-controller="todo_ctrl as my_ctrl">
+      <!-- now we have access to variables in the function namespace -->
+      The secret number is {{my_ctrl.secret_number}}.<br>
+      Factorial(4) = {{my_ctrl.fac(4)}}.<br><br>
+
+      This is a todo list using a controller:<br>
+      <h3>TODO</h3>
+      Tasks remaining: {{my_ctrl.remaining()}} out of
+      {{my_ctrl.todo_list.length}}.
+
+      <!--
+	   ng-click is like onclick
+	   this could've been done the old way, but we need the scope
+	   you can't call a function from within a function like that
+	   -->
+      <a href="" ng-click="my_ctrl.archive()">Remove done</a>
+
+      <ul class="unstyled">
+	<!-- ng-repeat works like a for -->
+	<li ng-repeat="todo in my_ctrl.todo_list">
+	  <label>
+	    <!-- this will link the checkbox to todo.done -->
+	    <!-- if I modify todo.done in code this will get updated -->
+	    <!-- and the other way around (like in the prev example) -->
+	    <input type="checkbox" ng-model="todo.done">
+	    <span class="done-{{todo.done}}">{{todo.text}}</span>
+	  </label>
+	</li>
+      </ul>
+
+      <form ng-submit="my_ctrl.add()">
+	<!-- new_todo will be accessible in js via this.new_todo -->
+	<input type="text" ng-model="my_ctrl.new_todo" size="30"
+	       placeholder="add new todo">
+	<input type="submit" value="add">
+      </form>
+    </div>
+    <script src="angular.min.js"></script>
+    <script src="test1.js"></script>
+  </body>
+</html>

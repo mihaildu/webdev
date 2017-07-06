@@ -1,0 +1,205 @@
+/* set the layout */
+
+/* useful in designing layout */
+/* comment at the end */
+/*
+* {
+    border: 1px solid red;
+}
+*/
+
+/* make the navbar all the way */
+body {
+    margin: 0;
+}
+
+/* navbar */
+#navbar {
+    background-color: #0C0C0C;
+    height: 50px;
+}
+
+/* centered fixed width layout */
+.fixedwidth {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* logo image */
+#logo {
+    float: left;
+
+    /* size */
+    width: 60px;
+    height: auto;
+}
+
+/* generic class for all text on navbar */
+.navbar_text {
+    color: #bfbfbf;
+    font-size: 15px;
+    font-family: Helvetica;
+}
+
+/* middle text region */
+#navbar_main_text {
+    height: 15px;
+    position: relative;
+    margin-top: 13px;
+    margin-left: 5px;
+    float: left;
+}
+
+/* links on navbar */
+.a_navbar {
+    /* get rid of underline */
+    text-decoration: none;
+}
+
+/* make a little bit white on hover */
+.a_navbar:hover {
+    color: #dfdfdf;
+}
+
+/* search form/text box */
+#navbar_search_text {
+    float: right;
+    margin-top: 13px;
+}
+
+/* search icon/button */
+#navbar_search_icon {
+    width: 30px;
+    height: auto;
+    float: right;
+    margin-top: 7px;
+}
+
+/* main content */
+#main_content {
+    margin-top: 30px;
+    height: 700px;
+}
+
+/* main, left side - around the world */
+#main_left {
+    width: 29.5%;
+    float: left;
+}
+
+/* main, center - featured */
+#main_center {
+    width: 44.5%;
+    float: left;
+    margin-left: 4.5px;
+}
+
+/* table images under header */
+.table_image {
+    width: 100%;
+    height: auto;
+}
+
+/* main, right - spotlight */
+#main_right {
+    width: 24.5%;
+    float: left;
+    margin-left: 4.5px;
+}
+
+/* table in each column */
+.main_table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* table header */
+.main_table_th {
+    color: #404040;
+    background-color: #f0f0f2;
+    font-size: 16px;
+    padding: 7px;
+}
+
+/* text in each row */
+.main_text {
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 18px;
+    color: #262626;
+    text-decoration: none;
+    display: block;
+}
+
+/* make links whiter */
+.main_text:hover {
+    color: #565656;
+}
+
+/* add border on top between links */
+.main_tr {
+    border-top: 1px solid #c6c6c6;
+}
+
+/* images on each row in main, center col */
+.main_center_img {
+    float: left;
+    width: 40%;
+    height: auto;
+}
+
+/* big text for center column, after imgs */
+#main_center_text {
+    /* text area size */
+    width: 57.5%;
+    height: auto;
+
+    float: left;
+    margin-left: 5px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 22px;
+    color: #262626;
+    text-decoration: none;
+}
+
+/* this is for the link */
+#main_center_text:hover {
+    color: #969696;
+}
+
+/* turn anchors to blocks */
+.main_center_anchor {
+    display: block;
+}
+
+/* images on each row in main, right col */
+.main_right_img {
+    float: left;
+    width: 30%;
+    height: auto;
+}
+
+#main_right_text {
+    width: 67.5%;
+    height: auto;
+    float: left;
+    margin-left: 5px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    color: #262626;
+    text-decoration: none;
+}
+
+/* this is for the link */
+#main_right_text:hover {
+    color: #969696;
+}

@@ -1,0 +1,94 @@
+/* you can use old css in this */
+.test {
+    color: pink;
+}
+
+/* variables */
+@var1: #5b83ad;
+@var2: @var1 + #111;
+
+#main {
+    color: @var1;
+    //background-color: @var2;
+}
+
+/* mixins */
+.common {
+    font-weight: bold;
+}
+
+#bold-p {
+    .common;
+    color: green;
+}
+
+#bold-div {
+    .common;
+    color: red;
+}
+
+/* nested rules */
+/* similar to sass */
+#my-nested {
+    font-style: italic;
+    .class1 {
+	color: navy;
+    }
+    .class2 {
+	color: orange;
+    }
+}
+
+/* you can also do arithmetic operations (similar sass) */
+
+/* functions */
+/* built-in */
+@width: 0.5;
+@base-color: #f04615;
+#my-func {
+    width: percentage(@width);
+    height: 10px;
+    //background-color: saturate(@base-color, 5%);
+    background-color: spin(lighten(@base-color, 25%), 8);
+}
+
+/* namespaces */
+/* grouping mixins together */
+/* bundle is considered a namespace */
+#bundle {
+    .first-mixin {
+	background-color: lime;
+    }
+    .second-mixin {
+	background-color: teal;
+    }
+    .common {
+	width: 100px;
+	height: 100px;
+    }
+}
+
+#nmspc-test-1 {
+    border: 1px solid black;
+    #bundle > .first-mixin;
+    #bundle > .common;
+}
+
+#nmspc-test-2 {
+    border: 1px solid black;
+    #bundle > .second-mixin;
+    #bundle > .common;
+}
+
+/* scope */
+@scope-var: red;
+#scope-id {
+    /* this is a different var */
+    @scope-var: green;
+    color: @scope-var;
+}
+
+/* importing */
+/* prob similar to CSS3 */
+/* this will import aux.less */
+@import "aux";

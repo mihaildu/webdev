@@ -1,0 +1,70 @@
+Old version (still in use): <b>angular.js (Angular 1.x)</b><br>
+Initial release 20 Oct 2010<br>
+Latest release 1.6.4 (31 Mar 2017)<br>
+<br>
+Website:<br>
+<a href="https://angularjs.org/">angular.js</a><br>
+
+Github:<br>
+<a href="https://github.com/angular/angular.js">angular.js</a><br>
+
+Tutorials:<br>
+<a href="https://docs.angularjs.org/tutorial">official</a>
+<span style="color: red; font-weight: bold;">TODO</span><br>
+<a href="https://www.w3schools.com/angular/">w3schools</a><br>
+<a href="https://www.codeschool.com/pages/angularjs-vs-angular">free course</a><br>
+
+Refs:<br>
+<a href="https://docs.angularjs.org/api">official</a><br>
+<a href="https://www.w3schools.com/angular/angular_ref_directives.asp">
+  w3schools</a><br>
+<br>
+<br>
+
+New version: <b>angular (v2/4)</b><br>
+Initial release 14 Sept 2016<br>
+Latest release 4.1.0 (26 April 2017)<br>
+<br>
+Website:<br>
+<a href="https://angular.io/">angular</a><br>
+
+Github:<br>
+<a href="https://github.com/angular/angular">angular</a><br>
+
+Tutorials:<br>
+<a href="https://angular.io/guide/quickstart">official</a><br>
+<a href="https://www.codeschool.com/pages/angularjs-vs-angular">free course</a><br>
+
+Refs:<br>
+<a href="https://docs.angularjs.org/api">official</a><br>
+<br>
+<br>
+
+<!-- this works -->
+<!-- why do we need ng-app -->
+<!-- it doesn't work without it -->
+<html ng-app>
+  <head>
+    <!-- script in the head? -->
+    <!-- works in the body -->
+  </head>
+  <body>
+    This text will get updated as you type your name below:
+    <!-- this gets updated in real-time -->
+    <p>Hello {{your_name}}</p>
+    <!-- you can't use dash for ng-models -->
+    <!-- you can use underlines though -->
+    <!-- this links this input to the variable "your_name" -->
+    <input type="text" ng-model="your_name" placeholder="Enter a name"></input>
+    <br><br>
+    <!-- you can also pipe stuff and filter them TODO -->
+    <script src="angular.min.js"></script>
+  </body>
+</html>
+
+<!-- it seems I can't have multiple apps on same page -->
+<iframe width="400" height="330" src="controller.html"></iframe>
+<br><br>
+
+<iframe width="400" height="330" src="components.html"></iframe>
+<br><br>

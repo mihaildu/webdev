@@ -1,0 +1,249 @@
+/* this sets style for body */
+/* this is also called a selector */
+body {
+    /* property: value */
+    background-color: #ff0000;
+}
+
+/* you can set properties for every element */
+* {
+    // some props here
+}
+
+/* this sets style for all the tags with this name <p> */
+p {
+    color: white;
+}
+
+/* this sets the style for all <p> tags with class "first" */
+p.first {
+    color: aqua;
+}
+
+/* this sets the style for all <p> tags with id "second" */
+p#second {
+    text-align: left;
+    text-indent: 20px;
+    letter-spacing: 3px;
+}
+
+/* <a> class = "c1", if link is not visited */
+a.c1:link {
+    color: red;
+    text-decoration: none;
+}
+
+/* <a> class = "c1", if link is visited */
+a.c1:visited {
+    color: purple;
+    text-decoration: none;
+}
+
+/* <a> class = "c1", when you hover over */
+a.c1:hover {
+    color: blue;
+}
+
+/* usually div and span will have special classes */
+div.my_class {
+    color: pink;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: bolder;
+    cursor: grabbing;
+}
+
+/* this class can be used by anything */
+.my_second_class {
+    color: blue;
+}
+
+/* center some image */
+img.pic_class {
+    /* relative = distance from where it should normally be displayed */
+    /* absolute = distance from upper-left corner of screen */
+    position: relative;
+    top: 0px;
+    right: 440px;
+    float: right;
+}
+
+/* this is my class for a square */
+.sqr {
+    background-color: green;
+    width: 50px;
+    height: 50px;
+    /* margin: top-bottom left-right */
+    margin: 5em 5em;
+    /* padding is all around */
+    padding: 10px;
+    border-radius: 1em;
+}
+
+.sqr2 {
+    /* old browsers */
+    background: #3b679e;
+    /* FF3.6-15 */
+    background: -moz-linear-gradient(top, #3b679e 0%, #2b88d9 50%,
+				     #207cca 51%, #7db9e8 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-linear-gradient(top, #3b679e 0%, #2b88d9 50%,
+					#207cca 51%, #7db9e8 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(to bottom, #3b679e 0%, #2b88d9 50%,
+				#207cca 51%, #7db9e8 100%);
+    /* IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3b679e',
+						       endColorstr='#7db9e8',
+						       GradientType=0);
+
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 450px;
+    left: 200px;
+    border-radius: 1em;
+}
+
+/* some text properties */
+.text1 {
+    color: white;
+    /* x-large can also work as font-size */
+    font-size: 200%;
+    /* line-through, overline, none */
+    text-decoration: underline;
+    /* 100, bold, bolder */
+    font-weight: bold;
+    font-family: Helvetica;
+    /* oblique */
+    font-style: italic;
+    /* %, px */
+    text-indent: 5%;
+    word-spacing: 10px;
+    letter-spacing: 3px;
+}
+
+.text2 {
+    color: white;
+    font-variant: small-caps;
+    /* this also works: uppercase, capitalize, lowercase */
+    //text-transform: uppercase;
+    /* right, left, center, justify */
+    text-align: left;
+}
+
+/* just a red box */
+.red_box {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    float: right;
+}
+
+/* this has a background image */
+.bg_img {
+    background-image: url(imgs/dots.jpg);
+    background-repeat: repeat;
+    //background-repeat: no-repeat;
+    //background-repeat: repeat-x;
+    background-attachment: scroll;
+    width: 200px;
+    height: 200px;
+}
+
+.long_line {
+    color: white;
+    /* this will not insert a <br> */
+    //white-space: nowrap;
+}
+
+.paddings_and_stuff {
+    color: white;
+    /* top, right, bottom, left */
+    /* one values = all are set to that */
+    padding: 15px;
+    border: 1px red;
+    /* border-color: red; */
+    border-style: dashed;
+    border-width: 2px;
+    /* same here */
+    margin: 10px;
+}
+
+.css_olist {
+    color: white;
+    /* decimal, numeral etc */
+    list-style-type: numeral;
+    /* inside, outside */
+    list-style-position: outside;
+}
+
+.css_ulist {
+    color: white;
+    /* check refs */
+    list-style-type: circle;
+    //list-style-image: url("arrow.jpg");
+}
+
+.mouse_stuff {
+    color: white;
+    /* wait, help, crosshair */
+    cursor: wait;
+}
+
+/* this is a joke */
+/**
+* body {
+*     cursor: wait;
+* }
+*/
+
+/* z-index doesn't seem to work for this one */
+.layer1 {
+    background-color: red;
+    width: 49px;
+    height: 49px;
+    z-index: 1;
+}
+
+/* it works here and for the yellow box */
+.layer2 {
+    background-color: blue;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: -37px;
+    left: 12px;
+    z-index: 2;
+}
+
+.layer3 {
+    background-color: yellow;
+    width: 9px;
+    height: 9px;
+    position: relative;
+    top: -54px;
+    left: 20px;
+    z-index: 3;
+}
+
+#inline_p {
+    display: inline;
+}
+
+#btn-div {
+    width: 300px;
+    height: 300px;
+    background-color: lime;
+    text-align: center;
+
+    /* this is needed for vertical-align */
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#btn-center {
+    /* this doesn't seem to work */
+    //margin: 0 auto;
+}

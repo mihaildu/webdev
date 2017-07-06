@@ -1,0 +1,24 @@
+# less needs node/npm
+# to install less
+npm install -g less
+lessc --version
+
+# listing installed packages
+npm ls
+
+# to use less
+lessc input.less output.css
+
+# to minimize a css - less-plugin-clean-css
+# to install the plugin
+npm install -g less-plugin-clean-css
+# to use
+lessc --clean-css input.less output.min.cs
+# or the long version
+lessc style.less --clean-css="--s1 --advanced --compatibility=ie8" style.min.cs
+
+# installing a watcher
+npm install -g less-watch-compiler
+
+# using the watcher
+less-watch-compiler src-dir dist-dir

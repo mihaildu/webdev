@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="This site is all about tests"/>
+    <meta name="keywords" content="test, tests"/>
+    <title>Javascript Examples</title>
+    <link rel="stylesheet" type="text/css" href="test1.css">
+  </head>
+  <body>
+    Refs:<br>
+    <a href="https://www.w3schools.com/jsref/default.asp">w3school</a><br>
+    <a href="https://www.javascript.com/learn/javascript/strings">
+      javascript.com</a><br>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+      mozilla</a><br>
+    <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">
+      Standard (ES6)</a><br><br>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">
+      HTMLElement</a><br>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">
+      Element</a>
+    <br><br>
+
+    <!-- using js in the attr -->
+    <button onclick="alert('This is an alert')">Click for alert</button>
+    <br><br>
+
+    <!-- using a function from test1.js -->
+    <button onclick="test2_alert()">Click for alert</button>
+    <br><br>
+
+    <p id="text-change">This text will change if you click the button</p>
+    <button onclick="test3_change_text()">Click</button>
+    <br><br>
+
+    <!-- the onclick will be set in js file -->
+    <button id="test4-button" onclick="test3_change_text()">
+      Click again
+    </button><br><br>
+
+    <!-- put some html stuff on the page -->
+    <button onclick="test5_insert_html()">
+      Click Test 5
+    </button>
+    <br><br>
+    <div id="test5-div"></div>
+
+    <!-- change css/style -->
+    <button onclick="test6_change_color()">
+      Change color
+    </button>
+    <button id="test6-hide-btn" onclick="test6_change_div()">
+      Hide it
+    </button>
+    <button onclick="test6_show_color()">
+      Show color
+    </button>
+    <br><br>
+    <div id="test6-div"></div>
+
+    <!-- load script files after page -->
+    <script src="test1.js"></script>
+  </body>
+</html>

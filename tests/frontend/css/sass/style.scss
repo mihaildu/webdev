@@ -1,0 +1,135 @@
+/* you can have normal css in here */
+.my_class {
+     background-color: red;
+}
+
+/* you can have definitions inside definitions */
+#main {
+    p {
+	color: pink;
+    }
+    div {
+	background-color: red;
+    }
+}
+
+/* you can also reference parent selectors */
+a {
+    color: #2f2f2f;
+    text-decoration: none;
+    &:hover {
+	color: #7f7f7f;
+    }
+}
+
+/* you also have namespaces */
+/* e.g. the font namespace */
+.nspc {
+    font: {
+	family: Times;
+	size: 22px;
+	weight: bold;
+    }
+}
+
+/* single line comments are deleted from the css file */
+
+/* variables */
+$width: 100px;
+$height: 100px;
+
+.box1 {
+    background-color: lime;
+    width: $width;
+    height: $height;
+}
+
+/* content property - css */
+/* this only works with :before and :after */
+p.ctn1 {
+    color: lime;
+}
+
+p.ctn2:before {
+    content: ".";
+}
+
+/* doing the same in sass */
+/* TODO check this out - doesn't really work */
+p.ctn6 {
+    color: blue;
+}
+
+.ctn5 {
+    p {
+	color: blue;
+	&:before {
+	    content: ">";
+	}
+    }
+}
+
+p.ctn3 {
+    /* font size/line height */
+    /* line height = e.g. space between lines in a paragraph */
+    font: 10px/8px;
+}
+
+/* you can also set alpha for colors - old css */
+p.ctn4 {
+    color: rgba(255, 0, 0, 0.25);
+}
+
+/* functions */
+.func1 {
+    color: hsl(0, 100%, 50%);
+}
+
+.func2 {
+    color: hsl($saturation: 100%, $hue: 0, $lightness: 50%);
+}
+
+/* mixins */
+/* what's the difference between these and placeholders */
+/* it just seems like variables and some minimal functionality */
+@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+
+.mixin-test {
+    @include large-text;
+}
+
+/* they can also take arguments */
+@mixin mbox($txt-color, $bg-color) {
+    color: $txt-color;
+    background-color: $bg-color;
+}
+
+.mixin-test-2 {
+    @include mbox(green, pink);
+}
+
+/* placeholders */
+/* we won't use error on it's own */
+/* we'll just extend classes from it */
+%error {
+    border: 1px #00f;
+    background-color: #fdd;
+}
+
+.serious-error {
+    @extend %error;
+    color: aqua;
+}
+
+/* partials TODO _filename.scss
+ * I just assume _name.scss files are not compiled if you use
+ * sass input-dir:output-dir
+ * you can define stuff in them, and them @import in the main file.
+ */

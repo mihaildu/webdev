@@ -1,0 +1,63 @@
+/*
+* {
+    border: 1px solid red;
+}
+*/
+
+/*
+h1 {
+    //color: black;
+}
+*/
+
+/* I think this means apply prop to elem with both classes */
+.my_class.subcls {
+    color: red;
+}
+
+.gray_bg {
+    background-color: gray;
+}
+
+.lr_margin {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.ub_margin {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.sb {
+    border: 1px solid black;
+}
+
+.over {
+    overflow: hidden;
+}
+
+.input_txt {
+    width: 200px;
+    display: inline;
+    float: left;
+}
+
+.submit_btn {
+    padding-left: 1px;
+    padding-right: 1px;
+    margin-left: 2px;
+    float: left;
+    width: 100px;
+}
+
+.my_img {
+    width: 300px;
+    height: auto;
+}
+
+.fbox {
+    width: 200px;
+    height: 200px;
+    float: left;
+}
