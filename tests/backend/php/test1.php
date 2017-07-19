@@ -1,3 +1,4 @@
+<!-- TODO a lot of this stuff should be moved to php_only -->
 <!doctype html>
 <html lang="en">
     <head>
