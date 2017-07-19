@@ -6,3 +6,6 @@
 # turning errors on (in browser)
 # modify this in the ini file
 display_errors = On
+
+# enabling a mod
+sudo php5enmod mcrypt

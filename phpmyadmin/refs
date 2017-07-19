@@ -1,0 +1,24 @@
+# this is just a web interface to your mysql dbs
+# in case you hate the terminal
+# it's written in php
+
+# login with the mysql user
+# e.g. root & root
+
+# (top) dir on debian
+/usr/share/phpmyadmin
+
+# to use it in apache create a symlink
+ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+
+# then you can access it at localhost/phpmyadmin
+
+# config
+/etc/phpmyadmin/
+/etc/dbconfig-common/phpmyadmin.conf
+
+# docs
+https://docs.phpmyadmin.net/en/latest/
+/usr/share/doc/phpmyadmin/README.Debian.gz
+
+# phpmyadmin needs a separate db (phpmyadmin)

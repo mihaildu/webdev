@@ -11,7 +11,19 @@
     </head>
     <body>
 	<!-- new identation thanks to web-mode -->
-	TODO: tutorials + refs<br><br>
+	Manual:<br>
+	<a href="http://php.net/manual/en/">php.net</a>
+	<br>
+
+	Tutorials:<br>
+	<a href="http://php.net/manual/en/tutorial.php">php.net</a><br>
+	<a href="https://www.w3schools.com/php/">w3schools</a>
+	<br>
+
+	Refs:<br>
+	<a href="http://php.net/manual/en/langref.php">langref</a><br>
+	<a href="http://php.net/manual/en/funcref.php">funcref</a><br>
+	<br>
 
 	<!-- to play around with _GET, _POST -->
 	<form method="get">
@@ -32,6 +44,9 @@
 	   -->
 	<?php
 
+	// this shows info about php version
+	//phpinfo();
+
 	// this is a variable
 	$a = 10;
 
@@ -40,6 +55,9 @@
 	echo("a = ");
 	echo($a);
 	echo("<br>");
+
+	// type of obj
+	echo("type of a = " . gettype($a) . "<br>");
 
 	// same thing with one echo
 	$b = 5;
@@ -51,6 +69,11 @@
 
 	// you can also use print function
 	print("hello 2<br>");
+
+	// you can print info on variables with var_dump
+	echo("var_dump(a) = ");
+	var_dump($a);
+	echo("<br>");
 
 	// concatenating 2 strings with dot
 	echo("string1 " . "string2<br>");
@@ -189,6 +212,21 @@
 	print_r($_POST);
 	echo("<br>");
 
+	// this will escape special characters
+	echo(htmlspecialchars("Jon & Jim<br>") . "<br>");
+
+	// casts str <-> int
+	echo((int)"10" + 12 . "<br>");
+	echo((string)17 . "<br>");
+
+	// apply md5 to some text
+	echo("md5(\"admin123\") = " . md5("admin123") . "<br>");
+	$salt = "lkdjdla921l";
+	echo("salted md5(\"admin123\") = " . md5($salt . "admin123") .
+	     "<br>");
+
+
+
 	// TODO _FILES
 
 	// sending an e-mail
@@ -218,6 +256,21 @@
 
 	//send_email2();
 	//send_email2();
+	?>
+
+	<!-- you can also mix php with html -->
+	<!-- this looks stupid tbh -->
+	<?php
+	$x = 10;
+	if ($x == 10) {
+	?>
+	    <p>x is 10</p>
+	<?php
+	} else {
+	?>
+	    <p>x is not 10</p>
+	<?php
+	}
 	?>
 
     </body>
