@@ -1,0 +1,5 @@
+bootstrap was compiled with
+	  @grid-float-breakpoint: 170px;
+
+For now fonts has only the glyphicons. If I need other fonts, I'll prob move it
+up and recompile bootstrap.

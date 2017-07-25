@@ -1,0 +1,28 @@
+# .htaccess is an apache thing
+# e.g. you can control permissions in each
+# dir by placing a .htaccess file there
+
+# to enable .htaccess files you might have to change
+# AllowOverride from None to All in /etc/apache2/apache2.conf
+# (in <Directory /var/www/> or whatever you use)
+# TODO document more on this
+
+# to deny access to files you can use <Files> for a single file
+# and <FilesMatch> for multiple files
+
+# e.g.
+#<Files navbar.php>
+#order deny,allow
+#deny from all
+#</Files>
+
+# this will target all files ending in .html or .htm
+# the . is escaped
+#<FilesMatch "\.(html|htm)$">
+#AddDefaultCharset utf-8
+#DefaultLanguage en-us
+#</FilesMatch>
+
+# apparently you don't need Files or FilesMatch
+# this will do
+deny from all

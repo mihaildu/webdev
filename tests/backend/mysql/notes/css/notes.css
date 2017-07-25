@@ -1,0 +1,208 @@
+/*
+ * One CSS file for all main pages. If you want to split this
+ * into separate files (e.g. login.css, signup.css) then
+ * the navbar.php should be split as well (that's where I
+ * include the CSS files).
+ * */
+body {
+    /*
+     * use a gradient for background
+     * this is "metallic toad" from uigradients.com
+     * */
+    background: #abbaab;
+    background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
+    background: linear-gradient(to right, #ffffff, #abbaab);
+    /* this will make gradient go outside the screen as well, if needed
+     * e.g. for table
+     * */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+/* common style for both login and signup */
+.menu {
+    margin-top: 150px;
+    width: 300px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 1em;
+    position: relative;
+
+    /* center everything inside */
+    text-align: center;
+}
+
+#login-menu {
+    height: 250px;
+}
+
+#signup-menu {
+    /* apparently one form input adds 49px height */
+    height: 299px;
+}
+
+.title {
+    color: rgb(119, 119, 119);
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+.form {
+    padding-top: 20px;
+    width: 80%;
+}
+
+.footer {
+    color: rgb(119, 119, 119);
+    font-size: 12px;
+
+    /* position this at the bottom of the parent */
+    position: absolute;
+    bottom: 5px;
+
+    /*
+     * since this has position
+     * absolute, auto won't do
+     * */
+    left: 0;
+    right: 0;
+}
+
+/*
+ * error messages after the login/signup form
+ * even though this is used by both login and signup
+ * it is used only once per page; should be changed
+ * to a class still.
+ */
+#messages {
+    margin-top: 10px;
+
+    /* hide it by default */
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.testx {
+    //width: 600px;
+}
+
+/* error messages, second implementation */
+#error-messages {
+    margin-top: 10px;
+    text-align: left;
+    display: inline-block;
+    //width: 100%;
+}
+
+#logout {
+    float: right;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#notes-table-container {
+    margin-top: 150px;
+    width: 800px;
+}
+
+#notes-table {
+    border: none;
+    table-layout: fixed;
+}
+
+/*
+ * setting width for each column
+ * child(1) = note id
+ * child(2) = edit
+ * child(3) = delete
+ * child(4) = title
+ */
+#notes-table th:nth-child(2) {
+    width: 50px;
+}
+#notes-table th:nth-child(3) {
+    width: 60px;
+}
+#notes-table th:nth-child(4) {
+    width: 200px;
+}
+
+#notes-table th {
+    //background-color: #abbaab;
+    //background-color: #b9c6b9;
+    //background-color: #b3c6ff;
+    //background-color: #cccccc;
+    background-color: rgb(240, 240, 240);
+    border-top: none;
+    text-align: center;
+}
+
+#notes-table td {
+    background-color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#notes-table td.edit, td.delete {
+    text-align: center;
+}
+
+#notes-table td.delete {
+    color: red;
+}
+
+#notes-table tr {
+    border: none;
+}
+
+/* rounded borders */
+#notes-table th:nth-child(2) {
+    /*
+     * since the first column is hidden,
+     * we need to apply changes to the second
+     * */
+    border-radius: 1em 0 0 0;
+    border-left: none;
+}
+#notes-table th:last-child {
+    border-radius: 0 1em 0 0;
+    border-right: none;
+}
+
+#notes-table a {
+    color: inherit;
+    /* make it look like a[href] */
+    cursor: pointer;
+}
+
+/* if you want the blue link effect from bootstrap */
+#notes-table a:hover {
+    color: #23527c;
+    //text-shadow: 1px 1px 1px #555;
+}
+
+#add-note-btn {
+    width: 80px;
+}
+
+/* similar to #messages, but for table page */
+#table-message {
+    margin-top: 150px;
+    display: inline-block;
+    text-align: left;
+}
+
+#edit-note-form {
+    margin-top: 150px;
+}

@@ -1,0 +1,39 @@
+TODO
+  * there is a problem with new lines on textarea
+  * intuition: maybe they get lost when I select the text in javascript
+    and I post it to the edit_note page
+
+index.php is the main page; if the user is logged in this should display
+  a list with all the notes; if not, it should redirect to login.php
+
+login.php is the login page; this just includes various components like the
+  login_form.php; this should redirect to index.php if the user is
+  already logged in
+
+signup.php is the signup page; after the user signs up he is redirected to
+  the login page (after a 3s timeout).
+
+edit_note.php is the note editing page; this is used both on a new note
+  (POST["action"] = "add") and when editing one ("action" => "edit")
+
+logout.php & delete_note.php are just PHP scripts to destroy the session
+  and to run a delete query in the DB
+
+All of these pages use common elements (e.g. the navbar). There are probably
+different ways to achieve this (e.g. use only one page and some variables).
+The way I did it is probably similar to a template engine (jinja) where I
+wrote the different components in a separate file and for each main page
+(index, login, signup) I used a different file where I included the components.
+
+Most of the PHP logic is done at the top of the pages. If a certain message
+needs to be displayed somewhere random in the page (e.g. login/signup error
+messages), then I print some hidden divs at the top, and put the content in
+the right place using javascript. Instead of mixing HTML with PHP too much
+(which I don't like), I could've used more includes at various points in
+the HTML file (in retrospect, this sounds easier than what I did).
+
+Update: I used the second approach for the edit_note page, since the first
+one didn't work for no apparent reason.
+
+When you edit a note, the whole note text gets sent via POST so the DB
+won't be queried twice.
