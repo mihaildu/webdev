@@ -1,0 +1,12 @@
+# this will disable directory listing
+# it doesn't work like I would expect
+# it just shows an empty list of files
+# forbidden access or redirect would be more appropriate
+#IndexIgnore *
+
+# removing the Indexes option works much better
+#Options -Indexes
+
+# this also works if you remove Indexes from <Directory>
+# in /etc/apache2/apache2.conf
+# this is better if you want to do it for the all the dirs
