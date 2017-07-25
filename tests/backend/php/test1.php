@@ -106,6 +106,8 @@
 	    echo("key " . $key . " => " . $value . "<br>");
 	}
 
+	// length of array is count($a) or sizeof($a)
+
 	// this will also work
 	// foreach ($a as $key)
 

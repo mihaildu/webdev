@@ -72,7 +72,7 @@ if (isset($_POST["submit_login"])){
     <input type="password" name="password_login"
 	   placeholder="Password"
     	   <?php
-	   if(isset($_POST["password_login"]) and
+	   if(isset($_POST["submit_login"]) and
 	       $_POST["password_login"] != "")
 	   echo("value=\"" . $_POST["password_login"] . "\"");
 	   ?>>

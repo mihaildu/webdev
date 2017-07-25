@@ -9,13 +9,38 @@ define("MY_CONSTANT", "some value");
 main();
 
 function main(){
-    test7_escaping();
+    test9_multiple_ret_vars2();
+    //test8_multiple_ret_vars();
+    //test7_escaping();
     //test6_constants();
     //test5_hashing();
     //test4_string_cmp();
     //test3_regex();
     //test2();
     //test1();
+}
+
+function test9_multiple_ret_vars2(){
+    $ret = _test9();
+    print_r($ret["messages"]);
+    echo($ret["messages"][0] . "\n");
+}
+
+function _test9(){
+    return array("success" => true,
+		 "messages" => array("message1", "message2"));
+}
+
+function test8_multiple_ret_vars(){
+    $ret = _test8();
+    $ret_bool = $ret["success"];
+    $ret_msg = $ret["message"];
+    echo($ret_bool . "\n");
+    echo($ret_msg . "\n");
+}
+
+function _test8(){
+    return array("success" => true, "message" => "error message<br>");
 }
 
 function test7_escaping(){

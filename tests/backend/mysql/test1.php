@@ -238,5 +238,4 @@
     }
     ?>
     <br><br>
-    Lecture 207 secret diary 1
 </body>
