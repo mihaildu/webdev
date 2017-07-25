@@ -1,7 +1,7 @@
 TODO
-  * there is a problem with new lines on textarea
-  * intuition: maybe they get lost when I select the text in javascript
-    and I post it to the edit_note page
+  * note breaks if you type </textarea>
+  * todo how to print </textarea> inside textarea with js
+  * in the end, just querying the db will solve all the problems
 
 index.php is the main page; if the user is logged in this should display
   a list with all the notes; if not, it should redirect to login.php

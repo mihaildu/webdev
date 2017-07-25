@@ -67,7 +67,6 @@ function show_table($db){
 		 "</a>" .
 		 "</td>");
 	    // title & note text
-	    // TODO maybe add a special non escaped field (for text)
 	    echo("<td class='note-title'>" .
 		 htmlspecialchars($row_data["title"]) . "</td>");
 	    echo("<td class='note-text'>" .

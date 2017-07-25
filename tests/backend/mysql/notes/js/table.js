@@ -37,7 +37,11 @@ function edit_note(){
     // submit to form
     $("#edit-note-id").val(note_id);
     $("#edit-note-title").val(note_title);
-    $("#edit-note-text").val(note_text);
+    // both val() and html() seem to work for textarea
+    $("#edit-note-text").html(note_text);
+
+    // TODO solve for </textarea>
+    //$("#edit-note-text").html("test<br>&lt;/textarea><br>ddada");
 
     // both trigger("submit") and submit() work
     $("#edit-form").submit();
