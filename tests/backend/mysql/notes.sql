@@ -11,8 +11,12 @@ CREATE TABLE Users (
        email VARCHAR(255),
        -- TODO how to force a fixed (e.g. 41) hash value here
        -- similar to mysql.user
+       -- CHAR(41) + some other trick should work
        -- 64 should allow for different hashing algos (e.g. sha256)
-       password CHAR(64) NOT NULL
+       password CHAR(64) NOT NULL,
+
+       -- INDEX allows for faster searches after username (e.g. on login)
+       INDEX USING BTREE(username)
 ) ENGINE = InnoDB;
 
 CREATE TABLE Notes (
@@ -20,8 +24,6 @@ CREATE TABLE Notes (
        uid INT NOT NULL,
        title VARCHAR(255) NOT NULL,
        text TEXT NOT NULL,
-
-       -- INDEX allows for faster searches after uid
        INDEX (uid),
 
        -- if user with uid gets deleted, delete all the notes
