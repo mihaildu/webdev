@@ -10,8 +10,8 @@ body {
      * this is "metallic toad" from uigradients.com
      * */
     background: #abbaab;
-    background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
-    background: linear-gradient(to right, #ffffff, #abbaab);
+    background: -webkit-linear-gradient(bottom, #ffffff, #abbaab);
+    background: linear-gradient(bottom, #ffffff, #abbaab);
     /* this will make gradient go outside the screen as well, if needed
      * e.g. for table
      * */
