@@ -12,8 +12,79 @@
     <!-- using php to connect to db -->
     <?php
 
+    /*
+     * three way to access MySQL in PHP
+     *   * old (legacy) mysql_ routines
+     *   * new mysqli_ routines (procedural & oop style)
+     *   * pdo (portable data objects)
+     * */
+
     //mysql_procedural();
-    mysql_oop();
+    //mysql_oop();
+    mysql_pdo();
+
+    function mysql_pdo() {
+	// pdo("connection", "username", "password")
+	$db = new pdo("mysql:host=localhost;dbname=testing", "root", "root");
+
+	/*
+	 * PDO::ATTR_ERRMODE = error reporting mode
+	 * PDO::ERRMODE_EXCEPTION = throw exceptions
+	 * other options:
+	 *   * PDO::ERRMODE_SILENT = set error codes
+	 *   * PDO::ERRMODE_WARNING = raise E_WARNING
+	 * */
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	// run a query
+	//fetch1($db);
+	fetch2($db);
+
+	/*
+	 * you can also run queries (e.g. delete) with prepare & execute
+	 * TODO check this
+	   $query = "select host, user from mysql.user where host = :hst";
+	   $result = $db->prepare($query);
+
+	   this will replace the :hst with a value (and escape stuff)
+	   $result->execute(array(":hst" => $_POST["host"]));
+	   $row = $result->fetch(PDO::FETCH_ASSOC);
+	 */
+
+	// closing the connection?
+    }
+
+    function fetch2($db) {
+	/* other way of iterating through results */
+	$query = "select host, user from mysql.user";
+	$result = $db->query($query);
+
+	echo("<table>");
+	echo("<tr><th>Host</th><th>User</th></tr>");
+	while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    echo("<tr>");
+	    echo("<td>" . htmlentities($row["host"]) . "</td>");
+	    echo("<td>" . htmlentities($row["user"]) . "</td>");
+	    echo("</tr>");
+	}
+	echo("</table><br>");
+    }
+
+    function fetch1($db) {
+	$query = "select host, user from mysql.user";
+	$result = $db->query($query);
+
+	echo("<table>");
+	echo("<tr><th>Host</th><th>User</th></tr>");
+	foreach ($result as $row) {
+	    echo("<tr>");
+	    echo("<td>" . htmlentities($row["host"]) . "</td>");
+	    echo("<td>" . htmlentities($row["user"]) . "</td>");
+	    echo("</tr>");
+	}
+	echo("</table><br>");
+	//$row = $result->fetch(PDO::FETCH_ASSOC);
+    }
 
     function mysql_procedural(){
 	// host, user, password, db name
