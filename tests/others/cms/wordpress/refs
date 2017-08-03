@@ -1,0 +1,22 @@
+db: wordpress
+user: wp_user
+password: wordpress
+
+wordpress user
+username: admin
+password: admin
+
+installation:
+  1. create db + user for wordpress (mysql)
+  2. unzip wordpress files
+  3. rename wp-config-sample.php to wp-config.php
+  4. edit wp-config.php with info and w/e
+  5. open the wordpress dir in a browser (the index.php should
+     handle the install)
+
+the wp-content needs writable permission (for www-data) after install (to upload files)
+e.g. chmod g+w wp-content
+
+also, to enable image manipulation (e.g. image cropping and rotation etc) you have to install
+php-gd (graphics draw?)
+e.g. sudo apt-get install php5-gd

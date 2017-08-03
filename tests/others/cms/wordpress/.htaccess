@@ -1,0 +1,6 @@
+# increase upload size
+php_value upload_max_filesize 5M
+
+# if the desired upload size is greater than 8M this should be
+# increased as well; default value is 8M
+#php_value post_max_size 10M
