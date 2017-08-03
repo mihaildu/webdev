@@ -19,6 +19,12 @@
 		   ?>>
 	</div>
 	<div class="form-group">
+	    <!--
+		 fun fact, when submitting a form even with POST to
+		 a server, the password is sent in plain text
+		 it's a good idea to use passwords only on websites
+		 that use HTTPS
+	       -->
 	    <input type="password" name="password_signup"
 		   placeholder="Password"
 		   class="form-control"

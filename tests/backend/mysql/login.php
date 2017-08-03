@@ -74,9 +74,16 @@ function bad_credentials($db){
     /*
      * Assumes the following fields:
      *   id, username, email, password
+     *
+     * Ways to break up login without sanitizing the input.
+     * x' OR '1' = '1
+     *   this won't work here however because of the way I log in
+     * x' delete from notes.Users where name = 'user11';
+     *   I don't know why this doesn't work
      * */
     $query = "select * from Users where username = '" .
 	     $db->real_escape_string($_POST["username_login"]) . "'";
+
     if ($result = $db->query($query)){
 	// assumes only one user for a name
 	// this check happens at sign up

@@ -29,7 +29,10 @@
     width: 300px;
 }
 
-/* animation for the loader */
+/* animation for the loader
+ * for the loader a .gif image can be used as well
+ * e.g. https://loading.io/
+ * */
 .loader {
     border: 7px solid #f3f3f3;
     border-top: 7px solid #0f0f0a;

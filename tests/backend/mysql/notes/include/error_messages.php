@@ -3,7 +3,7 @@
      (e.g. $ret["success"] = false)
    -->
 <div class="row">
-    <div class="text-centered" class="testx">
+    <div class="text-centered">
 	<div class="alert alert-danger" id="error-messages">
 	    <?php
 	    foreach ($ret["messages"] as $key => $value) {

@@ -2,6 +2,10 @@ TODO
   * note breaks if you type </textarea>
   * todo how to print </textarea> inside textarea with js
   * in the end, just querying the db will solve all the problems
+  * replace the $_POST messages/value snippets with $_SESSION and perform
+    redirect to switch from POST to GET (so that users won't see the
+    confirm to submit message) + flash message
+    example in mysql/test3.php
 
 index.php is the main page; if the user is logged in this should display
   a list with all the notes; if not, it should redirect to login.php
@@ -37,3 +41,9 @@ one didn't work for no apparent reason.
 
 When you edit a note, the whole note text gets sent via POST so the DB
 won't be queried twice.
+
+Apparently there's a thing similar to jinja/django templates for PHP called
+Twig.
+
+As a fun fact, this can be considered a CRUD application (Create, Read,
+Update and Delete rows/data from SQL dbs).

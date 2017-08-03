@@ -92,10 +92,6 @@ body {
     text-align: left;
 }
 
-.testx {
-    //width: 600px;
-}
-
 /* error messages, second implementation */
 #error-messages {
     margin-top: 10px;

@@ -12,7 +12,8 @@ main();
 function main(){
     // TODO regex test
 
-    test11_queue();
+    test12_oop();
+    //test11_queue();
     //test10_args();
 
     //test9_global_var3 = 30;
@@ -30,6 +31,21 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test12_oop() {
+    // use functions as classes/namespaces
+    function MyClass() {
+	this.x = 0;
+	this.some_func = function(val) {
+	    this.x = this.x + val;
+	    console.log("New value for x: " + this.x);
+	}
+    }
+
+    var obj = new MyClass();
+    obj.some_func(10);
+    obj.some_func(5);
 }
 
 function test11_queue(){
@@ -166,13 +182,19 @@ function test7_operators(){
 
     // delete
 
-    // I assume this is like Array()
-    // prob a json internally
-    // official name: object
+    /* persone is like Array()
+     * prob a json internally
+     * official name: object
+     * object is json (javascript object notation) in javascript
+     */
     var person = {name:"john", age:10, sex:"male"};
     console.log(person);
     delete person.age;
     console.log(person);
+
+    /* apparently person.age is the real thing
+     * person["age"] gets substituted to that?
+     * */
 
     var arr = new Array();
     arr[0] = 10;

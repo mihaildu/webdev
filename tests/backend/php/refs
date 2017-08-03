@@ -9,3 +9,22 @@ display_errors = On
 
 # enabling a mod
 sudo php5enmod mcrypt
+
+# having a custom php.ini in your site dir
+# add this to your site/vritual host configuration file (e.g. 000-default.conf)
+PHPINIDir /var/www/html/
+
+# then place the php.ini in /var/www/html/
+# apparently PHPINIDir is global and can be set only once TODO test this
+# instead of using multiple php.ini files, you can use .htaccess files
+# to change php values, e.g.
+php_value upload_max_filesize 10M
+
+# something similar to pep-8 (python) but for php called psr from php-fig
+http://www.php-fig.org/psr/
+
+# popular php frameworks
+symphony
+drupal
+phpBB
+laravel

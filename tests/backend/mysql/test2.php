@@ -24,6 +24,16 @@ if (isset($_POST["submit_signup"])){
 
 if (isset($_POST["submit_login"])){
     attempt_login();
+    /*
+     * sometimes to avoid double post messages you can do a redirect
+     * to the same page again (which will cause a GET request)
+     *
+     * instead of using $_POST variables to check if you want to print
+     * something or to store messages to print (e.g. value_snippet)
+     * use $_SESSION variables (so you have them there when you switch
+     * from POST to GET)
+     * */
+    //header("Location: test2.php");
 }
 ?>
 
@@ -41,7 +51,9 @@ if (isset($_POST["submit_login"])){
 	       // the value is actually displayed in html
 	       // so we need &quot; to display "
 	       echo("value=\"" . htmlspecialchars($_POST["username_signup"])
-		  . "\"");
+	         . "\"");
+	       //echo("value=\"" .
+	       //   htmlspecialchars($_SESSION["username_signup"]) . "\"");
 	   ?>>
     <input type="email" name="email_signup"
 	   placeholder="Email Address"
