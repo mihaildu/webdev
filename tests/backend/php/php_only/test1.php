@@ -477,7 +477,7 @@ second line\n");
     /* you can have json in php (e.g. from js) */
     $arr = array("first" => "first value", "second" => "second value");
     /* JSON_PRETTY_PRINT is optional */
-    echo(json_encode($arr, JSON_PRETTY_PRINT));
+    echo(json_encode($arr, JSON_PRETTY_PRINT) . "\n");
 }
 
 function test2_ref(&$var){
