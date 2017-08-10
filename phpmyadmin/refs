@@ -22,3 +22,10 @@ https://docs.phpmyadmin.net/en/latest/
 /usr/share/doc/phpmyadmin/README.Debian.gz
 
 # phpmyadmin needs a separate db (phpmyadmin)
+
+# ppa (ubuntu) with the latest version
+sudo add-apt-repository ppa:nijel/phpmyadmin
+sudo apt-get update
+
+# version currently installed
+4.6.6deb1+deb.cihar.com~trusty.2 (based on php7.1)

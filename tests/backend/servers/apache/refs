@@ -13,6 +13,9 @@ apache2ctl start/stop/restart/status
 # looking for apache2 procs
 ps -e | grep apache
 
+# look for the port
+sudo netstat -tlnp | grep apache
+
 # logs - rotation + compression
 /var/log/apache2/
 # errors
@@ -43,3 +46,33 @@ apache2ctl -M
 apache2ctl status/fullstatus
 # or if configured properly (TODO)
 http://127.0.0.1/server-status
+
+# the webserver has this interface called CGI (common gateway interface)
+# this is how programs/scripts that run on the server interacts with it
+# I assume PHP, javascript (node.js), python etc all interact with the CGI
+# FastCGI is a faster version of CGI
+
+# stopping apache2 from starting after boot
+sudo update-rc.d -f apache2 disable
+
+# adding a new virtual host/site
+1. place a new conf file in /etc/apache2/sites-available/
+   (e.g. cp 000-default.conf new-host.conf)
+2. edit the file
+   *:80 means allow any IP on port 80 (maybe change port)
+   documentroot should point to the right thing
+3. create link in sites-enabled
+   * sudo ln -s ../sites-available/new-host.conf ./
+   or use a2ensite
+   * a2endsite new-host
+4. if you changed port (from 80), make sure you have an apache proc listening there
+   in ports.conf
+   Listen new-port
+   (after restart "sudo netstat -tlnp | grep apache2" to check)
+5. if the new documentroot is not in /var/www or /usr/share, make sure to add it to
+   apache2.conf
+   <Directory new-dir> ... (copy from /var/www)
+6. restart apache2
+   sudo /etc/init.d/apache2 restart
+
+(also, make sure you have the right permissions on the dir, e.g. for www-data)

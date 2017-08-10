@@ -1,7 +1,12 @@
 # php.ini = configuration file
+# this is in php5
 /etc/php5/apache2/php.ini
 # for cli usage only?
 /etc/php5/cli/php.ini
+
+# php7
+/etc/php/7.1/apache2/php.ini
+/etc/php/7.1/cli/php.ini
 
 # turning errors on (in browser)
 # modify this in the ini file
@@ -28,3 +33,16 @@ symphony
 drupal
 phpBB
 laravel
+
+# current version of PHP installed
+7.1.8-2+ubuntu14.04.1+deb.sury.org+4
+
+# apache has native php processing
+# some web servers (nginx) don't, so we need to install a php processor
+# and tell nginx to use it with php pages (assuming we want to use php
+# in the same way)
+# e.g. php-fpm (fastcgi process manager) - this will run alongside the server
+# currently I have php-fpm7.1
+# running various commands (similar to apache/nginx)
+sudo /etc/init.d/php7.1-fpm status
+sudo /etc/init.d/php7.1-fpm restart
