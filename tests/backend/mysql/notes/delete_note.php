@@ -15,10 +15,12 @@ if (!isset($_POST["note_id"])) {
 }
 
 // connect to db
-$db = new mysqli("localhost", "notes_user", "notes_password", "notes");
-if($db->connect_errno){
+include_once("include/connect.php");
+$ret = connect_to_db();
+if (!$ret["success"])
     return;
-}
+
+$db = $ret["db"];
 
 // run delete query
 $query = "DELETE FROM Notes WHERE id=" .
