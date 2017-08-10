@@ -6,173 +6,351 @@
    -->
 
 <style>
-  .todo {
-      color: red;
-      font-weight: bold;
-  }
+ .todo {
+     color: red;
+     font-weight: bold;
+ }
 </style>
 
 <h1>Random Tests for Webdev Stuff</h1>
 <ol>
-  <li>Frontend</li>
-  <ol type="a">
-    <li>HTML</li>
-    <ol type="i">
-      <li><a href="frontend/html/test1.html">Test 1</a></li>
-    </ol>
-    <li>CSS</li>
-    <ol type="i">
-      <li><a href="frontend/css/test1.html">Test 1</a></li>
-      <li><a href="frontend/css/border.html">Borders</a></li>
-      <li><a href="frontend/css/cnn/cnn.html">CNN Copy</a></li>
-      <li>Bootstrap</li>
-      <ol type="i">
-	<li><a href="frontend/css/bootstrap/test1.html">Test 1</a></li>
-	<li>
-	  <a href="frontend/css/bootstrap/landing.html">Landing Page</a>
-	</li>
-      </ol>
-      <li>Sass</li>
-      <ol type="i">
-	<li>
-	  <a href="frontend/css/sass/test1.html">Test 1</a>
-	  <span class="todo">TODO</span>
-	</li>
-      </ol>
-      <li>Less</li>
-      <ol type="i">
-	<li>
-	  <a href="frontend/css/less/test1.html">Test 1</a>
-	  <span class="todo">TODO</span>
-	</li>
-      </ol>
-      <li>CSS3</li>
-      <ol type="i">
-	<li>
-	  <a href="frontend/css/css3/test1.html">Test 1</a>
-	  <span class="todo">TODO</span>
-	</li>
-      </ol>
-    </ol>
-    <li>Javascript</li>
-    <ol type="i">
-      <li><a href="frontend/js/test1.html">Test 1</a></li>
-      <li><a href="frontend/js/reaction.html">Reaction Tester</a></li>
-      <li><a href="frontend/js/snake/snake.html">Snake Game</a></li>
-      <li>jQuery</li>
-      <ol type="i">
-	<li><a href="frontend/js/jquery/test1.html">Test 1</a></li>
-	<li><a href="frontend/js/jquery/codeplayer.html">Code Player</a></li>
-      </ol>
-      <li>Angular.js (1.x)</li>
-      <ol type="i">
-	<li>
-	  <a href="frontend/js/angular/test1.html">Test 1</a>
-	  <span class="todo">TODO (1)</span>
-	</li>
-      </ol>
-      <li>
-	React.js/Flux <span class="todo">TODO (2)</span>
-      </li>
-      <li>AJAX</li>
-      <ol type="i">
-	<li>
-	  <a href="frontend/js/ajax/test1.html">Test 1</a>
-	  <span class="todo">TODO</span>
-	</li>
-      </ol>
-    </ol>
-    <li>Other stuff</li>
-    <ol type="i">
-      <li>Separators (Chrome)</li>
-      <ol type="i">
-	<li>
-	  <a href="frontend/others/separators/horz.html">Horizontal</a>
-	</li>
-	<li>
-	  <a href="frontend/others/separators/vert.html">Vertical</a>
-	</li>
-      </ol>
-    </ol>
-  </ol>
-  <li>Backend</li>
-  <ol type="a">
-    <li>Servers</li>
-    <ol type="i">
-	<li>Apache 2</li>
+    <li>Frontend</li>
+    <ol type="a">
+	<li>HTML</li>
 	<ol type="i">
-	    <li><a href="/server-status">Server Status</a></li>
-	    <li><a href="backend/servers/apache/refs">Refs</a></li>
+	    <li><a href="frontend/html/test1.html">Test 1</a></li>
+	</ol>
+	<li>CSS</li>
+	<ol type="i">
+	    <li><a href="frontend/css/test1.html">Test 1</a></li>
+	    <li><a href="frontend/css/border.html">Borders</a></li>
+	    <li><a href="frontend/css/cnn/cnn.html">CNN Copy</a></li>
+	    <li>Bootstrap</li>
+	    <ol type="i">
+		<li><a href="frontend/css/bootstrap/test1.html">Test 1</a></li>
+		<li>
+		    <a href="frontend/css/bootstrap/landing.html">Landing Page</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>this looks ugly on mobile; fix</li>
+		    </ul>
+		</li>
+	    </ol>
+	    <li>Sass</li>
+	    <ol type="i">
+		<li>
+		    <a href="frontend/css/sass/test1.html">Test 1</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>finish tutorial/play with this more</li>
+		    </ul>
+		</li>
+	    </ol>
+	    <li>Less</li>
+	    <ol type="i">
+		<li>
+		    <a href="frontend/css/less/test1.html">Test 1</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>finish tutorial/play with this more</li>
+		    </ul>
+		</li>
+	    </ol>
+	    <li>CSS3</li>
+	    <ol type="i">
+		<li>
+		    <a href="frontend/css/css3/test1.html">Test 1</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>finish tutorial/play with this more</li>
+		    </ul>
+		</li>
+	    </ol>
+	</ol>
+	<li>Javascript</li>
+	<ol type="i">
+	    <li><a href="frontend/js/test1.html">Test 1</a></li>
+	    <li><a href="frontend/js/reaction.html">Reaction Tester</a></li>
+	    <li>
+		<a href="frontend/js/snake/snake.html">Snake Game</a>
+		<br><span class="todo">TODO</span>
+		<ul>
+		    <li>
+			fix bug when you press down + right while going up and die
+		    </li>
+		</ul>
+	    </li>
+	    <li>jQuery</li>
+	    <ol type="i">
+		<li><a href="frontend/js/jquery/test1.html">Test 1</a></li>
+		<li><a href="frontend/js/jquery/codeplayer.html">Code Player</a></li>
+	    </ol>
+	    <li>Angular.js (1.x)</li>
+	    <ol type="i">
+		<li>
+		    <a href="frontend/js/angular/test1.html">Test 1</a>
+		    <br><span class="todo">TODO (3)</span>
+		    <ul>
+			<li>finish tutorial/play with this more</li>
+		    </ul>
+		</li>
+	    </ol>
+	    <li>
+		React.js/Flux
+		<br><span class="todo">TODO (2)</span>
+		<ul>
+		    <li>do tutorial/play with this</li>
+		</ul>
+	    </li>
+	    <li>AJAX</li>
+	    <ol type="i">
+		<li>
+		    <a href="frontend/js/ajax/test1.html">Test 1</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>finish tutorial/play with this more</li>
+		    </ul>
+		</li>
+	    </ol>
+	</ol>
+	<li>Other stuff</li>
+	<ol type="i">
+	    <li>Separators (Chrome)</li>
+	    <ol type="i">
+		<li>
+		    <a href="frontend/others/separators/horz.html">Horizontal</a>
+		</li>
+		<li>
+		    <a href="frontend/others/separators/vert.html">Vertical</a>
+		</li>
+	    </ol>
 	</ol>
     </ol>
-    <li>Databases</li>
-    <ol type="i">
-	<li>MySQL</li>
+    <li>Backend</li>
+    <ol type="a">
+	<li>Servers</li>
 	<ol type="i">
-	    <!-- http://127.0.0.1/phpmyadmin/ -->
-	    <li><a href="/phpmyadmin/panel">phpMyAdmin</a></li>
-	    <li><a href="backend/mysql/test1.php">Test 1</a></li>
-	    <li><a href="backend/mysql/test2.php">Register & Login</a></li>
-	    <li><a href="backend/mysql/notes/index.php">Notes</a></li>
-	    <li><a href="backend/mysql/test3.php">Register & Login 2</a></li>
+	    <li>Apache 2</li>
+	    <ol type="i">
+		<li><a href="/server-status">Server Status</a></li>
+		<li><a href="backend/servers/apache/refs">Refs</a></li>
+	    </ol>
+	    <li>Nginx</li>
+	    <ol type="i">
+		<li><a href="/nginx_status">Server Status</a></li>
+		<li><a href="backend/servers/nginx/refs">Refs</a></li>
+	    </ol>
+	</ol>
+	<li>Databases</li>
+	<ol type="i">
+	    <li>MySQL</li>
+	    <ol type="i">
+		<!-- http://127.0.0.1/phpmyadmin/ -->
+		<li><a href="/phpmyadmin/panel">phpMyAdmin</a></li>
+		<li><a href="backend/mysql/test1.php">Test 1</a></li>
+		<li><a href="backend/mysql/test2.php">Register & Login</a></li>
+		<li>
+		    <a href="backend/mysql/notes/index.php">Notes</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>
+			    maybe make the notes table smaller on mobile devices
+			</li>
+			<li>
+			    maybe switch to PDO from mysqli OOP
+			</li>
+			<li>
+			    switch to flash messages (similar to register &
+			    login 2)
+			</li>
+		    </ul>
+		</li>
+		<li><a href="backend/mysql/test3.php">Register & Login 2</a></li>
+	    </ol>
+	</ol>
+	<li>Programming Languages</li>
+	<ol type="i">
+	    <li>PHP</li>
+	    <ol type="i">
+		<li>
+		    <a href="backend/php/info.php">PHP Info</a>
+		</li>
+		<li>
+		    <a href="backend/php/test1.php">Test 1</a>
+		</li>
+		<li>
+		    <a href="backend/php/weather.html">Weather Scrapper</a>
+		    <br><span class="todo">TODO</span>
+		    <ul>
+			<li>
+			    this looks ugly on mobile; fix
+			</li>
+			<li>
+			    submit works with enter but not with mouse click
+			</li>
+		    </ul>
+		</li>
+		<li>Packages</li>
+		<ol type="i">
+		    <li><a href="https://getcomposer.org/">Composer</a></li>
+		    <ol type="i">
+			<li><a href="backend/php/composer/refs">Refs</a></li>
+		    </ol>
+		    <li>Twig</li>
+		    <li><a href="https://silex.symfony.com/doc/2.0/">Silex</a></li>
+		    <ol type="i">
+			<li><a href="backend/php/silex/refs">Refs</a></li>
+		    </ol>
+		    <li>Monolog</li>
+		    <li>Symfony</li>
+		    <li>Pimple</li>
+		    <li>Laravel</li>
+		</ol>
+	    </ol>
+	    <li>
+		Javascript/Node.js
+		<br><span class="todo">TODO (1)</span>
+		<ul>
+		    <li>do tutorial/play with this</li>
+		</ul>
+	    </li>
 	</ol>
     </ol>
-    <li>Programming Languages</li>
-    <ol type="i">
-      <li>PHP</li>
-      <ol type="i">
-	  <li>
-	      <a href="backend/php/info.php">PHP Info</a>
-	  </li>
-	  <li>
-	      <a href="backend/php/test1.php">Test 1</a>
-	  </li>
-	<li>
-	    <a href="backend/php/weather.html">Weather Scrapper</a>
-	</li>
-      </ol>
+    <li>Other Stuff</li>
+    <ol type="a">
+	<li>CMS</li>
+	<ol type="i">
+	    <li>Wordpress</li>
+	    <ol type="i">
+		<li>
+		    <a href="others/cms/wordpress/index.php">Test 1</a>
+		</li>
+	    </ol>
+	</ol>
+	<li>APIs</li>
+	<ol type="i">
+	    <li>Google Maps</li>
+	    <ol type="i">
+		<li>
+		    <a href="others/apis/gmaps/test1.html">Test 1</a>
+		</li>
+	    </ol>
+	    <li>Twitter</li>
+	    <ol type="i">
+		<li>
+		    <a href="others/apis/twitter/test1.html">Test 1</a>
+		</li>
+	    </ol>
+	</ol>
+	<li>Mobdev</li>
+	<ol type="i">
+	    <li>Cordova</li>
+	    <ol type="i">
+		<li>
+		    <a href="others/mobdev/cordova/test1.html">Test 1</a>
+		</li>
+	    </ol>
+	</ol>
+	<li>Grunt</li>
+	<li>Docker</li>
     </ol>
-  </ol>
-  <li>Webhosting</li>
-  <ol type="a">
-    <li>Amazon Web Services, Google App Engine, Digital Ocean, Heroku, Hostgator</li>
-  </ol>
-  <li>Other Stuff</li>
-  <ol type="a">
-      <li>CMS</li>
-      <ol type="i">
-	  <li>Wordpress</li>
-	  <ol type="i">
-	      <li>
-		  <a href="others/cms/wordpress/index.php">Test 1</a>
-	      </li>
-	  </ol>
-      </ol>
-      <li>APIs</li>
-      <ol type="i">
-	  <li>Google Maps</li>
-	  <ol type="i">
-	      <li>
-		  <a href="others/apis/gmaps/test1.html">Test 1</a>
-	      </li>
-	  </ol>
-	  <li>Twitter</li>
-	  <ol type="i">
-	      <li>
-		  <a href="others/apis/twitter/test1.html">Test 1</a>
-	      </li>
-	  </ol>
-      </ol>
-      <li>Mobdev</li>
-      <ol type="i">
-	  <li>Cordova</li>
-	  <ol type="i">
-	      <li>
-		  <a href="others/mobdev/cordova/test1.html">Test 1</a>
-	      </li>
-	  </ol>
-      </ol>
-      <li>Grunt</li>
-      <li>Docker</li>
-  </ol>
+    <li>Hosting</li>
+    <ol type="a">
+	<li>Web Hosting</li>
+	<ol type="i">
+	    <li>Free</li>
+	    <ol type="i">
+		<li>
+		    <a href="https://www.000webhost.com/">000webhost</a>
+		</li>
+		<li>
+		    <a href="https://byet.host/free-hosting">byet.host</a>
+		</li>
+		<li>
+		    <a href="https://www.hostinger.co.uk/">hostinger</a>
+		</li>
+		<li>
+		    <a href="https://titanichost.net/free-hosting/">
+			titanichost
+		    </a>
+		</li>
+		<li>
+		    <a href="https://viewen.com/">viewen</a>
+		</li>
+	    </ol>
+	    <li>Paid</li>
+	    <ol type="i">
+		<li>
+		    <a href="https://www.hostgator.com/">hostgator</a>
+		</li>
+		<li>
+		    <a href="https://www.bluehost.com/">bluehost</a>
+		</li>
+		<li>
+		    <a href="https://www.hostwinds.com/">hostwinds</a>
+		</li>
+		<li>
+		    <a href="https://www.hosting24.com/features.php">
+			hosting24
+		    </a>
+		</li>
+		<li>
+		    <a href="https://www.ecowebhosting.co.uk/">
+			ecowebhosting
+		    </a>
+		</li>
+	    </ol>
+	</ol>
+	<li>Cloud Hosting</li>
+	<ol type="a">
+	    <li>Infrastructure as a service (IaaS)</li>
+	    <ol type="i">
+		<li>
+		    <a href="https://www.digitalocean.com/">
+			Digital Ocean
+		    </a>
+		</li>
+		<li>
+		    <a href="https://aws.amazon.com/">
+			Amazon Web Services (AWS)
+		    </a>
+		</li>
+		<li>
+		    <a href="https://cloud.google.com/">
+			Google Cloud
+		    </a>
+		</li>
+		<li>
+		    <a href="https://azure.microsoft.com/en-us/">
+			Microsoft Azure
+		    </a>
+		</li>
+		<li>
+		    <a href="https://www.ibm.com/cloud-computing/">
+			IBM Cloud
+		    </a>
+		</li>
+	    </ol>
+	    <li>Platform as a service (PaaS)</li>
+	    <ol type="i">
+		<li>
+		    <a href="https://heroku.com">
+			Heroku
+		    </a>
+		    <ol type="i">
+			<li><a href="http://127.0.0.1:8080">mdunaev</a> (local)</li>
+			<li><a href="https://mdunaev.herokuapp.com">mdunaev</a> (global)</li>
+		    </ol>
+		</li>
+		<li>
+		    <a href="https://www.openshift.com/">
+			Openshift
+		    </a>
+		</li>
+		<li>Most of the above
+		    (most cloud providers offer all types)</li>
+	    </ol>
+	    <li>Software as a service (SaaS)</li>
+	</ol>
+    </ol>
 </ol>
