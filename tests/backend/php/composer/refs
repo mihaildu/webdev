@@ -1,0 +1,30 @@
+# composer helps with dependencies for PHP
+# after you made a PHP website and used different packages/frameworks
+# just create a file composer.json at the root of your website
+composer.json
+{
+  "require" : {
+    "silex/silex": "^2.0.4",
+    "monolog/monolog": "^1.22",
+    "twig/twig": "^2.0",
+    "symfony/twig-bridge": "^3"
+  }
+}
+
+# when you try to run your website on a different machine, you can get
+# the exact same versions of the packages you used
+composer install
+
+# to get composer go to https://getcomposer.org/
+# download the installer and run it (or just copy + paste from their website)
+php installer
+
+# this will get you composer.phar (php archive)
+# to be able to run this globally, move it to a dir in PATH, e.g.
+mv composer.phar /usr/local/bin/composer
+
+# after you add something new to the .json file (to download it)
+composer update
+
+# you can also modify the json from the command line
+composer require alrik11es/cowsayphp

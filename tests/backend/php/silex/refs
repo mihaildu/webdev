@@ -1,0 +1,39 @@
+# turning silex (2.0.4) on for apache 2
+# taken from https://silex.symfony.com/doc/2.0/web_servers.html
+
+# first you have to turn rewrite mod on (mod_rewrite)
+# check if it's on
+apache2ctl -M | grep rewrite
+
+# if it's not, turn it on
+sudo a2enmod rewrite
+
+# write a .htaccess at the root of the host/document
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    #RewriteBase /path/to/app
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# if the .htaccess is not at the root, uncomment RewriteBase
+# with the correct path
+
+# this also works (from heroku official repo)
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+# this second method seems much simpler (for apache >= 2.2.16)
+# add this directive to .htaccess or directly to the VirtualHost
+FallbackResource index.php
+
+TODO play around with this (+ doc) maybe from scratch
+other things to look at:
+* special args in a function Application & Request
+* type hinting
+* for post you need $app->post
+* $app->match will match all methods
