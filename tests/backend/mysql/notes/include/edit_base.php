@@ -1,4 +1,5 @@
 <?php
+include_once("connect.php");
 function attempt_save(){
     /*
      * No reason to make a generic version for this function.
@@ -9,11 +10,11 @@ function attempt_save(){
 	return array("success" => false, "messages" => $ret["messages"]);
     }
 
-    $db = new mysqli("localhost", "notes_user", "notes_password", "notes");
-    if($db->connect_errno){
-	return array("success" => false,
-		     "messages" => array("Error connecting to the database"));
+    $ret = connect_to_db();
+    if (!$ret["success"]){
+	return array("success" => false, "messages" => $ret["messages"]);
     }
+    $db = $ret["db"];
 
     if ($_POST["action"] == "edit"){
 	$ret = update_note($db);

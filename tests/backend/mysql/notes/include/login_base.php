@@ -1,5 +1,6 @@
 <?php
 include_once("password.php");
+include_once("connect.php");
 
 function attempt_login(){
     /*
@@ -38,11 +39,11 @@ function attempt_login(){
     }
 
     // connect to db
-    $db = new mysqli("localhost", "notes_user", "notes_password", "notes");
-    if($db->connect_errno){
-	return array("success" => false,
-		     "messages" => array("Error connecting to the DB"));
+    $ret = connect_to_db();
+    if (!$ret["success"]){
+	return array("success" => false, "messages" => $ret["messages"]);
     }
+    $db = $ret["db"];
 
     // check if credentials are ok
     $ret = check_credentials($db);

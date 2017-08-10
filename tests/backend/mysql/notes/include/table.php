@@ -3,16 +3,17 @@
  * Table with all the data in Notes.
  *
  * TODO Maybe it's better to use one connection.
- * DB credentials should be stored in a single location/file.
  * */
-$db = new mysqli("localhost", "notes_user", "notes_password", "notes");
-if($db->connect_errno){
+include_once("connect.php");
+$ret = connect_to_db();
+if (!$ret["success"]){
     echo("<div class='text-centered'>" .
 	 "<div class='alert alert-danger' id='table-message'>" .
 	 "Error connecting to the DB" .
 	 "</div></div>");
     return;
 }
+$db = $ret["db"];
 
 show_table($db);
 $db->close();
