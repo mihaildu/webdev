@@ -46,3 +46,9 @@ laravel
 # running various commands (similar to apache/nginx)
 sudo /etc/init.d/php7.1-fpm status
 sudo /etc/init.d/php7.1-fpm restart
+
+# you can interpret individual files like this (without browser support)
+php file.php
+
+# opening an interactive console
+php -a
