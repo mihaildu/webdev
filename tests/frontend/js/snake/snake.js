@@ -1,3 +1,7 @@
+/* there is a bug if you press down + right for example, you die
+ */
+
+
 // easier if we make this global
 var main_interval;
 
