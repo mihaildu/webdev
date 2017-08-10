@@ -1,0 +1,39 @@
+# setup
+sudo apt-get install nginx
+
+# conf file
+/etc/nginx/nginx.conf
+
+# service stuff (e.g. restarting)
+/etc/init.d/nginx start/stop/restart
+
+# procs
+ps -e | grep nginx
+
+# look for the port
+sudo netstat -tlnp | grep nginx
+
+# logs (access + error)
+/var/log/nginx/
+
+# same as apache2 for sites
+/etc/nginx/sites-available + enabled
+# default path
+/usr/share/nginx/html
+
+# testing the configuration file (syntax)
+sudo nginx -t
+
+# enabling php on nginx (in nginx.conf)
+1. index.php after root
+2. location ~ \.php$ uncommented  (with the right fpm)
+3. uncomment the .ht(access) part
+4. restart nginx
+
+# stopping nginx from running at startup
+# this starts from a System V init script in /etc/init.d/
+# which is linked to /etc/rcx.d/
+sudo update-rc.d -f nginx disable
+
+# turning it back on TODO test
+sudo update-rc.d -f nginx enable
