@@ -15,7 +15,7 @@
 #first-segment {
     width: 100%;
     min-height: 628px;
-    min-width: 628px;
+    //min-width: 628px;
 
     background-image: url(landing_bg.jpg);
     background-repeat: no-repeat;
@@ -29,7 +29,7 @@
 }
 
 #first-container {
-    width: 600px;
+    //width: 600px;
     text-align: center;
 }
 
