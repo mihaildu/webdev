@@ -1,0 +1,107 @@
+# official website
+https://nodejs.org/en/
+
+# repo
+https://github.com/nodejs/node
+
+# versions/branches (25.08.2017)
+v8.4.0
+6.11.2 (LTS)
+
+# my version
+v8.2.1
+
+# open the repl
+node
+
+# to exit
+.exit
+# or
+C-c C-c
+
+# there is a global object (instead of window from broswer)
+var a = 10;
+# this should print 10
+a;
+# this should also print 10
+global.a;
+
+# there is no document, but there is process
+process
+
+# to run a file (e.g. js_only/)
+node file.js
+
+# from my old refs file
+# javascript = interpreted
+# interpreters for javascript: rhino, node.js
+# node.js = more than just an interpreter (runtime env)
+
+# node.js can be installed from repos (on old linux distro up until v0.12)
+sudo apt-get install nodejs
+
+# to get newest version of node (v8.x) - on newer linux distros
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node --version
+
+# running a javascript with node
+node file.js
+
+# you can also start the cli/repl
+node
+
+# npm = node packet manager
+# TODO npm installation (might come by default with nodejs)
+npm --version
+
+# package manager
+npm
+
+# installing a package
+npm install underscore
+
+# you can also uninstall a package
+npm uninstall underscore
+
+# npm works similar to composer for php
+# it installs packages/frameworks in the current dir
+# it needs packages.json
+# this works for both frontend and backend packages
+
+# this will install the package in npm_modules/ in current dir
+# then you can use packages from there with require (e.g. test2.js)
+
+# turning your code into a package?
+# creating the package.json
+npm init
+
+# adding a new package to package.json after install
+npm install backbone -S
+npm install backbone --save
+
+# you have to start the webserver first
+# e.g. this will listen for connections on port 3000
+node test1.js
+
+# installing a package globally
+npm install -g express-generator
+
+# global modules location
+/usr/local/lib/node_modules/
+/usr/lib/node_modules/
+
+# if you don't want to stop the proc and restart it everytime you make a change
+# use a monitor thing: nodemon
+npm install -g nodemon
+
+# then start the webserver like you normally would
+nodemon test1.js
+
+# template engines for node.js
+ejs
+handlebars
+mustache.js (hogan is based on this)
+nunjucks
+
+# apparently you can also do template stuff in react.js
