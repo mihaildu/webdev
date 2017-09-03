@@ -1,0 +1,30 @@
+* check promises
+  * bluebird
+    https://www.npmjs.com/package/bluebird
+  * async.js
+    https://www.npmjs.com/package/async
+  * await
+
+* check body-parser
+  * for parsing post data (instead of querystring)
+
+* check mongoose
+  https://www.npmjs.com/package/mongoose
+
+* check passport
+  * instead of the local login/signup system I wrote
+  * try oauth
+
+* check hogan
+  * use it for value=
+
+* check nodemon restart options
+  * how to restart on errors thrown and not wait for file changes
+
+* check flash messages npm package
+  https://www.npmjs.com/package/express-messages
+
+* implement a function chaining mini lib
+  * specify a set of functions + args
+  * have a main event/"done" that gets called when a function is done
+  * either call final event on fail or call next
