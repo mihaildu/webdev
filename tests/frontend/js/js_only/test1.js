@@ -1,5 +1,9 @@
 /*
  * Random javascript tests.
+ *
+ * TODO
+ * re-write this file without duplications in something like
+ *   js/refs.js + js/refs-nodejs.js
  */
 
 // global vars initialized at before anything else
@@ -10,9 +14,11 @@ var test9_global_var3;
 main();
 
 function main(){
-    // TODO regex test
-
-    test27_generic_streams();
+    //test31_json_prop();
+    //test30_regex();
+    test29_move_props();
+    //test28_env_vars();
+    //test27_generic_streams();
     //test26_fs();
     //test25_default_arg();
     //test24_inheritance();
@@ -46,6 +52,110 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test31_json_prop(){
+    /* this works */
+    var test = 100;
+    var obj = {
+	test: test,
+    };
+    console.log(obj);
+}
+
+function test30_regex(){
+    /*
+     * Regular expressions in javascript
+     */
+    let re;
+
+    // this is a regular exp that will match a
+    re = /^a$/;
+    console.log("type of regexp = " + typeof(re));
+    console.log("/^a$/ matches a: " + re.test("a"));
+    console.log("/^a$/ matches ab: " + re.test("ab"));
+
+    /*
+     * I guess /re/ will automatically convert to RegExp (js object)
+     * Special characters
+     *   ^: beginning of string
+     *   $: end of string
+     *   +: at least once
+     * */
+
+    // you can create a re from a string like so
+    re = new RegExp("a+b");
+
+    // this will match strings that have (ab, aab, ...) in them
+    console.log("/a+b/ matches xabz: " + re.test("xabz"));
+    console.log("/a+b/ matches xbz: " + re.test("xbz"));
+
+    /*
+     * Some special characters in strings need to be escaped (e.g. backslashes)
+     * You can do automatic escaping when converting from string to re using
+     * re.source
+     *
+     * e.g. we want to match "a+"
+     * */
+
+    // this won't do since it means (a, aa, ...)
+    re = new RegExp("^a+$");
+    console.log(re.test("a+"));
+
+    // this won't do since \+ is interpreted as a special char in the string
+    re = new RegExp("^a\+$");
+    console.log(re.test("a+"));
+
+    // this will do since we escaped the \
+    re = new RegExp("^a\\+$");
+    console.log(re.test("a+"));
+
+    // doing this without escaping (using source)
+    re = new RegExp(/^a\+$/.source);
+    console.log(re.test("a+"));
+
+    // splitting into multiple strings (useful for long REs)
+    re = new RegExp(/^a/.source + /\+$/.source);
+    console.log(re.test("a+"));
+
+    // matching /
+    re = new RegExp(/^\/$/.source);
+    console.log(re.test("/"));
+}
+
+function test29_move_props(){
+    /* Object.assign() will append one js object to another */
+    obj1 = {prop1: "p1", prop2: "p2"};
+    obj2 = {prop3: "p3", prop4: "p4"};
+    /* this will add obj2 to obj1 */
+    Object.assign(obj1, obj2);
+    console.log(obj1);
+
+    /* if dest obj already has prop, it will be updated */
+    obj3 = {prop1: "p1", prop2: "p2"};
+    obj4 = {prop2: "p3", prop4: "p4"};
+    Object.assign(obj3, obj4);
+    console.log(obj3);
+
+    /*
+     * some other options to try:
+     * req.session = {req.session, ret.session}
+     * */
+}
+
+function test28_env_vars(){
+    /*
+     * when checking if a variable is set I guess 2 methods work
+     *   1. if (myvar == undefined) {} // no type coercion here
+     *   2. if (typeof(myvar) == "undefined") {}
+     *
+     * all env variables are accessible via process.env (json)
+     * to run this with NODE_ENV set:
+     *   NODE_ENV=test node test1.js
+     */
+    if(typeof(process.env["NODE_ENV"]) != "undefined"){
+	console.log(process.env["NODE_ENV"]);
+    }
 }
 
 function test27_generic_streams(){
@@ -174,7 +284,6 @@ function test26_fs(){
 	if (err){
 	    console.log("There has been an error: " + err);
 	} else {
-	    // TODO document JSON.stringify; last arg is spacing level
 	    console.log("Stats for file 'test':\n" +
 			JSON.stringify(stats, null, 2));
 	}
@@ -485,6 +594,34 @@ function test21_prototypes(){
     // you can print props only specific to the object with multiple methods
     console.log(Object.keys(Tim));
     console.log(Object.getOwnPropertyNames(Tim));
+
+    /*
+     * printing objects
+     *
+     * most of the time using console.log(obj) will work just fine
+     * however, sometimes this will only print [object Object]
+     *
+     * TODO figure out when this happens exactly
+     *   in connection.query(query, function(err, rows, fields))
+     *   console.log(rows); will print [object Object]
+     * I think this happens when you concatenate a string with an obj
+     * type coercion in concat(str, obj) TODO test this
+     *
+     * to print it in that case simply use JSON.stringify(obj)
+     *
+     * JSON.stringify(obj, null, 2) can also pretty print an obj
+     * in the prev example, the spacing on each line is 2
+     *
+     * JSON.stringify() turns a javascript object into a string
+     * with some pretty formatting (optional)
+     */
+
+    // TODO test this and edit above
+    var pobj = {prop1: "val1", prop2: "val2"};
+    console.log("pobj = " + pobj);
+
+    // example of pretty printing
+    console.log(JSON.stringify(pobj, null, 2));
 }
 
 function test20_streams(){
@@ -988,7 +1125,8 @@ function test8_statements(){
     // iterating through array
     var cars = ["bmw", "porsche", "mustang"];
     var all_cars = "";
-    // for loop/statement
+
+    // for loop statement
     for (var i = 0; i < cars.length; i++) {
 	all_cars = all_cars + cars[i] + " ";
     }
@@ -996,11 +1134,17 @@ function test8_statements(){
 
     var names = ["john", "tim", "jim"];
     var all_names = "";
+
     // other for loop
     for (var i in names) {
 	all_names = all_names + names[i] + " ";
     }
     console.log(all_names);
+
+    // other for loop
+    names.forEach(function(name){
+	console.log(name);
+    });
 
     s = 0;
     var j = 0;
