@@ -52,13 +52,26 @@
  * */
 
 function main(){
+    test8_crypto();
     //test7_next_tick();
     //test6();
     //test5_html();
     //test4();
     //test3();
     //test2();
-    test1();
+    //test1();
+}
+
+function test8_crypto(){
+    /*
+     * why is this so weird?
+     * first, create a new crypto.Hash object with crypto.createHash("alg")
+     * second, add some string to be hashed using .update("str")
+     * third, hash everything you passed with update() by using digest()
+     * */
+    var hash = require("crypto").createHash("sha256");
+    hash.update("test string");
+    console.log(hash.digest("hex"));
 }
 
 function test7_next_tick(){
@@ -192,6 +205,13 @@ function test6(){
 	request.on("error", (err) => {
 	    console.error(err.stack);
 	});
+
+	// you can also list info about the connection
+	// e.g. client ip address
+	console.log("Client IP address:", request.connection.remoteAddress);
+
+	// request.connection is a net.Socket
+	// https://nodejs.org/api/net.html#net_class_net_socket
 
 	// looking at response
 
