@@ -1,0 +1,102 @@
+# official website
+https://expressjs.com/
+
+# my version of express
+4.15.0
+
+# this gives you "declarative routing"
+# two main ways to use express: express and express generator
+
+# express generator
+# installing (globally)
+npm install -g express-generator
+
+# after this you can use the express cmd
+express -h
+
+# creating a new project with express generator
+express projname
+
+# using pug as view engine
+express --view=pug projname
+
+# with hogan templates & stylus
+express --hogan -c stylus
+
+# after this you have to install everything
+cd projname
+npm install
+
+# then run the app (this runs it in debug mode)
+# npm start will look in package.json and invoke the start cmd
+# normally it's "node ./bin/www"
+DEBUG=test:* npm start
+# or
+nodemon ./bin/www
+# or (in production)
+NODE_ENV=production nodemon ./bin/www
+
+# for debugging this should also work (TODO test)
+DEBUG=express:* nodemon ./bin/www
+
+# more on debugging
+# https://expressjs.com/en/guide/debugging.html
+# https://www.npmjs.com/package/debug
+# DEBUG=express shows more info than DEBUG=app
+
+# to change basic conf (e.g. port)
+bin/www
+
+# to start with nodemon instead of node
+package.json: "start"
+
+# routes (GET, POST etc request handling)
+routes/index.js
+
+# views in views/
+
+# using express (installed locally)
+npm init
+npm install express --save
+
+# run a node app in production mode with NODE_ENV=production
+# apparently this only works with express generator (no idea why)
+# if you try to get a path with no listener/route
+# you get the full stack trace in browser
+# running with NODE_ENV will disable that/only show "Not Found"
+NODE_ENV=production nodemon app.js
+
+# express 5 is in alpha
+npm install express@5.0.0-alpha.2 --save
+
+# using mysql with express
+npm install mysql (--save)
+
+# using mongodb with express
+npm install mongodb (--save)
+# or mongoose
+npm install mongoose (--save)
+
+# no built-in way to escape html on output?
+npm install html-entities --save
+# or (this seems more popular)
+npm install escape-html --save
+# express comes with escape-html apparently
+
+# for extra console messages (requests etc) use morgan
+# https://www.npmjs.com/package/morgan
+# express generator comes with this by default
+# for more debugging messages
+# https://www.npmjs.com/package/debug
+
+# for cookies you can use cookie-parser
+npm install cookie-parser --save
+var cp = require("cookie-parser");
+app.use(cp());
+
+# this is only for parsing cookies in request
+# to set a cookie (in a response) you just need to set a header
+# you can do this without any package
+
+# apparently there are books about express
+https://expressjs.com/en/resources/books-blogs.html
