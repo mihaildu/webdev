@@ -319,18 +319,57 @@ app.get("/mysql", function(req, res){
 });
 
 /*
- * TODO
- * install mongodb, play around with it for a bit
- * install mongodb package
- *   npm install mongodb
- * do some queries with mongodb package
- * https://expressjs.com/en/guide/database-integration.html#mongodb
+ * MongoDB
  *
- * try mongoose
+ * this uses mongodb package
+ * https://www.npmjs.com/package/mongodb
+ *
+ * TODO try mongoose
  * https://github.com/Automattic/mongoose
  */
 app.get("/mongodb", function(req, res){
-    res.send("Work in progress");
+    var mongo_client = require("mongodb").MongoClient;
+
+    // connect to a db
+    let db_type = "mongodb";
+    let host = "localhost";
+    let port = "27017";
+    let db_name = "test";
+    let connect_str = db_type + "://" + host + ":" + port + "/" + db_name;
+
+    mongo_client.connect(connect_str, function(err, db){
+	if (err){
+	    console.error("Error connecting to db:", err.message);
+	    res.send("Error connecting to db: " + err.message);
+	    return;
+	}
+
+	// get everything from collection test
+	db.collection("test").find().toArray(function (err, result){
+	    if (err){
+		console.error("Error querying the db:", err.message);
+		res.send("Error querying the db: " + err.message);
+		return;
+	    }
+
+	    /*
+	     * the weird thing about mongodb is that it doesn't enforce
+	     * a certain prototype; I guess it's safe to check for every
+	     * object in the collection if it follows a certain prototype
+	     */
+	    result.forEach(function(doc){
+		/* if object has name, age & email fields */
+		props = ["name", "age", "email"];
+		if (props.every(prop => prop in doc))
+		    res.write("name: " + doc.name +
+			      " age: " + doc.age +
+			      " email: " + doc.email + "\n");
+	    });
+	    res.end();
+	});
+
+	// TODO insert, delete, update - with different URL
+    });
 });
 
 /*
@@ -479,6 +518,21 @@ app.get("/session-start", function(req, res){
     }
     res.end("session started");
 });
+
+/*
+ * using a template engine - hogan
+ *
+ * first set the directory where the template files are
+ * second set the template engine to use
+ * this will be used every time on response.render()
+ */
+app.set("views", require("path").join(__dirname, "views"));
+app.set("view engine", "hjs");
+
+app.get("/hogan", function(req, res){
+    /* render index.hjs */
+    res.render("index", {prop1: "This is prop1"});
+})
 
 /*
  * normally this should perform a cleanup and exit

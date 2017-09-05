@@ -12,6 +12,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
+    "hjs": "0.0.6",
+    "mongodb": "^2.2.31",
     "mysql": "^2.14.1"
   }
 }

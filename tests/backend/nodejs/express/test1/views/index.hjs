@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Hogan.js for express</title>
+    </head>
+    <body>
+	<p>This is hogan.js for express.</p>
+	<p>Prop1 value: {{ prop1 }}</p>
+    </body>
+</html>
