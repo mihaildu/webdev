@@ -1,0 +1,30 @@
+# hogan is a template engine from twitter
+http://twitter.github.io/hogan.js/
+
+# it is based on moustache
+https://mustache.github.io/
+https://mustache.github.io/mustache.5.html
+
+# you can use it with express generator like this
+express --hogan projname
+
+# this will use the hjs package
+https://www.npmjs.com/package/hjs
+
+# if you want to install it without express generator
+# install hjs
+npm install hjs --save
+
+# set the views dir
+app.set("views", path.join(__dirname, "views"));
+
+# set the template engine to hjs
+app.set("view engine", "hjs");
+
+# in a get request
+res.render("index", {prop1: "Prop1 value"});
+
+# where index is a file: views/index.hjs
+# check localhost:3000/hogan from express/test1
+
+# hogan/moustache is logic-less - no ifs/for loops etc
