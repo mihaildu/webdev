@@ -16,12 +16,12 @@ main();
 function main(){
     //test31_json_prop();
     //test30_regex();
-    test29_move_props();
+    //test29_move_props();
     //test28_env_vars();
     //test27_generic_streams();
     //test26_fs();
     //test25_default_arg();
-    //test24_inheritance();
+    test24_jsobj_and_inheritance();
     //test23_wrappers();
     //test22_type_coercion();
     //test21_prototypes();
@@ -145,10 +145,6 @@ function test29_move_props(){
 
 function test28_env_vars(){
     /*
-     * when checking if a variable is set I guess 2 methods work
-     *   1. if (myvar == undefined) {} // no type coercion here
-     *   2. if (typeof(myvar) == "undefined") {}
-     *
      * all env variables are accessible via process.env (json)
      * to run this with NODE_ENV set:
      *   NODE_ENV=test node test1.js
@@ -362,9 +358,10 @@ function test25_default_arg(){
     fcn2("one", 2, "10", true);
 }
 
-function test24_inheritance(){
+function test24_jsobj_and_inheritance(){
     /*
      * TODO maybe make one big function for objects?
+     * added object props here too
      * more on inheriting stuff
      *
      * JavaScript book pag 122
@@ -409,6 +406,50 @@ function test24_inheritance(){
     console.log(Object.getPrototypeOf(p));
     console.log(p);
     console.log(p.x);
+
+    /*
+     * checking for variables/properties
+     *
+     * when checking if a variable is set this works
+     *   1. if (typeof(myvar) == "undefined") {}
+     *
+     * if (myvar) - could fail if myvar is a boolean set to false
+     *
+     * checking if a js object has a certain property
+     * the above method works (e.g. typeof(myvar.prop) == "undefined")
+     * other methods of doing this:
+     *   2. if (myvar.prop == undefined) {}
+     *      - no type coercion here
+     *      - this will crash if tested directly for myvar
+     *   3. if ("prop" in myvar) {}
+     *   4. using every (easier for multiple props)
+     */
+    if (typeof(random_var) == "undefined")
+	console.log("random_var is not defined");
+    else
+	console.log("random_var is defined");
+
+    // just writing "var myvar;" leaves it undefined as well
+    var myvar = {};
+    myvar.prop1 = "undefined";
+    if (myvar.prop1 == undefined)
+	console.log("myvar.prop1 is not defined");
+    else
+	console.log("myvar.prop1 is defined");
+
+    myvar.prop2 = 10;
+    if ("prop2" in myvar)
+	console.log("myvar.prop2 is defined");
+    else
+	console.log("myvar.prop2 is not defined");
+
+    myvar.prop3 = 100;
+    // we use shorthand arrow notation for functions
+    props = ["prop1", "prop2", "prop3"];
+    if (props.every(prop => prop in myvar))
+	console.log("myvar has all props: prop1, prop2 & prop3");
+    else
+	console.log("myvar is missing a prop");
 }
 
 function test23_wrappers(){
@@ -1141,7 +1182,12 @@ function test8_statements(){
     }
     console.log(all_names);
 
-    // other for loop
+    /*
+     * other for loop
+     *
+     * if you want to skip an element use "return" and not
+     * "continue" since this is a function and not a proper for loop
+     */
     names.forEach(function(name){
 	console.log(name);
     });
