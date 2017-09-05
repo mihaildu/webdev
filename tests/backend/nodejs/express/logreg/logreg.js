@@ -26,6 +26,7 @@ const port = 3000;
 const escape = require("escape-html");
 const fs = require("fs");
 const qs = require("querystring");
+const hogan = require("hogan.js");
 
 /*
  * login & register modules
@@ -41,6 +42,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
 }));
+
+/* set template engine */
+app.set("views", require("path").join(__dirname, "views/hjs"));
+app.set("view engine", "hjs");
 
 app.get(["/", "/index", "/index.html"], function(req, res){
     /*
@@ -65,6 +70,55 @@ app.get(["/", "/index", "/index.html"], function(req, res){
 	return;
     }
 
+    display_index_templates(req, res);
+});
+
+function display_index_templates(req, res){
+    /*
+     * display page using hogan template engine
+     *
+     * it's this function responsability to format the data properly
+     * for hogan (from req.session.messages and value fields)
+     * */
+
+    /* flash messages */
+    let hash = {messages: false, flash_messages: false};
+    if (typeof(req.session["messages"]) != "undefined"){
+	hash.messages = [];
+	hash.flash_messages = true;
+	req.session.messages.forEach(function(message){
+	    hash.messages.push({message: message});
+	});
+
+	/* clear for refresh/future requests */
+	delete req.session.messages;
+    }
+
+    /* values */
+    let values_list = ["username_login", "password_login",
+		       "username_signup", "email_signup",
+		       "password_signup"];
+
+    values_list.forEach(function(value){
+	if (value in req.session){
+	    hash[value] = {value: req.session[value]};
+	    /* you might want to keep typed data on refresh */
+	    delete req.session[value];
+	}
+	else
+	    hash[value] = false;
+    });
+
+    /* apparently " is escaped automatically */
+    res.render("index", hash);
+}
+
+function display_index(req, res){
+    /*
+     * display index page without using templates
+     * values typed in form won't be saved on new posts/refresh
+     */
+
     /* check for flash messages */
     if (typeof(req.session["messages"]) != "undefined"){
 	let messages = req.session["messages"];
@@ -84,7 +138,7 @@ app.get(["/", "/index", "/index.html"], function(req, res){
      */
     let rstream = fs.createReadStream("views/index.html");
     rstream.pipe(res);
-});
+}
 
 app.post(["/", "/index", "/index.html"], function(req, res){
     /*
@@ -163,7 +217,6 @@ app.post(["/", "/index", "/index.html"], function(req, res){
 	req.session["messages"] = ret["messages"];
 
 	/* save post data for autofill */
-	req.session["submit_login"] = true;
 	if (post_data["username_login"]){
 	    req.session["username_login"] = post_data["username_login"];
 	}
@@ -187,9 +240,11 @@ app.post(["/", "/index", "/index.html"], function(req, res){
 	req.session["messages"] = ret["messages"];
 
 	/* save post data for autofill */
-	req.session["submit_signup"] = true;
 	if (post_data["username_signup"]){
 	    req.session["username_signup"] = post_data["username_signup"];
+	}
+	if (post_data["email_signup"]){
+	    req.session["email_signup"] = post_data["email_signup"];
 	}
 	if (post_data["password_signup"]){
 	    req.session["password_signup"] = post_data["password_signup"];

@@ -1,0 +1,44 @@
+{{#flash_messages}}
+<!-- flash messages -->
+<div style="color:red">
+    {{#messages}}
+    {{message}}<br>
+    {{/messages}}
+</div>
+<br>
+{{/flash_messages}}
+
+<!-- sign up form -->
+<form method="post">
+    <input type="text" name="username_signup" placeholder="Username"
+	   {{#username_signup}}
+	   value="{{value}}"
+	   {{/username_signup}}
+    >
+    <input type="email" name="email_signup" placeholder="Email Address"
+	   {{#email_signup}}
+	   value="{{value}}"
+	   {{/email_signup}}
+    >
+    <input type="password" name="password_signup" placeholder="Password"
+	   {{#password_signup}}
+	   value="{{value}}"
+	   {{/password_signup}}
+    >
+    <input type="submit" value="Sign Up" name="submit_signup">
+</form>
+
+<!-- log in form -->
+<form method="post">
+    <input type="text" name="username_login" placeholder="Username"
+	   {{#username_login}}
+	   value="{{value}}"
+	   {{/username_login}}
+    >
+    <input type="password" name="password_login" placeholder="Password"
+	   {{#password_login}}
+	   value="{{value}}"
+	   {{/password_login}}
+    >
+    <input type="submit" value="Log In" name="submit_login">
+</form>
