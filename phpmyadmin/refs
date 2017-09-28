@@ -27,5 +27,12 @@ https://docs.phpmyadmin.net/en/latest/
 sudo add-apt-repository ppa:nijel/phpmyadmin
 sudo apt-get update
 
+# install
+sudo apt install phpmyadmin
+
+# enable mbstring if it isn't
+sudo apt install sudo apt install php-mbstring
+sudo systemctl status apache2
+
 # version currently installed
 4.6.6deb1+deb.cihar.com~trusty.2 (based on php7.1)

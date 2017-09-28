@@ -1,3 +1,29 @@
+# install php (for apache2)
+sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
+
+# checking version
+php --version
+
+# test with some .php file (e.g. from php_only/)
+php php_only/test1.php
+
+# or test directly in shell
+echo "<?php echo('test');?>" | php
+echo "<?php phpinfo();?>" | php
+
+# make apache2 prefer index.php over index.html etc
+# move index.php at the beginning of the list in
+/etc/apache2/mods-enabled/dir.conf
+
+# and restart apache2
+sudo systemctl restart apache2
+
+# search for php modules
+apt-cache search php- | less
+
+# show info on some package
+apt-cache show php-cli
+
 # php.ini = configuration file
 # this is in php5
 /etc/php5/apache2/php.ini

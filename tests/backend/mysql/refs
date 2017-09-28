@@ -1,0 +1,14 @@
+# install
+sudo apt install mysql-server
+
+# check version
+mysql --version
+
+# check if it's running
+sudo systemctl status mysql
+
+# check port
+sudo netstat -tlnp | grep mysql
+
+# make stuff more secure (production only)
+mysql_secure_installation

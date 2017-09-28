@@ -1,5 +1,57 @@
 # this is apache2 under debian systems
-# TODO apache setup
+
+# install apache2
+sudo apt install apache2
+
+# check version
+apachectl -V
+
+# check if config is ok
+sudo apache2ctl configtest
+
+# add ServerName to apache2.conf (optional)
+ServerName 127.0.0.1
+
+# check if apache is running (I guess 3 ways to interact with service)
+sudo service apache2 status
+sudo systemctl status apache2
+/etc/init.d/apache2 status
+
+# check opened port
+sudo netstat -tlnp | grep apache
+
+# check if it's working (in browser)
+127.0.0.1
+
+# configure /var/www dir
+
+# check if www-data group exists
+cat /etc/group | grep www-data
+
+# add user to www-data
+sudo adduser dryhten www-data
+
+# check if it worked
+groups dryhten
+
+# put right permissions on /var/www
+sudo chown dryhten:www-data -R /var/www
+
+# set group id for directory (so it copies ownership on new files/dirs)
+sudo chmod g+s /var/www
+
+# apparently 755 is a good permission (how about write for www-data?)
+# TODO investigate this
+# this also sets s bit for directory
+sudo chmod u=rwX,g=srX,o=rX -R /var/www
+
+# disable directory listing
+# remove indexes from /var/www directory in apache2.conf
+# this can also be done with .htaccess files
+/etc/apache2/apache2.conf
+<Directory /var/www/> Options -Indexes...
+
+# change to prefork?
 
 # apache configuration (the conf describes where stuff is located)
 /etc/apache2
