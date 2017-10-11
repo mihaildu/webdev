@@ -324,9 +324,6 @@ app.get("/mysql", function(req, res){
  *
  * this uses mongodb package
  * https://www.npmjs.com/package/mongodb
- *
- * TODO try mongoose
- * https://github.com/Automattic/mongoose
  */
 app.get("/mongodb", function(req, res){
     var mongo_client = require("mongodb").MongoClient;
@@ -376,7 +373,150 @@ app.get("/mongodb", function(req, res){
 	    res.end();
 	});
 
-	// TODO insert, delete, update - with different URL
+	// use a filter in find()
+	let filter = {username: "tim"};
+	db.collection("test").find(filter).toArray(function(err, result){
+	    if (err) { /* same as above */ }
+	    if (result.length < 1) { /* whatever you want */ }
+	    // result[0]["fieldname"]
+	    // ...
+	});
+
+	// inserting something
+	db.collection("test").insertOne({
+	    username: "john",
+	    email: "john@mail.com",
+	    password: "secret1337",
+	}, function(err, result) {
+	    if (err) {}
+	    if (result.insertedCount != 1) {}
+	    console.log("New object id: " + result.insertedId);
+	    // ...
+	});
+
+	// TODO delete, update - with different URL
+
+	// close connection at the end
+	db.close();
+    });
+});
+
+/*
+ * MongoDB with mongoose package
+ * https://github.com/Automattic/mongoose
+ *
+ * npm install mongoose --save
+ */
+app.get("/mongoose", function(req, res){
+    const credentials = {
+	host: "localhost",
+	port: "27017",
+	user: "notes_user",
+	password: "notes_password",
+	db: "notes"
+    };
+
+    /* mongodb://username:password@host:port/db */
+    const connect_str = "mongodb://" + credentials.user + ":" +
+	credentials.password + "@" + credentials.host + ":" +
+	credentials.port + "/" + credentials.db;
+
+    /* actual mongoose stuff */
+    var mongoose = require("mongoose");
+    mongoose.connect(connect_str, {useMongoClient: true});
+    /* so mongoose uses promises and you need to do this */
+    mongoose.Promise = global.Promise;
+    var db = mongoose.connection;
+
+    /* error handler */
+    db.on("error", console.error.bind(console, "connection error: "));
+
+    /* open handler */
+    db.once("open", function(){
+	/*
+	 * Mongoose uses Models to represent data from the DB in memory
+	 * so first you have to create your structures (schema, model)
+	 * and then transfer stuff to/from DB
+	 *
+	 * a schema is a description of a table/collection (e.g. fields)
+	 * a model is schema + data + name
+	 * */
+
+	/* creating a new schema + model for cats */
+	var cat_schema = mongoose.Schema({
+	    name: String,
+	});
+
+	/*
+	 * you can also add functions to schemas
+	 * I guess you can't do this in the DB
+	 * */
+	cat_schema.methods.speak = function(){
+	    /* this is an obj from the DB (doc representation) */
+	    if (this.name)
+		console.log("Meow name is " + this.name);
+	    else
+		console.log("I don't have a name");
+	}
+
+	/* create the actual model from the schema + name */
+	var cat = mongoose.model("Kitten", cat_schema);
+
+	/* add stuff to the model */
+	var jimmy = new cat({name: "jimmy"});
+	console.log(jimmy.name);
+	jimmy.speak();
+
+	/*
+	 * I guess there is a reason why you need both schema and model
+	 * anyway, to store an object from a model in the DB use save()
+	 *
+	 * the collections that corresponds to the model is set when
+	 * you call mongoose.model(); by default it will be model name
+	 * + "s" at the end and lower case first letter (so kittens
+	 * from above)
+	 *
+	 * to use a custom name for collection use a third param
+	 * see below for Users collection
+	 * */
+	jimmy.save(function (err, jimmy){
+	    if (err){
+		console.error(err.message);
+		return;
+	    }
+	    console.log("successfully stored " + jimmy.name + " in db");
+	});
+
+	/* to retrive stuff from the db to the model use find() */
+	cat.find(function (err, kittens){
+	    if (err){
+		console.log(err);
+		return;
+	    }
+	    /* so kittens will have all the docs */
+	    console.log(kittens);
+	});
+
+	/* you can also use filters */
+	cat.find({name: "jimmy"}, function (err, kittens){
+	    if (err) return;
+	    // ...
+	});
+
+	/* retriving Users from notes db */
+	var users_schema = mongoose.Schema({
+	    username: String,
+	    email: String,
+	    password: String,
+	});
+
+	/* make the model with custom collection name */
+	var user = mongoose.model("user", users_schema, "Users");
+	user.find(function (err, users){
+	    if (err)
+		return console.error(err);
+	    res.send(users);
+	});
     });
 });
 
