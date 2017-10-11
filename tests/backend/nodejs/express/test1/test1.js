@@ -46,7 +46,7 @@ app.get("/html", function(req, res){
      * also ".." is considered malicious so
      * __dirname + "/test1.html" doesn't work
      */
-    var proj_path = "/var/www/html/tests/backend/nodejs/express/test2";
+    var proj_path = "/var/www/html/tests/backend/nodejs/express/test1";
     var file_path = proj_path + "/test1.html";
     res.sendFile(file_path);
 });
@@ -90,6 +90,7 @@ app.get("/ab(cd)?cg", function(req, res){
 app.get(/x/, function(req, res){
     res.send("This path has x in it");
 });
+
 
 // .* = any character 0-inf
 // $ = end of string
@@ -220,7 +221,7 @@ app.use("/date", date_app);
 // you can use app.use(express.static()); this uses the express.static()
 // middleware on all URLs that start with / and should be moved at the top
 // e.g. all the files in "public" can be accessed by visitors
-// test with /express-cat.png
+// test with /express-cat.png (and comment the x match above)
 app.use(express.static("public"));
 
 // you can also create a custom route for the public dir
@@ -330,7 +331,14 @@ app.get("/mysql", function(req, res){
 app.get("/mongodb", function(req, res){
     var mongo_client = require("mongodb").MongoClient;
 
-    // connect to a db
+    /*
+     * connect to a db
+     *
+     * auth url
+     * mongodb://username:password@host:port/db
+     * or without auth
+     * mongodb://host:port/db
+     * */
     let db_type = "mongodb";
     let host = "localhost";
     let port = "27017";
