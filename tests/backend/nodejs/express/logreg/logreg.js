@@ -12,8 +12,7 @@
  *   * registers a new user
  *
  * TODO
- *   make a version of this with mongodb
- *   use hogan to fix value=
+ *   make a version of this with mongoose
  *   make a generic function that allows you to chain function that gets
  *     executed one after another only on success, and on fail they should
  *     emit a specified event
@@ -30,10 +29,28 @@ const hogan = require("hogan.js");
 
 /*
  * login & register modules
- * there are 2 version: v1 and v2
+ * there are 4 version: mysql v1 & v2, mongodb & mongoose
  * */
-const login = require("include/v2/login.js");
-const signup = require("include/v2/signup.js");
+const paths = {
+    "mysqlv1": {
+	login: "include/v1/login.js",
+	signup: "include/v1/signup.js",
+    },
+    "mysqlv2": {
+	login: "include/v2/login.js",
+	signup: "include/v2/signup.js",
+    },
+    "mongodb": {
+	login: "include/mongodb/mongodb/login.js",
+	signup: "include/mongodb/mongodb/signup.js",
+    },
+    "mongoose": {
+	// TODO
+    },
+};
+
+const login = require(paths["mongodb"]["login"]);
+const signup = require(paths["mongodb"]["signup"]);
 
 /* start session */
 const session = require("express-session");
