@@ -14,6 +14,10 @@ var test9_global_var3;
 main();
 
 function main(){
+    test35_scope_closures();
+    //test34_global_object();
+    //test33_prototypes_revised();
+    //test32_this();
     //test31_json_prop();
     //test30_regex();
     //test29_move_props();
@@ -21,7 +25,7 @@ function main(){
     //test27_generic_streams();
     //test26_fs();
     //test25_default_arg();
-    test24_jsobj_and_inheritance();
+    //test24_jsobj_and_inheritance();
     //test23_wrappers();
     //test22_type_coercion();
     //test21_prototypes();
@@ -52,6 +56,461 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test35_scope_closures(){
+    /* so scopes are delimited by functions, not if statements */
+    var obj1 = 10;
+    if (obj1 == 10){
+	var obj2 = 100;
+	/* this is the same obj as above */
+	var obj1 = 2;
+    }
+
+    console.log(obj1);
+    /* obj2 is the same one from the if statement */
+    console.log(obj2);
+
+    function fcn1(){
+	/* this is obj1 from the outer scope (test35_scope) */
+	console.log(obj1);
+
+	/* something interesting can happen here
+	 * so js has this "compilation" step where it builts the symbol
+	 * tables for all the objects/scope tables
+	 * this happens before the interpretation step
+	 * */
+
+	/* normally this would point to the outer obj2 */
+	console.log(obj2);
+
+	/* however, we declare a new obj2 in this scope as well */
+	var obj2 = 200;
+
+	/*
+	 * since the scope table is built before running console.log(obj2)
+	 * obj2 will actually be the one local to fcn1 with no value set
+	 * (the obj2 = 200 instruction has not been run yet); so when
+	 * console.log(obj2) is run, obj2 will have the value "undefined"
+	 *
+	 * this is also the reason why functions can be run before they
+	 * are declared - the scope table (that has function names as well
+	 * is built first); this is called hoisting
+	 *
+	 * sometimes this is explained as moving declarations to the top
+	 *
+	 * hoisting is also useful when you have functions that call eachother
+	 * normally you would declare functions first (prototypes)
+	 * or use an interface
+	 * */
+    }
+
+    fcn1();
+    /* obj2 has the original value of 100 */
+    console.log(obj2);
+
+    /*
+     * since you can pass functions around, they will save scope of execution
+     * it's somewhere in the javascript object I guess
+     * this is called a closure (function + env/scope)
+     * */
+    var a = 0;
+    function fcn2(){
+	var b = 10;
+	a++;
+	b++;
+	function fcn3(){
+	    console.log(a);
+	    console.log(b);
+	}
+	return fcn3;
+    }
+
+    /*
+     * this is an instance of fcn3 that has a pointer to global.a
+     * and fcn2.b; fcn2.b will still exist for fcn3 even if fcn2 ended
+     * because it saved the scope
+     * */
+    var f1 = fcn2();
+    f1();
+
+    /*
+     * this is another instance of fcn3 that has same things as above
+     * the fcn2.b for this function is different that the prev one
+     * so they are both 11, while a kept increasing
+     * */
+    var f2 = fcn2();
+    f2();
+
+    /*
+     * it seems that there is no way to get function scope from code
+     * you can do a bunch of other stuff
+     * */
+
+    /*
+     * you can convert the function to a
+     * string and look at local vars only
+     *
+     * this uses type coercion to convert it
+     * */
+    var f1s = f1 + "";
+    console.log(f1s);
+
+    /*
+     * if you are too lazy to read the code yourself
+     * you can re-parse the javascript code (just like js interpreter does)
+     *
+     * you can use something like esprima
+     * http://esprima.org/demo/parse.html
+     * */
+
+    /*
+     * closures allow us to use private variables even if javascript
+     * doesn't support them
+     *
+     * simply wrap variables in a function scope, and just return
+     * a set of function that modifies them
+     *
+     * this is called the module pattern
+     * */
+    function prfcn(){
+	/* declare some private vars */
+	var first_name;
+	var last_name;
+
+	/* place public functions in obj that will be returned */
+	var ret = {
+	    get_first_name: function(){
+		return first_name;
+	    },
+	    get_last_name: function(){
+		return last_name;
+	    },
+	    set_first_name: function(name){
+		first_name = name;
+	    },
+	    set_last_name: function(name){
+		last_name = name;
+	    },
+	}
+	return ret;
+    }
+
+    var probj = prfcn();
+    /* now you can't access prfcn.first_name, but you can use the functions */
+    probj.set_first_name("Jim");
+    probj.set_last_name("Jaxon");
+    console.log(probj.get_first_name());
+    console.log(probj.get_last_name());
+
+    /*
+     * possibly unrelated, but you can run anon
+     * functions by wrapping them with ()
+     *
+     * you can also save scope like this
+     *
+     * this is called IIFE - immediately invoked function expression
+     * */
+    (function(){console.log("hello")})();
+}
+
+function test34_global_object(){
+    /* Object is a global function */
+    console.log(Object);
+
+    /* you can use it to create js objects */
+
+    /* the following 2 are the same */
+    var obj1 = new Object();
+    var obj2 = {};
+
+    /* we can check by looking at the prototypes */
+    if (obj1.__proto__ == Object.prototype)
+	console.log("obj2 has Object.prototype");
+    if (obj2.__proto__ == Object.prototype)
+	console.log("obj1 has Object.prototype");
+
+    /*
+     * the prototype of a function/object is also an object that was
+     * created with "new Object", so the prototype has Object.prototype
+     * as prototype for itself
+     *
+     * I assume this is called inheritance/prototype chain in javascript
+     * */
+    function fcn(){
+	this.val = 10;
+    }
+    if (fcn.prototype.__proto__ == Object.prototype)
+	console.log("fcn.prototype has Object.prototype as proto");
+
+    /* this means that every object can share props through Object.prototype */
+    Object.prototype.myval = 100;
+    var obj3 = new fcn();
+
+    /*
+     * this will look at obj3.myval, then fcn.prototype.myval, then
+     * fcn.prototype.__proto__.myval which is Object.prototype.myval
+     * */
+    console.log(obj3.myval);
+
+    /* you can do "manual" inheritance by modifying __proto__ for some objs */
+    function Person(name){
+	this.name = name;
+    }
+    function Driver(name, team){
+	this.name = name;
+	this.team = team;
+    }
+
+    /* add a function to Person prototype */
+    Person.prototype.say_name = function(){
+	console.log("Hello, my name is " + this.name);
+    };
+
+    /*
+     * I want this function to be available for Driver too, so instead
+     * of having Driver.prototype.__proto__ point to Object.prototype
+     * we make it point to Person.prototype
+     * */
+    Driver.prototype.__proto__ = Person.prototype;
+
+    var p1 = new Person("tim");
+    var d1 = new Driver("john", "red");
+    p1.say_name();
+    d1.say_name();
+
+    /* there is prob a nicer way to make Driver inherit from Person */
+
+    /* this will create tst with an empty prototype object that has as proto
+     * Person.prototype instead of Object.prototype
+     * */
+    var tst = Object.create(p1);
+    if (tst.__proto__.__proto__ == Person.prototype)
+	console.log("tst.__proto__ is linked to Person.prototype");
+
+    /* you can also use it directly for the proto, which makes more sense */
+    function Pilot(name){
+	/* this will call Person() and "this" will be the obj that
+	 * calls new Pilot()
+	 * */
+	Person.call(this, name);
+	console.log("Pilot ctor got called");
+    }
+
+    /* link the Pilot proto to Person proto */
+    Pilot.prototype = Object.create(Person.prototype);
+
+    /* test on new object */
+    var pi1 = new Pilot("timmy");
+    pi1.say_name();
+
+    /* you can also test the actual prototype */
+    if (pi1.__proto__.__proto__ == Person.prototype)
+	console.log("Pilot is linked to Person");
+}
+
+function test33_prototypes_revised(){
+    /*
+     * Another take at prototypes.
+     *
+     * So from my understanding now, prototypes are these things that should
+     * allow us to use something similar to static in java - common properties
+     * for javascript objects. Multiple javascript objects can have the same
+     * prototype, and if you modify the prototype, it will apply the change to
+     * all the objects (static var for example).
+     *
+     * From my understanding when you create a javascript object (without using
+     * new/constructor), a new prototype will be created for that object that
+     * will stay in memory. I guess this is the case where the prototype is
+     * kind of useless. However, if you create it with "new", then it will
+     * have the same prototype as the function/class/object that created it
+     * (e.g. the constructor function). So functions have prototypes too,
+     * that can be accessed with fcn.prototype and the function is the
+     * constructor for the prototype (e.g. fcn.prototype.constructor)
+     * */
+    function fcn(){
+	this.val = 10;
+	console.log("call to fcn");
+    }
+
+    /* the function is an object in memory */
+    console.log(fcn);
+
+    /*
+     * the function also has a prototype, which should be a different obj
+     * by default this is an empty object
+     * */
+    console.log(fcn.prototype);
+
+    /*
+     * from the prototype you can access back the
+     * function by using the constructor property
+     *
+     * this will also add all the props defined with this
+     * to the prototype (e.g. val)
+     * */
+    console.log(fcn.val);
+    fcn.prototype.constructor();
+    console.log(fcn.prototype.val);
+
+    /*
+     * now you can create objects with the same
+     * prototype as fcn (same object) using the "new" keyword
+     *
+     * obj1, obj2 and fcn will have the same prototype: fcn.prototype
+     * to access the prototype from an object (rather than a function)
+     * use obj.__proto__
+     *
+     * fun fact: that double underscore is called dunderscore
+     *
+     * everything defined with this in fcn will be added as a property
+     * to obj1 and obj2
+     * */
+    var obj1 = new fcn();
+    var obj2 = new fcn();
+    console.log(obj1);
+    console.log(obj2);
+
+    if (obj1.__proto__ == fcn.prototype)
+	console.log("obj1 has fcn.prototype");
+    if (obj2.__proto__ == fcn.prototype)
+	console.log("obj2 has fcn.prototype");
+
+    /* this will also reconstruct the prototype object */
+    fcn.prototype.val = 100;
+    obj1.__proto__.constructor();
+    obj2.__proto__.constructor();
+    console.log(fcn.prototype.val);
+
+    /* fun fact, if you call fcn(), since it's global scope, this will
+     * be the global object, so val will be a global variable
+     * */
+    fcn();
+    /* both of these work */
+    console.log(global.val);
+    console.log(val);
+
+    /* fcn is a javascript object, but it will not have props
+     * defined with this inside of it (that's just the function
+     * code, nothing to do with its property); the prototype
+     * will have the props only if constructor is called
+     * */
+    console.log(fcn.val);
+
+    /* to show that the function is a different object than the prototype
+     * look at the following example
+     * */
+    fcn.x = 100;
+    console.log(fcn.x);
+    console.log(fcn.prototype.x);
+    console.log(obj1.x);
+
+    /* now you can add stuff to the prototype and it will be accessible
+     * from all the objects that share it
+     * */
+    fcn.prototype.name = "jim";
+    console.log(obj1.name);
+    console.log(obj2.name);
+
+    /* but if you look at obj1, it doesn't have the name prop */
+    console.log(obj1);
+
+    /* so name is like a static variable
+     * when you write obj1.name, the interpreter will first
+     * look at the object props, if it's not there it goes to proto
+     * so if you define obj1.name as well, then obj1 will have 2 props
+     * called "name", one on itself and one on the prototype
+     * in this case, the interpreter will pick the one on itself
+     * this works like overwriting functions/variables in java
+     * (or overshadowing)
+     *
+     * if you want to change the "static variable" name from obj1
+     * you have to use __proto__ (or something like Object.getPrototypeOf())
+     * */
+
+    /* this will add name to obj1 and set it to
+     * e.g. this won't change name for obj2
+     * */
+    obj1.name = "tom";
+    console.log(obj1);
+    console.log(Object.getPrototypeOf(obj1).name);
+    console.log(obj1.__proto__.name);
+    console.log(obj2.name);
+
+    /* to change the static var name from proto, use __proto__
+     * e.g. this will change name for obj2
+     * */
+    obj1.__proto__.name = "tommy";
+    console.log(obj2.name);
+
+    /* we can also add functions to the prototype */
+    fcn.prototype.num_objs = 0;
+    fcn.prototype.inc = function(){ this.num_objs = this.num_objs + 1; }
+    fcn.prototype.inc();
+    fcn.prototype.inc();
+    console.log(obj1.num_objs);
+
+    /* a more practical approach */
+    function fcn2(){
+	/* increase the number of defined objects */
+	this.__proto__.num_objs += 1;
+    }
+    /* start at 0 */
+    fcn2.prototype.num_objs = 0;
+
+    var obj3 = new fcn2();
+    var obj4 = new fcn2();
+    console.log(obj4.num_objs);
+
+    /*
+     * this won't break if you call fcn2(), it will just add
+     * __proto__.num_objs = NaN to global object
+     *
+     * the thing to remember is that prototypes link objects together
+     * */
+}
+
+function test32_this(){
+
+    /*
+     * So apparently there are 4 ways to call a function in javascript
+     * (didn't check). For each way, the this object is different.
+     *
+     * Ways to call a function:
+     *   * in the global scope - this is window/global
+     *   * from an object - this refers to the object
+     *   * in constructor mode/with new in front - this is the returned object
+     *   * with call() - you can specify who this is, as arg
+     *
+     * As a side note, process is just a property of global
+     */
+
+    /* global scope - 1st way */
+    function fcn(){
+	if (global == this)
+	    console.log("global = this");
+	else
+	    console.log("this is " + this);
+    }
+    fcn();
+
+    /* from an object - 2nd way */
+    var obj = {};
+    obj.fcn = fcn;
+    obj.fcn();
+
+    /*
+     * in constructor mode - 3rd way
+     * this adds this = {}, return this; in the function
+     * */
+    var obj2 = new fcn();
+
+    /*
+     * using call(this, ...) - 4th way
+     * call() will take as 1st arg an object that will represent this
+     * so you can use whatever you want for this
+     * */
+    fcn.call(global);
 }
 
 function test31_json_prop(){
