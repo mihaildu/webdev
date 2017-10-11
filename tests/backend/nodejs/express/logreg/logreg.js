@@ -45,12 +45,13 @@ const paths = {
 	signup: "include/mongodb/mongodb/signup.js",
     },
     "mongoose": {
-	// TODO
+	login: "include/mongodb/mongoose/login.js",
+	signup: "include/mongodb/mongoose/signup.js",
     },
 };
 
-const login = require(paths["mongodb"]["login"]);
-const signup = require(paths["mongodb"]["signup"]);
+const login = require(paths["mongoose"]["login"]);
+const signup = require(paths["mongoose"]["signup"]);
 
 /* start session */
 const session = require("express-session");
