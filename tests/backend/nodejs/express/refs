@@ -59,6 +59,8 @@ routes/index.js
 npm init
 npm install express --save
 
+# then create a new file app.js and run express there
+
 # run a node app in production mode with NODE_ENV=production
 # apparently this only works with express generator (no idea why)
 # if you try to get a path with no listener/route
