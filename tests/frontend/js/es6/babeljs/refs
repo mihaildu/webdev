@@ -1,0 +1,44 @@
+# so es6 is not supported by every browser at the moment
+# you can use babel to make es6 code compatible with older browsers
+# also, there are es6 features not supported by node.js either (e.g. import)
+# you can still use them and then convert code with babel
+
+# install the cli and a preset
+npm install --save-dev babel-cli babel-preset-env
+
+# you can run it directly from cmd
+./node_modules/.bin/babel src -d lib
+
+# or put it in "scripts" in package.json
+"scripts": {"build": "babel src -d lib"}
+
+# then you need to use presets
+# env preset enables transforms for es2015+
+# if you didn't prev installed it, run
+npm install babel-preset-env --save-dev
+
+# then you need to enable the preset by adding it to a config file
+# add .babelrc for config to the proj (root dir)
+# then add the preset to it (example in test1/)
+
+# to "compile" a js file with babel, you can use this
+./node_modules/.bin/babel scripts.js > tmp.js
+
+# where scripts.js has some ES6 code or something
+# then tmp.js will have ES5 code (based on what preset you used)
+
+# to specify an output file use --out-file (instead of redirecting)
+./node_modules/.bin/babel scripts.js --out-file tmp.js
+
+# you can also use --watch if you want
+babel script.js --watch --out-file script-compiled.js
+
+# you can compile entire directories
+# instead of --out-dir you can use -d too TODO test
+babel src --out-dir lib
+
+# you can compile dir to file
+# instead of --out-file you can use -o too TODO test
+babel src --out-file script.js
+
+# more on https://babeljs.io/docs/usage/cli/

@@ -1,0 +1,11 @@
+# first install the modules
+npm install
+
+# then try the js code from src without babel (it's written following es6)
+node src/test1.js
+
+# then "compile" with babel
+./node_modules/.bin/babel src -d dist
+
+# and run again
+node dist/test1.js
