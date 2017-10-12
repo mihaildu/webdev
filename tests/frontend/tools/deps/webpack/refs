@@ -1,0 +1,78 @@
+# webpack is a module bundler
+# basically, if you have different modules (e.g. javascript files)
+# it will merge/bundle them together
+#
+# one reason this is needed is because on the frontend side you can't do
+# this by default (e.g. you can't use require() to import a js file in a
+# different one, this only works on node.js)
+#
+# the only way to do this is to load all the js files via <script> in the
+# right order - this is too complicated (also, you don't know which js file
+# requires which etc)
+#
+# webpack allows you to load js files via require/import (different methods
+# allowed); at the end you need one file that will import all the other ones
+# (this is called the entry - although it's possible that you might be able to
+# use multiple entry points) and webpack will produce an output file
+#
+# other module loaders before this: require.js, browserify
+
+# website
+https://webpack.github.io/
+
+# docs
+# you have: concepts, configuration, api, guides, loaders and plugins
+https://webpack.js.org/concepts/
+
+# release date
+May 2012
+
+# github
+https://github.com/webpack/webpack
+
+# installation
+npm init
+npm install webpack --save
+
+# you have to run webpack on the js file that imports other files
+# when you have webpack installed locally
+./node_modules/.bin/webpack src/script.js dist/output.js
+
+# so script.js has require("other.js") and maybe other imports
+# output.js will have all the modules included and that's everything
+# you need to use in your html file
+
+# if you installed it globally
+webpack js/script.js ./bundle.js
+
+# to install it globally
+# but you still need the module installed in the directory I guess
+# so you still need "npm init" and "npm install webpack --save"
+npm install -g webpack
+
+# you can also use a config file (example in test2)
+webpack.config.js
+
+# then all you need to run is
+webpack
+
+# you can also specify the path to the config file
+webpack --config webpack.config.js
+
+# it's prob a good idea to have one js file where you just import every other
+# module (e.g. just have a list of require("");)
+
+# apparently there are different import methods supported (module methods) in webpack
+ES6 - import/export
+CommonJS/Require.js - require()
+AMD
+
+# you can also add "build": "webpack" (scripts) to package.json and run webpack wtih
+npm run build
+
+# you can also bundle other files than js (css, images, txt etc)
+# you need loaders for this
+
+# because you can use plugins, loaders and other stuff
+# you can also use it as a build system I guess
+# e.g. you can use plugins to minimize the output file

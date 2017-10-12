@@ -1,0 +1,24 @@
+<html>
+    <head>
+	<title>Title</title>
+    </head>
+    <body>
+	<!--
+	     so I want to use both logash and my index.js script file
+	     to do this I would have to import both of them here in
+	     the right order
+
+	     to avoid this - you can use webpack: in index.js import
+	     lodash, and then run webpack on index.js
+
+	     first, install lodash: npm install --save lodash
+
+	     ./node_modules/.bin/webpack src/index.js dist/bundle.js
+
+	     this example is taken from official doc
+	   -->
+	<div id="my-div"></div>
+	<script src="bundle.js"></script>
+	<!-- <script src="../src/index.js"></script> -->
+    </body>
+</html>

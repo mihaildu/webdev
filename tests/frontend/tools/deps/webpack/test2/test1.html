@@ -1,0 +1,13 @@
+This is just to show that you can't load js modules from different files
+on the frontend (in the browser) by default.<br>
+
+If you try to load test1.js which uses mod1.js and mod2.js it won't work.
+The files are loaded with require(), but this only works with node.js.
+So you need a module loader for frontend as well (this is what webpack can do).<br>
+
+Module loaders: require.js, browserify or webpack (newest).<br>
+
+If you run "webpack js/test1.js bundle.js", bundle.js will have both mod1.js and
+mod2.js and everything will work.
+
+<script type="text/javascript" src="bundle.js"></script>
