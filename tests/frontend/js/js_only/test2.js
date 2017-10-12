@@ -1,3 +1,9 @@
+/*
+ * fun fact: require only exists in node.js
+ * if you load this script (test2.js) into a browser it will give error
+ * that require doesn't exist
+ */
+
 // this will load test3.js into a json (only the exported stuff)
 var t3 = require("./test3.js");
 // this is taken from node_modules/
