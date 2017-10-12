@@ -61,6 +61,16 @@ npm
 # installing a package
 npm install underscore
 
+# you can install both frontend and back end stuff with npm
+npm install jquery
+
+# this will place jquery in node_modules/jquery/dist
+jquery.min.js
+...
+
+# however, you can use it with a module bundler like webpack
+var $ = require("jquery");
+
 # you can also uninstall a package
 npm uninstall underscore
 
