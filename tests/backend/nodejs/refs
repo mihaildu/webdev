@@ -90,6 +90,10 @@ npm init
 npm install backbone -S
 npm install backbone --save
 
+# if you want to install a package that you need for dev (when building the app)
+# but you don't want to ship it in production
+npm install package --save-dev
+
 # you have to start the webserver first
 # e.g. this will listen for connections on port 3000
 node test1.js
