@@ -3,3 +3,6 @@
 
 * look over concepts: https://webpack.js.org/concepts/
   * write a config file from scratch
+
+* check webpack-dev-server
+  * https://webpack.github.io/docs/webpack-dev-server.html
