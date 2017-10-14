@@ -1,0 +1,77 @@
+# TODO move this to proj/webdev
+
+# react is a js library (like jquery)
+# to use it you need to import/load it in your js files
+# I guess you can also generate a react.min.js and use that
+# but the default development process is using imports
+# so you need webpack (frontend/tools/deps/webpack)
+
+# react uses more stuff than just import that is not supported by js
+# at least that's how the documentation/tutorials are written
+# it uses ES6 style and JSX (some other type of style)
+# so you need something to convert from ES6 and JSX to normal javascript
+# babel can do that; you can use it by itself or use the babel-loader in webpack
+# this process of converting from one src code to another is called transpiling
+
+# react init
+# install webpack (npm init etc)
+
+# install the babel loader (along with the react preset)
+# just like normal babel, install it on the dev side (and not production)
+# https://github.com/babel/babel-loader
+npm install --save-dev babel-loader babel-core babel-preset-env babel-preset-react
+
+# install react
+npm install react react-dom --save
+
+# then configure the babel loader in webpack config file
+# add the "react" preset as well (for jsx)
+"presets": ["env", "react"]
+
+# then run webpack and it should work
+webpack
+
+# to avoid running webpack everytime you change the js file
+webpack --watch
+
+# more on react
+
+# react.js website
+https://reactjs.org/
+
+# wiki page
+https://en.wikipedia.org/wiki/React_(JavaScript_library)
+
+# github page
+https://github.com/reactjs
+
+# prob useless info - initial release
+March 2013
+
+# license
+MIT
+
+# so react has multiple components
+Flux - small, simple
+Redux - more complex data
+Relay - big, complex data
+GraphQL
+
+# you can also use react on the backend somehow TODO
+
+# there is a react version for mobile too - react native
+https://facebook.github.io/react-native/
+
+# you can also use create react app to install it
+npm install -g create-react-app
+create-react-app my-app
+
+# to run
+cd my-app
+npm start
+
+# when switching to production
+npm run build
+
+# you can also play around with react on codepen
+https://codepen.io/gaearon/pen/rrpgNB?editors=0010
