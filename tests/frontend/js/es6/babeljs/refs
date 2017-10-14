@@ -21,7 +21,7 @@ npm install babel-preset-env --save-dev
 # add .babelrc for config to the proj (root dir)
 # then add the preset to it (example in test1/)
 
-# to "compile" a js file with babel, you can use this
+# to "compile" (I guess the correct term here is transpile) a js file with babel, you can use this
 ./node_modules/.bin/babel scripts.js > tmp.js
 
 # where scripts.js has some ES6 code or something
@@ -42,3 +42,5 @@ babel src --out-dir lib
 babel src --out-file script.js
 
 # more on https://babeljs.io/docs/usage/cli/
+
+# babel can also be used to compile JSX, which is something like ES6 (syntax) used by react
