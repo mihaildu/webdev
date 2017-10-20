@@ -19,6 +19,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+/*
+ * you can also import CSS files
+ * TODO figure out why this doesn't work
+ * */
+//import css from "./index.css";
+
 import MyComp2 from "./components/mycomp2";
 
 main();
@@ -114,10 +120,13 @@ function test2_docs(){
      * */
 
     /* quick start guide */
-    test2_quick_start();
+    //test2_quick_start();
 
     /* advanced guides */
     // TODO
+
+    /* tutorial */
+    test2_tutorial();
 }
 
 function test2_quick_start(){
@@ -131,7 +140,7 @@ function test2_quick_start(){
     //test2_lists_keys();
     //test2_forms();
     //test2_lifting_state_up();
-    test2_composition_inheritance();
+    //test2_composition_inheritance();
 }
 
 function test2_hello_world(){
@@ -1095,4 +1104,257 @@ function test2_composition_inheritance() {
      * and you create another component that use the first one
      * with more specialized prop values
      * */
+}
+
+function test2_tutorial() {
+    /*
+     * building a tic-tac-toe game
+     * didn't bother to implement history, nothing to learn from that
+     * */
+
+    /* square class */
+    class Square extends React.Component {
+	constructor(props) {
+	    super(props);
+	    /*
+	     * props:
+	     *   player     = string; X or 0
+	     *   index      = number; [0 - 8]
+	     *   callback   = notify above layer to update things
+	     *   game_ended = true/false
+	     * */
+
+	    /* symbol for current square */
+	    this.symbol = "";
+	    this.fill_square = this.fill_square.bind(this);
+	}
+
+	fill_square() {
+	    /*
+	     * function that marks a square
+	     *
+	     * if the game ended it does nothing
+	     *   this can be moved in the render() function
+	     *   doing this will save the overhead of calling a function
+	     *   and checking a condition
+	     *
+	     * if the square is already marked it does nothing
+	     *
+	     * otherwise just save symbol and notify up
+	     * */
+
+	    /* game is over */
+	    if (this.props.game_ended === true)
+		return;
+
+	    /* square already marked */
+	    if (this.symbol != "")
+		return;
+
+	    /* save symbol */
+	    this.symbol = this.props.player;
+
+	    /* notify up */
+	    this.props.callback(this.props.index);
+	}
+
+	render() {
+	    return (
+		<button className="square" onClick={this.fill_square}>
+		  {this.symbol}
+		</button>
+	    );
+	}
+    }
+
+    /* board class */
+    class Board extends React.Component {
+	constructor(props) {
+	    super(props);
+	    /*
+	     * props:
+	     *   player = string; X or 0
+	     *     this is the current player
+	     *     this will change on every render()
+	     *   callback = callback
+	     * */
+	    this.squares = Array(9).fill("");
+	    this.state = {game_ended: false};
+
+	    this.move = this.move.bind(this);
+	    this.check_row = this.check_row.bind(this);
+	    this.check_col = this.check_col.bind(this);
+	    this.check_diags = this.check_diags.bind(this);
+	}
+
+	check_row(index) {
+	    if (this.squares[index] == this.props.player &&
+		this.squares[index+1] == this.props.player &&
+		this.squares[index+2] == this.props.player)
+		return true;
+	    return false;
+	}
+
+	check_col(index) {
+	    if (this.squares[index] == this.props.player &&
+		this.squares[index+3] == this.props.player &&
+		this.squares[index+6] == this.props.player)
+		return true;
+	    return false;
+	}
+
+	check_diags() {
+	    /* checks both diags at the same time */
+
+	    /* main diagonal */
+	    if (this.squares[0] == this.props.player &&
+		this.squares[4] == this.props.player &&
+		this.squares[8] == this.props.player)
+		return true;
+
+	    /* other diag */
+	    if (this.squares[2] == this.props.player &&
+		this.squares[4] == this.props.player &&
+		this.squares[6] == this.props.player)
+		return true;
+
+	    return false;
+	}
+
+	check_victory() {
+	    /*
+	     * lazy method
+	     *
+	     * this works on this.squares and this.props.player
+	     * checks each row, column and diagonal
+	     * */
+	    return this.check_row(0) || this.check_row(3) || this.check_row(6) ||
+		this.check_col(0) || this.check_col(1) || this.check_col(2) ||
+		this.check_diags();
+	}
+
+	check_full() {
+	    for (var i in this.squares) {
+		if (this.squares[i] == "")
+		    return false;
+	    }
+	    return true;
+	}
+
+	move(square) {
+	    /*
+	     * function that gets called when square was marked
+	     *
+	     * it checks if the current player won
+	     * if not, it checks if the board is full
+	     * if not, just notify up to change player
+	     * */
+	    this.squares[square] = this.props.player;
+	    if (this.check_victory() === true) {
+		this.setState({game_ended: true, winner: this.props.player});
+		return;
+	    }
+
+	    if (this.check_full() === true) {
+		this.setState({game_ended: true, winner: null});
+		return;
+	    }
+
+	    /* notify up */
+	    this.props.callback();
+	}
+
+	renderSquare(i) {
+	    return (
+		<Square index={i} callback={this.move}
+			player={this.props.player}
+			game_ended={this.state.game_ended}/>
+	    );
+	}
+
+	render() {
+	    let status = "Player " + this.props.player;
+	    if (this.state.game_ended == true) {
+		if (this.state.winner == null)
+		    /*
+		     * really weird bug here, if status is too long
+		     * the board will get out of shape
+		     * */
+		    //status = "Game ended, nobody won";
+		    status = "Nobody won";
+		else
+		    status += " won";
+	    }
+	    else
+		status += "'s turn";
+
+	    return (
+		<div>
+		  <div className="status">{status}</div>
+		  <div className="board-row">
+		    {this.renderSquare(0)}
+		    {this.renderSquare(1)}
+		    {this.renderSquare(2)}
+		  </div>
+		  <div className="board-row">
+		    {this.renderSquare(3)}
+		    {this.renderSquare(4)}
+		    {this.renderSquare(5)}
+		  </div>
+		  <div className="board-row">
+		    {this.renderSquare(6)}
+		    {this.renderSquare(7)}
+		    {this.renderSquare(8)}
+		  </div>
+		</div>
+	    );
+	}
+    }
+
+    /* game class */
+    class Game extends React.Component {
+	constructor(props) {
+	    super(props);
+	    /*
+	     * set start player - this might be saved in a const
+	     * e.g. const start_player = "X";
+	     * */
+	    this.state = {player: "X"};
+
+	    /* bind free functions */
+	    this.move = this.move.bind(this);
+	}
+
+	move() {
+	    /*
+	     * function that gets called (bottom -> up) after every move
+	     * right now it just changes player
+	     * */
+
+	    /* change player */
+	    let new_player = this.state.player == "X" ? "0" : "X";
+
+	    /* force a redraw - no other way to update child components */
+	    this.setState({player: new_player});
+	}
+
+	render() {
+	    return (
+		<div className="game">
+		  <div className="game-board">
+		    <Board player={this.state.player} callback={this.move} />
+		  </div>
+		  <div className="game-info">
+		    <div></div>
+		    <ol></ol>
+		  </div>
+		</div>
+	    );
+	}
+    }
+
+    ReactDOM.render(
+	<Game />,
+	document.getElementById("root")
+    );
 }
