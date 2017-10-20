@@ -75,3 +75,6 @@ npm run build
 
 # you can also play around with react on codepen
 https://codepen.io/gaearon/pen/rrpgNB?editors=0010
+
+# you can use react dev tools (e.g. for chrome browser)
+# to see more info on pages that use react
