@@ -14,7 +14,9 @@ var test9_global_var3;
 main();
 
 function main(){
-    test35_scope_closures();
+    test37_str_int();
+    //test36_saving_this();
+    //test35_scope_closures();
     //test34_global_object();
     //test33_prototypes_revised();
     //test32_this();
@@ -56,6 +58,75 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test37_str_int(){
+    /* converting from/to string to/from int */
+    let s1 = "10";
+    let n1 = parseInt(s1);
+    console.log(n1);
+    console.log(typeof(n1));
+
+    /* this also works */
+    let n2 = Number(s1);
+    console.log(n2);
+    console.log(typeof(n2));
+
+    let n3 = 100;
+    let s2 = String(n3);
+    console.log(s2);
+    console.log(typeof(s2));
+
+    /* this works */
+    let s3 = n3 + "";
+    console.log(s3);
+    console.log(typeof(s3));
+
+    let s4 = n3.toString();
+    console.log(s4);
+    console.log(typeof(s4));
+}
+
+function test36_saving_this() {
+
+    /*
+     * in some case we might want to save this (e.g. react)
+     * I guess there are some other ways to do this (prob bind(this),
+     * or fcn.call(this, ...)), but we can also use anonymous functions
+     * see example below
+     *
+     * the goal is to have a function, that returns another function
+     * where this is saved from the first function call
+     * */
+
+    function fcn1() {
+	/*
+	 * we want to save "this" for fcn1; however, in this case,
+	 * if we return fcn, whoever calls fcn will change "this"
+	 * */
+	function fcn() {
+	    /* this won't be the same from fcn1 */
+	    console.log(this);
+	}
+	return fcn;
+    }
+
+    function fcn2() {
+	/*
+	 * here "this" is saved, so it will be
+	 * whoever called fcn2 in the first place
+	 * */
+	return () => console.log(this);
+    }
+
+    const obj1 = {name: "obj1", fcn1: fcn1, fcn2: fcn2};
+    /* we call both fcn1 and fcn2 from obj1 */
+    const obj2 = {name: "obj2", fcn1: obj1.fcn1(), fcn2: obj1.fcn2()};
+
+    /* since fcn1 doesn't save "this", we will get obj2 */
+    obj2.fcn1();
+    /* in this case we get obj1 */
+    obj2.fcn2();
 }
 
 function test35_scope_closures(){
