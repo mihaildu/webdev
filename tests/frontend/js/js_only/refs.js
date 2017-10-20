@@ -1678,6 +1678,7 @@ function test9_math(){
 }
 
 function test8_statements(){
+    // if statements
     var x = 10;
     if (x == 10) {
 	console.log("X is 10");
@@ -1686,6 +1687,10 @@ function test8_statements(){
     } else {
 	console.log("X is neither 10 or 13");
     }
+
+    var y = 11;
+    if (x == 10 && y == 11)
+	console.log("x is 10 and y is 11");
 
     var s = 0;
     for (var i = 0; i < 6; i++) {
