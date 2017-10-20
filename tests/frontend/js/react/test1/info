@@ -1,0 +1,2 @@
+since this is only frontend, the index.html can be run with apache
+e.g. http://127.0.0.1/tests/frontend/js/react/test1/dist/index.html
