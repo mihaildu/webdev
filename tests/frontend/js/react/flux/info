@@ -1,0 +1,29 @@
+Flux is about how to structure your app. You split it into different
+components like: Views, Actions, Dispatcher, Stores.
+
+How the app behaves:
+You have user interactions -> action creators -> actions -> dispatcher ->
+  store -> change events (eventemitter) + store queries -> react views
+  which update stuff
+
+View: UI things
+  * this can use React
+  * in that case, a view is a React component
+Action: some abstract thing
+  * this is just some structured data
+Dispatcher: some sort of control thing
+  * you can use flux package for this
+Store: where data lives
+  * this usually uses EventEmitter
+
+Flux examples + guides
+  https://github.com/facebook/flux/tree/master/examples
+  flux-concepts - done
+  flux-todomvc - done (kinda)
+  ...
+
+Github page (for flux package)
+  https://github.com/facebook/flux
+
+API docs (for flux package) and more res
+  http://facebook.github.io/flux/

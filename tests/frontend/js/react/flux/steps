@@ -1,0 +1,10 @@
+* steps to set up something with react + flux
+
+*. npm init
+*. npm install webpack react react-dom flux classnames --save
+*. npm install babel-loader babel-core babel-preset-env babel-preset-react --save-dev
+*. webpack.config.js
+*. package.json (optional) add build, watch
+*. dir structure (e.g. js/, css/, src/ etc)
+*. index.html, base.css, root.js
+*. add some stuff to root.js and run webpack (webpack/npm run build)

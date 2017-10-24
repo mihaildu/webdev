@@ -1,0 +1,4 @@
+This is the same as test1 but code is split in
+     data/ = stores and dispatchers
+     views/ = views (components)
+     containers/ = store + views bindings

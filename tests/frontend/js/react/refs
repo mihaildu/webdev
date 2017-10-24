@@ -51,11 +51,25 @@ March 2013
 # license
 MIT
 
-# so react has multiple components
+# so react has multiple components (prob not the best word here)
 Flux - small, simple
 Redux - more complex data
 Relay - big, complex data
 GraphQL
+
+# Flux
+# just a bunch of ideas/way to work with React
+http://facebook.github.io/flux/
+
+# instead of MVC you have Flux
+Action -> Dispatcher -> Store -> View
+
+# it's about single directional data flow
+# e.g. from top component to bottom one
+# more in flux/
+
+# Redux
+http://redux.js.org/
 
 # you can also use react on the backend somehow TODO
 
