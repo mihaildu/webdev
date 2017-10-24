@@ -1141,6 +1141,15 @@ function test2_tutorial() {
 	     * if the square is already marked it does nothing
 	     *
 	     * otherwise just save symbol and notify up
+	     *
+	     * one might argue that this doesn't follow Flux because
+	     * I'm passing an argument up to the prev component (index)
+	     *
+	     * this is not much different than the official solution however
+	     * where the callback saved the index in the scope (anonymous
+	     * function that would call move with the right index)
+	     *
+	     * maybe there is too much logic here however
 	     * */
 
 	    /* game is over */
