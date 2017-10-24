@@ -25,8 +25,6 @@ import ReactDOM from "react-dom";
  * */
 //import css from "./index.css";
 
-import MyComp2 from "./components/mycomp2";
-
 main();
 
 function main(){
@@ -106,11 +104,13 @@ function test1(){
     const elem3 = document.getElementById("react-elem3");
     ReactDOM.render(<MyComp1/>, elem3);
 
-    /* this is an imported component */
-    const elem4 = document.getElementById("react-elem4");
-    ReactDOM.render(<MyComp2/>, elem4);
-
-    // TODO you can use components inside other components
+    /*
+     * this is an imported component
+     * TODO this is outdated
+     * */
+    //import MyComp2 from "./components/mycomp2";
+    //const elem4 = document.getElementById("react-elem4");
+    //ReactDOM.render(<MyComp2/>, elem4);
 }
 
 function test2_docs(){
@@ -123,10 +123,10 @@ function test2_docs(){
     //test2_quick_start();
 
     /* advanced guides */
-    // TODO
+    test2_advanced_guide();
 
     /* tutorial */
-    test2_tutorial();
+    //test2_tutorial();
 }
 
 function test2_quick_start(){
@@ -1364,6 +1364,192 @@ function test2_tutorial() {
 
     ReactDOM.render(
 	<Game />,
+	document.getElementById("root")
+    );
+}
+
+function test2_advanced_guide() {
+    test2_jsx_indepth();
+}
+
+function test2_jsx_indepth() {
+    /*
+     * so when we use jsx code, it will get converted to
+     * React.createElement() as I mentioned before
+     *
+     * this is why React must be defined (import React), even
+     * if we don't specifically use it
+     *
+     * a bundler should add it automatically, but in my case I
+     * still seem to need it
+     *
+     * I don't know if I mentioned this before, but a react comp
+     * must be capitalized, otherwise it will be mistaked for a
+     * built-in component (e.g. <div>, <span>)
+     * */
+
+    /* you can also use dot notation in jsx */
+    const Components = {
+	FirstComp: function FirstComp(props) {
+	    return <p>Hello from first component</p>;
+	},
+	SecondComp: function SecondComp(props) {
+	    return <div>Hello from second component</div>;
+	}
+    };
+    function ThirdComp(props) {
+	/*
+	 * dot notation used here
+	 * you can't use [] notation in jsx
+	 *
+	 * also, jsx can't be an expression like
+	 * Component.some_variable or Component[some_var]
+	 * */
+	return <Components.FirstComp />;
+    }
+    ReactDOM.render(
+	<ThirdComp />,
+	document.getElementById("root")
+    );
+
+    /*
+     * you can't use if statements/for loops in jsx
+     * e.g. this won't work <div>Hello {if(2 == 2) 3}</div>
+     * so you have to do the if statement before render()
+     * */
+
+    /* if you don't specify a value for a prop it will default to true */
+    function MyComp1(props) {
+	if (props.message === true)
+	    return <p>Hello, this is message</p>;
+	return <p>Hello, this is not message</p>;
+    }
+
+    /* message will be true */
+    ReactDOM.render(
+	<MyComp1 message />,
+	document.getElementById("root")
+    );
+
+    /*
+     * doing ...props will take all props out one after another
+     * <MyComp {...props} /> is the same as
+     * <MyComp val="10" /> if props only has {val: "10"}
+     * */
+
+    /*
+     * if you use both opening and closing tag for an element
+     * you can get the inner html via props.children
+     * */
+    function MyComp2(props) {
+	console.log(props.children);
+	return <div>I won't show inner text</div>;
+    }
+    ReactDOM.render(
+	<MyComp2>This is inner html</MyComp2>,
+	document.getElementById("root")
+    );
+
+    /*
+     * you can also use other elements as inner html
+     * in this case, the props.children will be an object or
+     * an array of objects
+     *
+     * the children are react elements
+     * */
+    function MyComp3(props) {
+	/*
+	 * props.children = [<div1>, <div2>]
+	 * <div1> = [string, <p>]
+	 * <div2> = string
+	 *
+	 * in both cases (div1 and div2) props.children is an object
+	 *
+	 * I guess you can use some weird js trick to check
+	 * if element has one or multiple elements inside
+	 *
+	 * e.g. typeof(props.children[0]) == "undefined"
+	 *
+	 * you also have React.Children
+	 * https://reactjs.org/docs/react-api.html#reactchildren
+	 *
+	 * React.Children.forEach(children, function) will go through each
+	 * React.Children.count(children) will count how many
+	 *
+	 * other functions to look into: only(), toArray()
+	 * */
+	console.log("num children = " + React.Children.count(props.children));
+	React.Children.forEach(props.children, function(child) {
+	    console.log(child);
+	});
+
+	if (typeof(props.children[0]) == "undefined") {
+	    console.log("this elem has only one child");
+	    return props.children;
+	}
+
+	/* you can also replace all children (e.g. add a new prop) */
+	const new_children = React.Children.map(props.children, child => {
+	    return React.cloneElement(child, {val: "extra info"});
+	});
+
+	/* now new_children will have the val prop */
+	console.log(new_children[0].props.val);
+
+	console.log("this elem has multiple children");
+	const first_div = props.children[0];
+	const second_div = props.children[1];
+
+	const n = 4;
+
+	/* to show only first div */
+	if (n === 1) {
+	    console.log(typeof(first_div));
+	    return first_div;
+	}
+
+	/* only second div */
+	if (n === 2) {
+	    console.log(typeof(second_div));
+	    return second_div;
+	}
+
+	/* showing text from first div */
+	if (n === 3) {
+	    console.log(typeof(first_div.props.children[0]));
+	    return first_div.props.children[0];
+	}
+
+	/* showing the p from first div */
+	if (n === 4) {
+	    console.log(typeof(first_div.props.children[1]));
+	    return first_div.props.children[1];
+	}
+
+	return first_div;
+    }
+    ReactDOM.render(
+	<MyComp3>
+	  <div key="0">
+	    This is text in first div
+	    <p>
+	      This is text in first div, first p
+	    </p>
+	  </div>
+	  <div key="3">
+	    This is text in second div
+	  </div>
+	</MyComp3>,
+	document.getElementById("root")
+    );
+
+    /* same as before, but only with one child */
+    ReactDOM.render(
+	<MyComp3>
+	  <div>
+	    Only one div
+	  </div>
+	</MyComp3>,
 	document.getElementById("root")
     );
 }
