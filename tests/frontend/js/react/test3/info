@@ -1,0 +1,14 @@
+Express (Node.js) + React.js
+  webpack (to build bundle.js)
+  nodemon app.js
+
+you can do both at the same time (webpack --watch and node app.js) with webpack-dev-server
+this is a node.js server that uses express
+
+webpack-dev-server
+  npm install webpack-dev-server
+  ./node_modules/.bin/webpack-dev-server --progress --colors --content-base views
+
+I have no idea how it knew to use public dir for static files
+safest way to go would be to place bundle.js in same dir as index.html
+and use that as content-base
