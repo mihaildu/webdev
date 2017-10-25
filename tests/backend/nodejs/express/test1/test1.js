@@ -680,7 +680,7 @@ app.set("view engine", "hjs");
 app.get("/hogan", function(req, res){
     /* render index.hjs */
     res.render("index", {prop1: "This is prop1"});
-})
+});
 
 /*
  * normally this should perform a cleanup and exit
