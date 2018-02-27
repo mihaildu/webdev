@@ -1,0 +1,41 @@
+# run apps in a container
+https://www.docker.com/
+https://docs.docker.com/
+
+# community edition + enterprise edition
+
+# installation on debian
+# first, make sure you don't have a version installed
+sudo apt-get remove docker docker-engine docker.io
+
+# install some packages
+sudo apt-get install \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common
+
+# add gpg key
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+# verify that you have the right key (docker should show up)
+sudo apt-key fingerprint 0EBFCD88
+
+# add the stable repo
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   stretch \
+   stable"
+
+# update apt package index
+sudo apt-get update
+
+# install docker ce
+sudo apt-get install docker-ce
+
+# check if installed correctly
+sudo docker run hello-world
+
+# my docker version
+Docker version 17.12.0-ce, build c97c6d6

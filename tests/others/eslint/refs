@@ -1,0 +1,7 @@
+# linting tool for javascript and jsx
+https://eslint.org/
+
+# installation (global)
+npm install -g eslint
+eslint --init
+eslint file.js

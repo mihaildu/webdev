@@ -14,7 +14,9 @@ var test9_global_var3;
 main();
 
 function main(){
-    test37_str_int();
+    // TODO random color
+    //console.log("#" + Math.random().toString(16));
+    //test37_str_int();
     //test36_saving_this();
     //test35_scope_closures();
     //test34_global_object();
@@ -40,6 +42,7 @@ function main(){
     //test14_template_strings();
     //test13_arrow_functions();
     //test12_oop();
+    //test12_error();
     //test11_queue();
     //test10_args();
 
@@ -100,23 +103,23 @@ function test36_saving_this() {
      * */
 
     function fcn1() {
-	/*
-	 * we want to save "this" for fcn1; however, in this case,
-	 * if we return fcn, whoever calls fcn will change "this"
-	 * */
-	function fcn() {
-	    /* this won't be the same from fcn1 */
-	    console.log(this);
-	}
-	return fcn;
+        /*
+         * we want to save "this" for fcn1; however, in this case,
+         * if we return fcn, whoever calls fcn will change "this"
+         * */
+        function fcn() {
+            /* this won't be the same from fcn1 */
+            console.log(this);
+        }
+        return fcn;
     }
 
     function fcn2() {
-	/*
-	 * here "this" is saved, so it will be
-	 * whoever called fcn2 in the first place
-	 * */
-	return () => console.log(this);
+        /*
+         * here "this" is saved, so it will be
+         * whoever called fcn2 in the first place
+         * */
+        return () => console.log(this);
     }
 
     const obj1 = {name: "obj1", fcn1: fcn1, fcn2: fcn2};
@@ -263,7 +266,7 @@ function test35_scope_closures(){
 	    set_last_name: function(name){
 		last_name = name;
 	    },
-	}
+	};
 	return ret;
     }
 
@@ -671,6 +674,25 @@ function test29_move_props(){
      * some other options to try:
      * req.session = {req.session, ret.session}
      * */
+
+    /* to duplicate one object we can use spread operator */
+    const original = {a: 1, b: 2};
+    const dup = {...original};
+    console.log(dup);
+
+    /* we can do the same to copy/dup arrays */
+    const items = [1, 2, 3];
+    const itemsCopy = [...items];
+    console.log(itemsCopy);
+
+    const original2 = {a: 1, b: 2};
+    const dup2 = {...original2, a: 3};
+    console.log(original2);
+    console.log(dup2);
+
+    const lst = [];
+    lst.push(10);
+    console.log(lst);
 }
 
 function test28_env_vars(){
@@ -1883,6 +1905,15 @@ function test4_arrays(){
     // length seems to work just fine under node.js
     console.log(b);
     console.log(b.length);
+
+    // adding elem at the beginning - unshift
+    let marr = [1, 2, 3];
+    marr.unshift(0);
+    console.log(marr);
+
+    // you can also add multiple elements
+    marr.unshift(-1, -2);
+    console.log(marr);
 }
 
 // wrapper for factorial

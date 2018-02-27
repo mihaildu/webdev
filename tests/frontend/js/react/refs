@@ -24,6 +24,9 @@ npm install --save-dev babel-loader babel-core babel-preset-env babel-preset-rea
 # install react
 npm install react react-dom --save
 
+# also immutable
+npm install immutable --save
+
 # then configure the babel loader in webpack config file
 # add the "react" preset as well (for jsx)
 "presets": ["env", "react"]

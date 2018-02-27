@@ -1,0 +1,18 @@
+/* center everything */
+h1, p, #map-div, #route-control {
+    text-align: center;
+}
+
+/* cursor turns to pointer over streets */
+circle:hover, path:hover {
+    cursor: pointer;
+}
+
+#route-control, #route-tags {
+    margin-top: 20px;
+}
+
+#route-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
