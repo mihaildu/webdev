@@ -119,3 +119,32 @@ mustache.js (hogan is based on this)
 nunjucks
 
 # apparently you can also do template stuff in react.js
+
+# publishing packages to npmjs.com
+# the repo where packages are stored - npm registry (basically a db)
+https://docs.npmjs.com/misc/registry
+https://registry.npmjs.org/
+
+# apparently it uses CouchDB to store data
+# you can see what registry your npm uses
+npm config ls -l | grep registry
+
+# you can publish any dir with a package.json
+# it needs to have "name" and "version" set
+# you need a user for the registry first
+npm adduser
+
+# check that it stored your info
+npm config ls
+
+# you can also view users on npmjs website
+https://www.npmjs.com/~user
+
+# finally publish it
+npm publish
+
+# to later update the package just update version + publish again
+# you can update the version manually by changing "version"
+# or use npm
+npm version patch
+npm publish

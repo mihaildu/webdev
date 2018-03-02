@@ -1,0 +1,9 @@
+# so there is a thing called npm organizations
+https://www.npmjs.com/features
+https://docs.npmjs.com/misc/scope
+
+# basically you own a scope, like @myorg and only you can publish
+# packages that look like this
+@myorg/package-name
+
+# easier to organize, maintain, auth and name/scope packages like this
