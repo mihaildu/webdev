@@ -18,6 +18,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import styled, { keyframes, ThemeProvider, withTheme, css } from 'styled-components';
 
 /*
  * you can also import CSS files
@@ -123,10 +124,13 @@ function test2_docs(){
     //test2_quick_start();
 
     /* advanced guides */
-    test2_advanced_guide();
+    //test2_advanced_guide();
 
     /* tutorial */
     //test2_tutorial();
+
+    /* styled components */
+    test2_styled_components();
 }
 
 function test2_quick_start(){
@@ -1552,4 +1556,331 @@ function test2_jsx_indepth() {
 	</MyComp3>,
 	document.getElementById("root")
     );
+}
+
+function test2_styled_components(){
+
+    /*
+     * More on styled components
+     * https://www.styled-components.com/
+     * API
+     * https://www.styled-components.com/docs/api
+     * */
+
+    /* basics */
+    //styled_components_basics();
+
+    /* advanced */
+    styled_components_advanced();
+}
+
+function styled_components_advanced() {
+    /* using themes */
+
+    // first, defined the theme
+    const myTheme = {
+        main: "mediumseagreen"
+    };
+    // styled comp
+    const Paragraph = styled.p`
+        font-size: 1em;
+        margin: 1em;
+        padding: 0.25em 1em;
+        border-radius: 3px;
+        color: ${props => props.theme.main}
+    `;
+    // define a default theme, in case none is applied
+    Paragraph.defaultProps = {
+        theme: {
+            main: "palevioletred"
+        }
+    };
+    ReactDOM.render(
+        <div>
+          <Paragraph>Normal paragraph</Paragraph>
+
+          <ThemeProvider theme={myTheme}>
+            <Paragraph>Styled/themed paragraph</Paragraph>
+          </ThemeProvider>
+
+          <Paragraph theme={myTheme}>Styled/themed paragraph v2</Paragraph>
+        </div>,
+        document.getElementById("root")
+    );
+
+    /* you can also use functions in themes */
+    const Paragraph2 = styled.p`
+        color: ${props => props.theme.fg};
+        background: ${props => props.theme.bg};
+    `;
+    const myTheme2 = {
+        fg: "palevioletred",
+        bg: "white"
+    };
+    const invertTheme = ({fg, bg}) => ({
+        fg: bg,
+        bg: fg
+    });
+    ReactDOM.render(
+        <div>
+          <ThemeProvider theme={myTheme2}>
+            <div>
+              <Paragraph2>
+                Styled/themed paragraph
+              </Paragraph2>
+
+              <ThemeProvider theme={invertTheme}>
+                <Paragraph2>
+                  Styled/themed paragraph with inverted colors
+                </Paragraph2>
+              </ThemeProvider>
+            </div>
+          </ThemeProvider>
+        </div>,
+        document.getElementById("root")
+    );
+
+    /* you can also use themes in normal react components */
+    class MyComp2 extends React.Component {
+        render() {
+            // theme will be in props.theme
+            console.log("current theme is ", this.props.theme);
+        }
+    }
+    const ThemedMyComp2 = withTheme(MyComp2);
+    // export default withTheme(MyComp2);
+    // TODO what's current theme - stored in context??
+
+    /*
+     * refs
+     * you can get a ref to the actual dom element using innerRef
+     * https://www.styled-components.com/docs/advanced#refs
+     * */
+
+    /*
+     * security
+     * when using user input in styled components as values - sanitize
+     * */
+    const userInput = "/api/withdraw-funds";
+    const SomeComponent = styled.div`
+        background: url(${userInput});
+    `;
+
+    /* you can also use media queries in the CSS */
+    const Content = styled.div`
+        background: papayawhip;
+        @media (max-width: 700px) {
+            background: palevioletred;
+        }
+    `;
+
+    /*
+     * you can also do it in a more generic way
+     * TODO this doesn't seem to work
+     * */
+    const sizes = {
+        desktop: 992,
+        tablet: 768,
+        phone: 376
+    };
+    const media = Object.keys(sizes).reduce((acc, label) => {
+        acc[label] = (...args) => css`
+            @media (max-width: $(sizes[label] / 16)em) {
+                ${css(...args)}
+            }
+        `;
+        return acc;
+    }, {});
+    const Content2 = styled.div`
+        ${media.desktop`color: dodgerblue;`}
+        ${media.tablet`color: red;`}
+        ${media.phone`color: green;`}
+    `;
+    ReactDOM.render(
+        <div>
+          <Content2>Test</Content2>
+        </div>,
+        document.getElementById("root")
+    );
+
+    /*
+     * tagged template literals
+     * so these weird backtick strings are called tagged template literals
+     * the following 2 are equivalent
+     * */
+    function fn() {
+        console.log(arguments);
+    }
+    fn(["some string"]);
+    fn`some string`;
+
+    /* passing arguments */
+    const sVar = "nice";
+    fn(["this is a ", "day"], sVar);
+    fn`this is a ${sVar} day`;
+}
+
+function styled_components_basics() {
+
+    /* this should be the same as styled(h1) */
+    const Title = styled.h1`
+      font-size: 1.5em;
+      text-align: center;
+      color: palevioletred;
+    `;
+
+    const Wrapper = styled.section`
+        padding: 4em;
+        background: papayawhip;
+    `;
+
+    ReactDOM.render(
+        <Wrapper>
+          <Title>
+            Hello from styled-components!
+          </Title>
+        </Wrapper>,
+        document.getElementById("root")
+    );
+
+    /* you can also have inputs */
+    const Input = styled.input`
+        padding: 0.5em;
+        margin: 0.5em;
+        color: palevioletred;
+        background: papayawhip;
+        border: none;
+        border-radius: 3px;
+    `;
+
+    ReactDOM.render(
+        <div>
+          <Input placeholder="test 1" type="text" />
+          <Input placeholder="test 2" type="text" />
+        </div>,
+        document.getElementById("root")
+    );
+
+    /* you can also use props/variables */
+    const Button = styled.button`
+        background: ${props => props.bg};
+        color: ${props => props.primary ? "white" : "palevioletred"};
+        font-size: 1em;
+    `;
+    ReactDOM.render(
+        <Button bg={"blue"} primary>Hello</Button>,
+        document.getElementById("root")
+    );
+
+    /*
+     * you can style react components like so
+     * style will be applied to class passed to props
+     * */
+    function MyComp1(props) {
+        return (
+            <p className={props.className}>
+              {props.children}
+            </p>
+        );
+    }
+    const StyledComp1 = styled(MyComp1)`
+        background-color: blue;
+        color: red;
+        font-weight: bold;
+    `;
+    ReactDOM.render(
+        <StyledComp1>Test 2</StyledComp1>,
+        document.getElementById("root")
+    );
+
+    /* extending styles */
+    const Style1 = styled.div`
+        color: palevioletred;
+        font-size: 1em;
+    `;
+    const Style2 = Style1.extend`
+        border: 1px solid red;
+    `;
+    ReactDOM.render(
+        <Style2>Test 3</Style2>,
+        document.getElementById("root")
+    );
+
+    /*
+     * we can also replace the html tag from styled comp
+     * this will replace the div in Style1 with span
+     * */
+    const Style3 = Style1.withComponent("span");
+    ReactDOM.render(
+        <Style3>Test 4</Style3>,
+        document.getElementById("root")
+    );
+
+    /*
+     * you can set static props in styled components
+     * e.g. we apply some style to all "passwords" input fields
+     * and we don't have to write type="password" all the time
+     * */
+    const Input2 = styled.input.attrs({
+        type: "password",
+        margin: props => props.size || "1em",
+        padding: props => props.size || "1em"
+    })`
+        color: palevioletred;
+        font-size: 1em;
+    `;
+    ReactDOM.render(
+        <Input2 placeholder="Test 5" />,
+        document.getElementById("root")
+    );
+
+    /* applying style to a sub-element */
+    const Style4 = styled.div`
+        p {
+          color: palevioletred;
+          font-size: 1em;
+        }
+    `;
+    ReactDOM.render(
+        <Style4>
+          This is outside p.
+          <p>This is in p.</p>
+        </Style4>,
+        document.getElementById("root")
+    );
+
+    /*
+     * you can also apply style to sub-components - TODO test this
+     * https://www.styled-components.com/docs/advanced#referring-to-other-components
+     * */
+    const Style5 = styled.div`
+        ${Input2} {
+          color: palevioletred;
+          font-size: 1em;
+        }
+    `;
+
+    /* adding animations */
+    const rotate = keyframes`
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    `;
+    const ShapeDiv = styled.div`
+        display: inline-block;
+        animation: ${rotate} 2s linear infinite;
+        padding: 2rem 1rem;
+        font-size: 1.2rem;
+    `;
+    ReactDOM.render(
+        <ShapeDiv>
+          «»
+        </ShapeDiv>,
+        document.getElementById("root")
+    );
+
+    /* styled components also work with React Native */
 }
