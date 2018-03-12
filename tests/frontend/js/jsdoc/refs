@@ -1,0 +1,8 @@
+# jsdoc is a tool to generate doc for your project (e.g. in html format)
+http://usejsdoc.org/about-getting-started.html
+
+# it's also a pattern/way of writing documentation for your code
+# TODO add examples in current dir
+
+# generating the docs
+jsdoc file.js
