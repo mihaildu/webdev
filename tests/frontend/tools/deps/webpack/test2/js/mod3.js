@@ -33,3 +33,16 @@ export default class {
 	console.log("hello from default exported class");
     }
 }
+
+/* testing how vars change */
+let mvar1 = 100;
+
+function fcn2() {
+    console.log(mvar1);
+}
+
+function fcn3() {
+    mvar1++;
+}
+
+export {fcn2, mvar1, fcn3};

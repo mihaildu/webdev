@@ -74,6 +74,9 @@ var $ = require("jquery");
 # you can also uninstall a package
 npm uninstall underscore
 
+# installing a specific version
+npm install package@x.x.x
+
 # npm works similar to composer for php
 # it installs packages/frameworks in the current dir
 # it needs packages.json

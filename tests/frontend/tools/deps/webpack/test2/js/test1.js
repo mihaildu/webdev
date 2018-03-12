@@ -14,18 +14,43 @@ import { fcn1 } from "./mod3";
  * */
 import kfcn from "./mod3";
 
+import {mvar1, fcn2, fcn3} from "./mod3";
+
 import Immutable from "immutable";
 
 
 main();
 
 function main() {
-    //test1();
-    //test2();
-    //test3();
-    //test4();
-    test5_iterators();
+    test8_import_vars();
+    //test7_componse();
     //test6();
+    //test5_iterators();
+    //test4();
+    //test3();
+    //test2();
+    //test1();
+}
+
+function test8_import_vars() {
+    console.log(mvar1);
+    fcn3();
+    console.log(mvar1);
+}
+
+function test7_componse() {
+    /*
+     * componse is some es6 thing used to compose functions
+     * */
+    function fcn1(val) {
+        return val + 1;
+    }
+    function fcn2(val) {
+        return val * 10;
+    }
+    const composedFunction = compose(fcn1, fcn2);
+    const res = composedFunction(2);
+    console.log(res);
 }
 
 function test6() {

@@ -20,6 +20,21 @@ module.exports = {
 	path: __dirname,
 	filename: debug ? "bundle.js" : "bundle.min.js"
     },
+    // add aditional modules
+    module: {
+	rules: [
+	    {
+		test: /\.js$/,
+		exclude: /(node_modules|bower_components)/,
+		use: {
+		    loader: "babel-loader",
+		    options: {
+			presets: ["env"]
+		    }
+		}
+	    }
+	]
+    },
     // optional plugins
     // don't use any for debug mode
     // use some in production
