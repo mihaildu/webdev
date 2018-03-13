@@ -1,5 +1,23 @@
-# install
+# install server
 sudo apt install mysql-server
+
+# you can also install client, not sure if you need this
+sudo apt install mysql-client
+
+# instructions for debian
+https://wiki.debian.org/MySql
+
+# on debian, you need to run mysql as root the first time
+su
+mysql
+
+# once logged in, you can create other users
+# then use
+mysql -u <user> -p
+# or for current user
+mysql -p
+
+# more on usage in the other refs file (util/)
 
 # check version
 mysql --version
