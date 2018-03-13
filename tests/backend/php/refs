@@ -5,7 +5,7 @@ sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
 php --version
 
 # test with some .php file (e.g. from php_only/)
-php php_only/test1.php
+php php_only/refs.php
 
 # or test directly in shell
 echo "<?php echo('test');?>" | php
