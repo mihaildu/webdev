@@ -40,8 +40,15 @@ node file.js
 # node.js can be installed from repos (on old linux distro up until v0.12)
 sudo apt-get install nodejs
 
-# to get newest version of node (v8.x) - on newer linux distros
+# to get newest version of node (v8.x)
+
+# on Ubuntu
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+
+# on Debian
+curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
+# or run as root on Debian
 sudo apt-get install -y nodejs
 node --version
 
