@@ -126,7 +126,8 @@ function test1() {
 	}
     }
     ReactDOM.render(
-	<TodoApp />,
+        // myprop won't be accessible
+        <TodoApp myprop={20}/>,
 	document.getElementById("todoapp")
     );
 }
