@@ -1,12 +1,16 @@
 import React, { Component } from "react"
-
 import { Container } from "flux/utils"
+
+import Sections from "rsg-components/Sections"
+
 import StyleguidistStore from "./StyleguidistStore"
+import { Actions } from "./StyleguidistActions"
 
 function MyStyleGuideRenderer (props) {
   /*
    * this will be rendered from StyleGuide
-   * the following props will be passed here
+   * the following props should be passed here
+   * they don't with flux
    *   title
    *   homepageUrl
    *   components - ??
@@ -14,13 +18,24 @@ function MyStyleGuideRenderer (props) {
    *   toc - table of contents (on the left)
    *   hasSidebar
    * */
-  //console.log(props);
-  //console.log(arguments);
+  const sections = props.storeData.get("sections");
+  //const children = <Sections sections={sections} depth={1} />;
+  const selectTheme = (
+    <select onChange={event => Actions.updateTheme(event.target.value)}>
+      <option value="firstTheme">
+        firstTheme
+      </option>
+      <option value="secondTheme">
+        secondTheme
+      </option>
+    </select>
+  );
   return (
     <div>
-      {props.children}
+      {selectTheme}
+      <Sections sections={sections} depth={1} />
     </div>
-  )
+  );
 }
 
 function getStores() {
@@ -28,11 +43,9 @@ function getStores() {
 }
 
 function getState() {
-  console.log(arguments)
   return {
     storeData: StyleguidistStore.getState()
   }
 }
 
 export default Container.createFunctional(MyStyleGuideRenderer, getStores, getState)
-//import { Provider } from "react-redux"
