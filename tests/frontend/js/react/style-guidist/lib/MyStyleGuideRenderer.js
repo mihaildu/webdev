@@ -1,9 +1,5 @@
 import React, { Component } from "react"
 
-import { Provider } from "react-redux"
-
-const store = {};
-
 export default class MyStyleGuideRenderer extends Component {
   /*
    * this will be rendered from StyleGuide
@@ -19,9 +15,7 @@ export default class MyStyleGuideRenderer extends Component {
     console.log(this.props.children);
     return (
       <div>
-        <Provider store={store}>
-          {this.props.children}
-        </Provider>
+        {this.props.children}
       </div>
     )
   }
