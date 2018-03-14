@@ -3,7 +3,7 @@
 https://react-styleguidist.js.org/
 https://react-styleguidist.js.org/docs/getting-started.html
 
-# I assume this goes over a react, so you need react first
+# I assume this goes over react, so you need react first
 # look in react/refs to set it up
 npm install --save-dev react-styleguidist
 
@@ -93,6 +93,8 @@ https://react-styleguidist.js.org/docs/documenting.html#writing-code-examples
 # styleguidist uses react-docgen to generate documentation
 https://github.com/reactjs/react-docgen
 
+# you can use other libraries in the readme file
+
 # each component is defined in an independent react root/context
 # this happens in a Wrapper component (defined in styleguidist by default)
 # you can overwrite the Wrapper like this
@@ -102,5 +104,45 @@ module.exports = {
   }
 }
 
-# you can use other libraries in the readme file
+# so what I think it happens - styleguidist creates a new html file that will
+# take some bundled javascript which will use their components
+# https://github.com/styleguidist/react-styleguidist/tree/master/src/rsg-components
+# and they add the components you define to display
 
+# you can also change what html file is served with the template prop
+# in styleguide.config.js
+
+# the component tree structure is something like this
+<StyleGuide>
+  <StyleGuideRenderer>
+    <Content>
+      <Sections>
+        <Section>
+          <Examples>
+            <Playground>
+              <Preview>
+                <Wrapper>
+                </Wrapper>
+              </Preview>
+            </Playground>
+          </Examples>
+        </Section>
+        <Section>
+        </Section>
+        ...
+      </Sections>
+    </Content>
+  </StyleGuideRenderer>
+</StyleGuide>
+
+# you can replace individual components
+# to do this you need to change styleguide.config.js
+module.exports = {
+  styleguideComponents: {
+    Wrapper: [path],
+    ...
+  }
+}
+
+# for a list of what you can specify in styleguide.config.js
+https://react-styleguidist.js.org/docs/configuration.html
