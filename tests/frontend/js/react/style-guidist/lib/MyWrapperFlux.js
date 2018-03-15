@@ -3,14 +3,6 @@ import React, { Component } from "react"
 import { Container } from "flux/utils"
 import StyleguidistStore from "./StyleguidistStore"
 
-function MyWrapper (props) {
-  // props.children is lost here too
-  console.log(props.storeData.get("theme"));
-  return (
-    <div>{props.children}</div>
-  )
-}
-
 function getStores() {
   return [StyleguidistStore];
 }
@@ -21,4 +13,20 @@ function getState() {
   };
 }
 
-export default Container.createFunctional(MyWrapper, getStores, getState)
+export default class MyWrapper extends Component {
+  render() {
+    const props = this.props;
+    function MyWrapperFunctional (propsFlux) {
+      console.log(propsFlux.storeData.get("theme"));
+      return (
+        <div>{props.children}</div>
+      )
+    }
+    const MyWrapperFlux = Container.createFunctional(MyWrapperFunctional,
+                                                     getStores, getState);
+
+    return (
+      <MyWrapperFlux />
+    )
+  }
+}
