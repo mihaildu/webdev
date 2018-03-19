@@ -1,0 +1,60 @@
+# so redux is like flux, but it's not tied to react
+
+# to install
+npm install --save redux
+
+# apparently it should work without any bundler/webpack
+
+# for react
+npm install --save react-redux
+npm install --save-dev redux-devtools
+
+# you treat actions in "reducers"
+# see example in test1
+
+# docs progress
+# https://redux.js.org/
+* introduction - done
+  * motivation - done
+  * core concepts - done
+  * three principles - done
+    * single source of truth
+    * state is read-only
+    * changes are made with pure functions
+  * prior art - done
+  * learning resources - done
+  * ecosystem - done
+  * examples - done
+* basics - done
+  * actions - done
+  * reducers - done
+  * store - done
+  * data flow - done
+  * usage with react - done
+  * example: todo list - done
+* advanced - current
+  * async actions - briefly
+  * async flow - briefly
+  * middleware - 
+  * usage with react router
+  * example: reddit api
+  * next steps
+* recipes
+* api refs
+
+# videos progress
+# https://egghead.io/courses/getting-started-with-redux
+* the single immutable state tree - done
+* describing state changes with actions - done
+* pure and impure functions - done
+* the reducer function - done
+* writing a counter reducer with tests
+...
+16 - react todo list example
+
+# videos 2 progress
+# https://egghead.io/courses/building-react-applications-with-idiomatic-redux
+* TODO
+
+# more redux docs
+https://redux.js.org/introduction/learning-resources
