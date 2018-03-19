@@ -158,3 +158,21 @@ npm publish
 # or use npm
 npm version patch
 npm publish
+
+# change where global packages are installed
+https://github.com/mixonic/docs.npmjs.com/blob/master/content/getting-started/fixing-npm-permissions.md
+
+# the get the current path
+npm config get prefix
+
+# optional: make the new directory to store packages
+mkdir ~/npm-global
+
+# update the path in npm
+npm config set prefix "~/npm-global"
+
+# add the path to $PATH, in .bashrc/.profile
+export PATH=~/npm-global/bin:$PATH
+
+# update system variables (if terminal is open)
+source ~/.bashrc
