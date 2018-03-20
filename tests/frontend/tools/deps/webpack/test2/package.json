@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "humps": "^2.0.1",
     "immutable": "^3.8.2",
     "webpack": "^3.7.1"
   },

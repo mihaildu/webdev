@@ -17,12 +17,14 @@ import kfcn from "./mod3";
 import {mvar1, fcn2, fcn3} from "./mod3";
 
 import Immutable from "immutable";
+import { decamelize } from "humps";
 
 
 main();
 
 function main() {
-    test8_import_vars();
+    test9_humps();
+    //test8_import_vars();
     //test7_componse();
     //test6();
     //test5_iterators();
@@ -30,6 +32,10 @@ function main() {
     //test3();
     //test2();
     //test1();
+}
+
+function test9_humps() {
+    console.log(decamelize("camel-caseXdsakj", {separator: " "}));
 }
 
 function test8_import_vars() {
