@@ -19,6 +19,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styled, { keyframes, ThemeProvider, withTheme, css } from 'styled-components';
+import PropTypes from "prop-types";
 
 /*
  * you can also import CSS files
@@ -31,6 +32,7 @@ main();
 function main(){
     //test1();
     test2_docs();
+    //test3_styled_components();
 }
 
 function test1(){
@@ -124,13 +126,10 @@ function test2_docs(){
     //test2_quick_start();
 
     /* advanced guides */
-    //test2_advanced_guide();
+    test2_advanced_guide();
 
     /* tutorial */
     //test2_tutorial();
-
-    /* styled components */
-    test2_styled_components();
 }
 
 function test2_quick_start(){
@@ -1373,7 +1372,118 @@ function test2_tutorial() {
 }
 
 function test2_advanced_guide() {
-    test2_jsx_indepth();
+    //test2_jsx_indepth();
+    test2_context();
+}
+
+function test2_context() {
+    /**
+     * With context you can pass props down the entire tree,
+     * without using props every time.
+     *
+     * Context docs https://reactjs.org/docs/context.html
+     */
+    class InnerComponent extends React.Component {
+        render() {
+            /**
+             * context variable ctxColor is available here too
+             * this will have access to both variables passed by
+             * Message and MessageList
+             */
+            console.log("InnerComp ctx: ", this.context);
+            return <div>Hello from InnerComponent</div>;
+        }
+    }
+    InnerComponent.contextTypes = {
+        ctxColor: PropTypes.string,
+        messageCtx: PropTypes.string
+    };
+
+    /* message component with props.text & props.color */
+    class Message extends React.Component {
+        getChildContext() {
+            /**
+             * modifying the context even more
+             * this only appends stuff to context
+             */
+            return {messageCtx: "hello from message"};
+        }
+        render() {
+            /* context passed via ctx */
+            console.log("Message ctx: ", this.context);
+            //console.log(this.context.ctxColor);
+            return (
+                <div style={{color: this.props.color}}>
+                  {this.props.text}
+                  <InnerComponent />
+                </div>
+            );
+        }
+    }
+    // this is actually needed - own context
+    Message.contextTypes = {
+        ctxColor: PropTypes.string
+    };
+    // children context
+    Message.childContextTypes = {
+        messageCtx: PropTypes.string
+    };
+
+    ReactDOM.render(
+        <Message text={"this is text"} color={"red"} />,
+        document.getElementById("root")
+    );
+
+    /**
+     * list of messages [{text: "...", ...}, ...] in props.messages
+     * will display a list of <Message /> components
+     *
+     * here we apply a color to each Message
+     * instead of duplicating the color prop every time (which is fine)
+     * we can store it in context and access it from there in the children
+     */
+    class MessageList extends React.Component {
+        /**
+         * this function gets called every time the props or state
+         * changes
+         */
+        getChildContext() {
+            /**
+             * this will get passed via context to all children
+             * and children of children etc
+             */
+            return {ctxColor: "blue"};
+        }
+        render() {
+            const color = "purple";
+            let id = 0;
+            const children = this.props.messages.map((message) => {
+                return (
+                    <Message
+                       text={message.text}
+                       color={color}
+                       key={id++}
+                       />
+                );
+            });
+            return <div>{children}</div>;
+        }
+    }
+    // this is actually needed
+    MessageList.childContextTypes = {
+        ctxColor: PropTypes.string
+    };
+
+    ReactDOM.render(
+        <MessageList messages={[{text: "some text"}]} />,
+        document.getElementById("root")
+    );
+
+    /**
+     * if you define contextTypes for a component, then you can access
+     * it in lifecycle methods too: constructor, componentWillReceiveProps
+     * shouldComponentUpdate, componentWillUpdate
+     */
 }
 
 function test2_jsx_indepth() {
@@ -1558,7 +1668,7 @@ function test2_jsx_indepth() {
     );
 }
 
-function test2_styled_components(){
+function test3_styled_components(){
 
     /*
      * More on styled components
