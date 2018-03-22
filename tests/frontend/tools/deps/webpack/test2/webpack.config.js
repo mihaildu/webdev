@@ -8,6 +8,9 @@ var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 
 module.exports = {
+    node: {
+        net: "empty",
+    },
     // TODO explanation
     context: __dirname,
     // TODO explanation

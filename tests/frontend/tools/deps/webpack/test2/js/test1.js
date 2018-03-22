@@ -18,12 +18,14 @@ import {mvar1, fcn2, fcn3} from "./mod3";
 
 import Immutable from "immutable";
 import { decamelize } from "humps";
-
+import Joi from "joi";
+//const Joi = require("joi");
 
 main();
 
 function main() {
-    test9_humps();
+    test10_joi();
+    //test9_humps();
     //test8_import_vars();
     //test7_componse();
     //test6();
@@ -32,6 +34,66 @@ function main() {
     //test3();
     //test2();
     //test1();
+}
+
+function test10_joi() {
+    /**
+     * Joi is this object scheme/key validation
+     * https://github.com/hapijs/joi
+     *
+     * To make it work with webpack, add this to webpack.config
+     * node: {
+     *   net: "empty",
+     * }
+     */
+
+    /* first, define a schema */
+    const schema = {
+        username: Joi.string()
+    };
+
+    /**
+     * then validate something against it
+     * the error is null if input ok
+     * otherwise it's an error object
+     */
+    const {error, value} = Joi.validate({username: "User1"}, schema);
+    console.log(error);
+    console.log(Joi.validate({username: 100}, schema).error);
+
+    const schema2 = {
+        username: Joi.string(),
+        password: Joi.string(),
+        age: Joi.number(),
+        child: Joi.object()
+    };
+    const obj2 = {
+        username: "user2",
+        password: "user2",
+        age: 10,
+        child: {}
+    };
+    console.log(Joi.validate(obj2, schema2).error);
+
+    /**
+     * however, this still passes is prop is not defined
+     * to force the existence of props use .required()
+     */
+    const schema3 = Joi.object().keys({
+        username: Joi.string().required(),
+        password: Joi.string().required()
+    });
+    const obj3 = {
+        username: "username3",
+    }
+    console.log(Joi.validate(obj3, schema3).error);
+
+    const obj4 = {
+        username: "user4",
+        password: "pss4",
+        other: "extra"
+    }
+    console.log(Joi.validate(obj4, schema3).error);
 }
 
 function test9_humps() {
