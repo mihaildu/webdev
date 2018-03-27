@@ -176,3 +176,15 @@ export PATH=~/npm-global/bin:$PATH
 
 # update system variables (if terminal is open)
 source ~/.bashrc
+
+# working with modules
+https://nodejs.org/api/modules.html
+
+# when it looks for a module, nodejs will start with the current dir
+# and then it appends 'node_modules', then it goes up and appends node_modules
+# until the root dir
+# to see this entire tree you can do (in repl)
+require.resolve.paths("some-module")
+
+# on node (backend) you can also do this in src file
+console.log(require.resolve("some-module"))
