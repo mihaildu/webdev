@@ -6,3 +6,6 @@ http://usejsdoc.org/about-getting-started.html
 
 # generating the docs
 jsdoc file.js
+
+# to install it
+npm install jsdoc --save
