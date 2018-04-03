@@ -20,6 +20,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styled, { keyframes, ThemeProvider, withTheme, css } from 'styled-components';
 import PropTypes from "prop-types";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 /*
  * you can also import CSS files
@@ -31,8 +32,9 @@ main();
 
 function main(){
     //test1();
-    test2_docs();
+    //test2_docs();
     //test3_styled_components();
+    test4_react_router();
 }
 
 function test1(){
@@ -1993,4 +1995,72 @@ function styled_components_basics() {
     );
 
     /* styled components also work with React Native */
+}
+
+function test4_react_router() {
+    /**
+     * Routing on the frontend.
+     * https://reacttraining.com/react-router/web/guides/philosophy
+     *
+     * dynamic and not static routing??
+     *
+     * installation (you need react)
+     * npm install react-router-dom
+     */
+
+    /* 2 react componets/pages */
+    const Home = () => <div>Hello from Home</div>;
+    const About = () => <div>Hello from About</div>;
+    const Nothing = () => <div>Nothing was matched</div>;
+
+    /**
+     * frontend rounting
+     *
+     * this is based on the entire path
+     * so if you have the file somewhere along the path
+     * you have to prefix routes with the right path
+     *
+     * by default, the path matching is "if it starts with"
+     * so path="/home" will also match "/homex" or "/home/path"
+     * path="/" will match anything
+     * for exact path use "exact path"
+     *
+     * this only seem to work if you get any path initially
+     * then navigate with <Link>
+     *
+     * also, why are multiple routes matched?
+     *
+     * prob best to test this from root path
+     *
+     * TODO finish this some other time
+     */
+
+    /* <div> */
+    /*   <ul> */
+    /*     <li><Link to="/about">About</Link></li> */
+    /*     <li><Link to="/home">Home</Link></li> */
+    /*     <li></li> */
+    /*   </ul> */
+    /*   <hr /> */
+    /* </div> */
+
+    const basePath = "/tests/frontend/js/react/test1/dist";
+    const MyComp = () => {
+        return (
+            <Switch>
+              <Route exact path="/home" component={Home} />
+              <Route exact path={"/tests/frontend/js/react/test1/dist/home"} component={Home} />
+              <Route exact path={basePath + "/about"} component={About} />
+              <Route exact path="/about" component={About} />
+              <Route path="*" component={Nothing} />
+            </Switch>
+        );
+    };
+
+    /* TODO you can also pass params to components, like :id etc */
+
+    ReactDOM.render(
+	<MyComp />,
+	document.getElementById("root")
+    );
 }
