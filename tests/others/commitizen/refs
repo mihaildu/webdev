@@ -1,0 +1,35 @@
+# commit messages in a standardized way (e.g. conventional commits)
+https://conventionalcommits.org/
+https://www.npmjs.com/package/commitizen
+
+# when you commit a message a prompt will show up guiding you through the commit
+# installing commitizen
+npm install -g commitizen
+
+# you also need to select a standard (adapter)
+npm install -g cz-conventional-changelog
+
+# make a config file for commitizen (globally)
+~/.czrc
+echo '{"path": "cz-conventional-changelog"}' > ~/.czrc
+
+# now you can commit with commitizen, in your repo
+git cz
+
+# instead of doing it globally, you can also do it for projects
+# you still need commitizen cli globally so
+npm install -g commitizen
+commitizen inti cz-conventional-changelog --save-dev --save-exact
+
+# or run it from local project
+npm install commitizen --save-dev
+./node_modules/.bin/commitizen ...
+
+# this will do a bunch of things
+1. it installs cz-conventional-changelog in repo (with save)
+2. it adds the standard to commitizen config in package.json
+   "config": {"commitizen": {"path": "cz-conventional-changelog"}}, ...
+
+# if you commit failed because of some error messages
+# instead of retyping everything do
+git cz --retry
