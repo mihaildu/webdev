@@ -1,0 +1,20 @@
+# npm package for git hooks
+# so you can attach functions when you run a git command
+https://www.npmjs.com/package/husky
+
+# installation
+npm install husky --save-dev
+# or
+yarn add husky --dev
+
+# now you can edit package.json and add scripts like
+{
+  "scripts": {
+    "precommit": "npm test",
+    "prepush": "[some cmd]",
+    ...
+  }
+}
+
+# apparently not that hard to add your own git hooks (in .git/hooks)
+https://githooks.com/
