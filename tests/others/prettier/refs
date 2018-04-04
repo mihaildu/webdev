@@ -1,0 +1,77 @@
+# this is some tool that automatically formats your code
+# e.g. when you save the file
+# it's what an emacs mode is, but works slightly different
+https://prettier.io/
+
+# you can still use the style you want when you write code but
+# when you save it will automatically be formatted
+
+# installation
+npm install --save-dev --save-exact prettier
+
+# you can run it on a file to format it
+# this doesn't replace file, it just prints to stdout
+prettier file.js
+
+# you can do something like
+prettier file.js > file2.js
+
+# this will replace file
+prettier file.js --write
+
+# you can also add options
+prettier --single-quote --trailing-comma es5 file.js
+
+# you can use prettier with other languages (than js)
+# you need a plugin for that
+prettier --write file.cpp --plugin=./cpp-plugin
+
+# apparently you can also use prettier inside js
+# this is called the API
+const prettier = require("prettier");
+
+# you can use prettier in pre-commit with husky + lint-staged
+yarn add lint-staged husky --dev
+
+# in precommit (husky) run "lint-staged"
+# add lint-staged target + cmds
+{
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
+  }
+}
+
+# you can also use pretty-quick for pre-commits
+
+# to watch for changes you can use onchange
+https://www.npmjs.com/package/onchange
+
+# instead of using cmd line options, you can write a config file
+# in the current dir
+.prettierrc
+
+# you can also write a js file that exports object
+prettier.config.js
+
+# or add "prettier" to package.json
+
+# you can also attach it to emacs to format file automatically
+# every time you save
+https://github.com/prettier/prettier-emacs
+
+# you must have prettier installed globally
+npm install -g prettier
+
+# then install the emacs package (e.g. list-packages)
+prettier-js
+
+# then add it to .emacs
+(require 'prettier-js)
+(add-hook 'rjsx-mode-hook 'prettier-js-mode)
+
+# this doesn't seem to work, but turning prettier-js-mode on manually
+# does the job; then, every time you save prettier --write will be run
+# on your file
