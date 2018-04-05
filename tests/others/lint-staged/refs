@@ -1,0 +1,4 @@
+# this is for running linters like prettier and eslint on precommit hook
+https://github.com/okonet/lint-staged
+
+# I don't know why you need both this and husky
