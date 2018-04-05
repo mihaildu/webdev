@@ -19,7 +19,7 @@ git cz
 # instead of doing it globally, you can also do it for projects
 # you still need commitizen cli globally so
 npm install -g commitizen
-commitizen inti cz-conventional-changelog --save-dev --save-exact
+commitizen init cz-conventional-changelog --save-dev --save-exact
 
 # or run it from local project
 npm install commitizen --save-dev
