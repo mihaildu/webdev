@@ -188,3 +188,18 @@ require.resolve.paths("some-module")
 
 # on node (backend) you can also do this in src file
 console.log(require.resolve("some-module"))
+
+# you can make local packages global on your system with npm link
+# run in root directory (with package.json)
+npm link
+
+# this will create a symlink in [npm-prefix]/lib/node_modules/
+# this is like a local registry of node packages
+# this is not the same as installing something globally
+# a globally installed package puts the runnable js script in some PATH
+# directory so you can run it without specifying path
+
+# to "install" a package from the local registry, run this from root dir
+npm link [local-package-name]
+
+
