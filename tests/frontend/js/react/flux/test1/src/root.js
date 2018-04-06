@@ -9,12 +9,99 @@ import ReactDOM from "react-dom";
 import {Dispatcher} from "flux";
 import {ReduceStore} from "flux/utils";
 import {Container} from "flux/utils";
+import PropTypes from "prop-types";
 
 main();
 
 function main() {
     //test1();
-    test2();
+    //test2();
+    test3_passing_down_props();
+}
+
+function test3_passing_down_props() {
+    /**
+     * if you pass down props to a container component, they will
+     * be ignored (and only stuff in store will be used)
+     */
+
+    // dispatcher
+    const MyDispatcher = new Dispatcher();
+
+    // store
+    class MyStoreClass extends ReduceStore {
+        constructor() {
+	    super(MyDispatcher);
+	}
+        getInitialState() {
+            return Immutable.OrderedMap({value: 10});
+        }
+        reduce(state, action) {
+            switch(action.type) {
+                default:
+                return state;
+            }
+        }
+    }
+    let MyStore = new MyStoreClass();
+
+    // connect
+    function getStores() {
+        return [MyStore];
+    }
+    function getState() {
+        // arguments is weird
+        // no idea if you can get myVal from there
+        console.log(arguments);
+        console.log(this);
+        return {
+            mainStore: MyStore.getState()
+        };
+    }
+
+    // view component
+    function MyComponent (props) {
+        // this will only have what getState returns
+        console.log(props);
+        return <div>Hello from MyComp</div>;
+    }
+    let MyCompContainer = Container.createFunctional(MyComponent,
+                                                     getStores, getState);
+
+    // display
+    // myVal will get lost
+    /* ReactDOM.render( */
+    /*     <MyCompContainer myVal={100} />, */
+    /*     document.getElementById("todoapp") */
+    /* ); */
+
+    /**
+     * apparently context doesn't work either
+     * you can still wrap container in another component
+     * and use props in inner component from scope (from the wrapper one)
+     */
+    MyComponent.contextTypes = {
+        myVal: PropTypes.number
+    };
+
+    // no way to define child context in container
+    class WrapperComponent extends React.Component {
+        getChildContext() {
+            return {myVal: 100};
+        }
+        render() {
+            console.log("lol");
+            return <MyCompContainer />;
+        }
+    }
+    WrapperComponent.childContextTypes = {
+        myVal: PropTypes.number
+    };
+
+    ReactDOM.render(
+	<WrapperComponent  />,
+	document.getElementById("todoapp")
+    );
 }
 
 function test1() {
