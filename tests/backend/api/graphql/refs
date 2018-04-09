@@ -1,0 +1,56 @@
+# so graphql is this alternative to rest api
+# instead of having multiple api endpoints you only have one
+# that is more generic and should be more maintainable
+# you also perform fewer backend requests
+http://graphql.org/
+
+# official docs
+http://graphql.org/learn/
+
+# some external website with docs/tutorials
+https://www.howtographql.com/
+
+# getting started (javascript)
+http://graphql.org/graphql-js/
+
+# graphql + express
+app.js
+
+# once it's set up, you can send graphql requests to that api via POST
+# (why did we use only a middleware then??)
+# the data in POST should be a json, if you want to query it should have
+# a query field, e.g.
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"query": "{ hello }"}' \
+http://localhost:4000/graphql
+
+# a better way to query the server would be to use the GraphiQL
+# if you use graphql + express it should be there if you enable it
+# in graphiql you can run the same query like
+{
+  hello
+}
+
+# running a query with an arg
+{
+  returnNumber(num: 10, secret: "my secret")
+}
+
+# running a query for your own type/object
+# you also need to specify what you want from the obj
+{
+  returnMyType(arg: 10) {
+    arg,
+    getArg
+  }
+}
+
+# you can also pass arguments to fields like so
+{
+  returnMyType(arg: 10) {
+    inc(someNumber: 100)
+  }
+}
+
+# I guess you can nest these as much as you like
