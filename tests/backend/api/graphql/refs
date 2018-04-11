@@ -22,6 +22,7 @@ https://www.howtographql.com/react-apollo/0-introduction/
 http://graphql.org/graphql-js/
 
 # graphql + express
+npm install express express-graphql graphql
 app.js
 
 # once it's set up, you can send graphql requests to that api via POST
@@ -77,3 +78,6 @@ mutation {
 curl -XPOST \
 -H 'Content-Type:application/graphql' \
 -d 'mutation { setMessage(message: "My message") }'
+
+# graphql + apollo-server
+npm install apollo-server-express body-parser express graphql graphql-tools
