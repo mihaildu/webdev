@@ -4,11 +4,19 @@
 # you also perform fewer backend requests
 http://graphql.org/
 
+# GraphQL = graph query language
+# it's just the standard for how to write the query/select what you want
+
 # official docs
 http://graphql.org/learn/
 
 # some external website with docs/tutorials
 https://www.howtographql.com/
+
+# it also has tutorials on using graphql with different
+# frontend & backend technologies like node.js & react
+https://www.howtographql.com/graphql-js/0-introduction/
+https://www.howtographql.com/react-apollo/0-introduction/
 
 # getting started (javascript)
 http://graphql.org/graphql-js/
@@ -54,3 +62,18 @@ http://localhost:4000/graphql
 }
 
 # I guess you can nest these as much as you like
+# you can also be more explicit that it's a query
+query {
+  hello
+}
+
+# this allows for a distinction between queries and mutations
+# to run a mutation (something that modifies data on server)
+mutation {
+  setMessage(message: "hello")
+}
+
+# running a mutation with curl
+curl -XPOST \
+-H 'Content-Type:application/graphql' \
+-d 'mutation { setMessage(message: "My message") }'

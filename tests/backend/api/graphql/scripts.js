@@ -2,16 +2,60 @@
  * Sending a POST to graphql api from client side
  */
 
-graphql_obj();
+graphql_mutation();
+//graphql_obj();
 //graphql_escaping();
 //graphql_jquery();
 //graphql_xhr();
 
+function graphql_mutation() {
+    /**
+     * Doing a mutation with jquery
+     */
+    const newMessage = "Hello world";
+    const mutation = `mutation {
+        setMessage(message: "${newMessage}")
+    }`;
+
+    // a simple $.post won't work, we need to set the headers
+    $.ajax({
+        type: "POST",
+        url: "/graphql",
+        data: mutation,
+        success: (res) => {console.log(res);},
+        headers: {
+            "Content-Type": "application/graphql"
+        },
+        dataType: "json"
+    });
+
+    // also, getMessage just to be sure
+    const query = `{
+        getMessage
+    }`;
+    $.post("/graphql", {query}, (res) => {
+        console.log(res);
+    });
+}
+
 function graphql_obj() {
-    // TODO
-    /* $.post("/graphql", {query: queryString}, (res) => { */
-    /*     console.log(res); */
-    /* }); */
+    /**
+     * Nested query in graphql
+     */
+    const query = `{
+        returnMyType(arg: 2) {
+            inc(someNumber: 10)
+        }
+    }`;
+    $.post("/graphql", {query}, (res) => {
+        /**
+         * this will be
+         * returnMyType {
+         *   inc: 11
+         * }
+         */
+        console.log(res);
+    });
 }
 
 function graphql_escaping() {

@@ -1,3 +1,13 @@
+/**
+ * Using GraphQL with express/node.js
+ *
+ * Docs starts at
+ * http://graphql.org/graphql-js/
+ *
+ * API reference starts at
+ * http://graphql.org/graphql-js/express-graphql/
+ */
+
 /* normal express app */
 const express = require("express");
 const app = express();
@@ -26,10 +36,31 @@ const app = express();
  * then we can return the object in the root resolver
  *
  * when you define the type you should specify all props on obj
+ *
+ * for api endpoints that change data - define mutations instead
+ * there's no difference between queries and mutations, it's just
+ * for better organizing your code
+ * also, apparently mutations run in series and queries are
+ * executed in parallel
+ *
+ * for custom types that will be used as input you can use
+ * input instead of type; this will force the type to not
+ * be nested
+ * for input types you don't have to define an object/class
+ * all args will be available as if you used multiple inputs
  */
-const { buildSchema } = require("graphql");
+const {
+    buildSchema,
+    GraphQLSchema,
+    GraphQLObjectType,
+    GraphQLString
+} = require("graphql");
 const graphqlHTTP = require("express-graphql");
 const schema = buildSchema(`
+    input MessageInput {
+        content: String,
+        author: String
+    }
     type MyType {
         arg: Int,
         getArg: Int,
@@ -40,7 +71,14 @@ const schema = buildSchema(`
         number: Int,
         returnNumber(num: Int!, secret: String!): String!,
         returnList(arg1: Int, arg2: Int): [Int],
-        returnMyType(arg: Int): MyType
+        returnMyType(arg: Int): MyType,
+        getMessage: String,
+        setMessage2(message: String!): String,
+        printInputType(arg: MessageInput): String,
+        showIp: String
+    }
+    type Mutation {
+        setMessage(message: String!): String
     }
 `);
 
@@ -56,6 +94,8 @@ class MyType {
         return someNumber + 1;
     }
 }
+
+let serverMessage = "";
 
 /* root resolver */
 const root = {
@@ -80,8 +120,62 @@ const root = {
     },
     returnMyType: ({arg}) => {
         return new MyType(arg);
+    },
+    getMessage: () => {
+        return serverMessage;
+    },
+    setMessage: ({message}) => {
+        serverMessage = message;
+        return serverMessage;
+    },
+    setMessage2: ({message}) => {
+        serverMessage = message;
+        return serverMessage;
+    },
+    printInputType: ({arg}) => {
+        return arg.content + " " + arg.author;
+    },
+    /* you can access request object as second param */
+    showIp: (args, request) => {
+        return request.ip;
     }
 };
+
+/**
+ * instead of using buildSchema with a template string
+ * you can also define it dynamically with graphql.GraphQLSchema()
+ * for this you have to define your types with GraphQLObjectType
+ *
+ * for built-in types you have GraphQLString etc
+ * http://graphql.org/graphql-js/type/#scalars
+ * for your own types just use the object returned by GraphQLObjectType
+ *
+ * more on how to fill custom object types
+ * http://graphql.org/graphql-js/type/#graphqlobjecttype
+ */
+const queryType = new GraphQLObjectType({
+    name: "Query",
+    fields: {
+        hello: {
+            type: GraphQLString,
+            args: {},
+            /**
+             * I assume they use the one with same name from root
+             * when you use buildSchema
+             */
+            resolve: () => {
+                return "Hello World";
+            }
+        }
+    }
+});
+
+/**
+ * you can add mutations in a similar way
+ * GraphQLSchema({query, mutation})
+ * http://graphql.org/graphql-js/type/#graphqlschema
+ */
+const dynamicSchema = new GraphQLSchema({query: queryType});
 
 /**
  * graphql-js is some middleware
@@ -92,9 +186,22 @@ const root = {
  * this graphql middleware will look for a "query" field
  * in the json you send (payload)
  */
+
+/* app.use("/graphql", graphqlHTTP({ */
+/*     schema: schema, */
+/*     rootValue: root, */
+/*     graphiql: true */
+/* })); */
+
+
+/**
+ * you can change the context (e.g. to add a db)
+ * the function call is
+ * graphqlHTTP({schema, graphiql, rootValue,
+ *   context, pretty, formatError, validationRules})
+ */
 app.use("/graphql", graphqlHTTP({
-    schema: schema,
-    rootValue: root,
+    schema: dynamicSchema,
     graphiql: true
 }));
 
