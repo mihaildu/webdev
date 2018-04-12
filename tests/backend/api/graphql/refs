@@ -6,6 +6,9 @@ http://graphql.org/
 
 # GraphQL = graph query language
 # it's just the standard for how to write the query/select what you want
+# since graph ql also specifies how to interact with that one endpoint
+# there are several packages/implementations for it (like graphql-js and
+# apollo-server for javascript)
 
 # official docs
 http://graphql.org/learn/
@@ -21,9 +24,14 @@ https://www.howtographql.com/react-apollo/0-introduction/
 # getting started (javascript)
 http://graphql.org/graphql-js/
 
+# options for graphql on the backend
+graphql.js (basic) - http://graphql.org/graphql-js/
+express-graphql - http://graphql.org/graphql-js/running-an-express-graphql-server/
+apollo-server - https://www.apollographql.com/docs/apollo-server/
+
 # graphql + express
 npm install express express-graphql graphql
-app.js
+app-express.js
 
 # once it's set up, you can send graphql requests to that api via POST
 # (why did we use only a middleware then??)
@@ -81,6 +89,32 @@ curl -XPOST \
 
 # graphql + apollo-server
 npm install apollo-server-express body-parser express graphql graphql-tools
+https://www.apollographql.com/docs/apollo-server/
 
 # apparently you only need apollo-server-[variant]
 # variant can be express, koa, hapi etc
+
+# apollo engine is this tool that allows you to see meta info about your apollo server
+# like performance tracing, caching???, error tracking etc
+https://www.apollographql.com/docs/engine/setup-node.html
+
+# you generate a token for your apollo-server, then see this info in the web panel/ui
+https://engine.apollographql.com/login
+
+# I guess apollo engine works as a service in the middle, so the queries and results
+# will go there first
+
+# you need to install apollo-engine package
+npm install apollo-engine --save
+
+# on the client side you can do custom POST/GET messages to interact with
+# GraphQL backend or use a GraphQL client like
+Relay - https://facebook.github.io/relay/
+Apollo Client - https://www.apollographql.com/client/
+
+# you usually use apollo client with a view framework like React
+# apollo client installation - easier to use with apollo boost
+npm install apollo-boost react-apollo graphql-tag graphql --save
+
+# example of react + apollo
+src/index.js

@@ -13,6 +13,15 @@
 const express = require("express");
 const app = express();
 
+/**
+ * use cors to make it work on localhost
+ * so this actually works...
+ * you can also use it for specific routes
+ * https://www.npmjs.com/package/cors
+ */
+const cors = require("cors");
+app.use(cors());
+
 const bodyParser = require("body-parser");
 
 const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
@@ -91,7 +100,11 @@ app.use(
             context: {
                 ip: req.ip
             },
-            // you can enable tracing & cache control
+            /**
+             * you can enable tracing & cache control
+             * both of these are for apollo engine only
+             * they will get removed when sent back to client
+             */
             tracing: true,
             cacheControl: true
         };
