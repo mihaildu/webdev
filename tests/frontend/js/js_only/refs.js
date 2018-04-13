@@ -14,8 +14,8 @@ var test9_global_var3;
 main();
 
 function main(){
-    // TODO random color
-    //console.log("#" + Math.random().toString(16));
+    test39_random_color();
+    //test38_filter();
     //test37_str_int();
     //test36_saving_this();
     //test35_scope_closures();
@@ -61,6 +61,37 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test39_random_color() {
+    /**
+     * ways to generate random color strings for css
+     * example of css color string
+     * #f0f8ff
+     */
+
+    /**
+     * first solution
+     *
+     * Math.random() returns something like 0.1514659001777845
+     * the precision seems random too (maybe trailing 0s are ignored)
+     * so Math.random() * 1000000 will give 6 digits before comma
+     * but when we convert to base 16, we get less digit
+     * so we use 16777215 instead - TODO check this number is ok
+     */
+    console.log(Math.floor(Math.random() * 16777215).toString(16));
+}
+
+function test38_filter() {
+    /**
+     * filter an array based on some validation
+     */
+    const arr = [-5, 2, -1, 0, 6];
+    const narr = arr.filter(number => number > 0);
+    // only numbers > 0
+    console.log(narr);
+    // original array stays the same
+    console.log(arr);
 }
 
 function test37_str_int(){
@@ -1914,6 +1945,10 @@ function test4_arrays(){
     // you can also add multiple elements
     marr.unshift(-1, -2);
     console.log(marr);
+
+    // remove specific element from array
+    let arr = [1, 2];
+    arr.splice(arr.indexOf(2), 1);
 }
 
 // wrapper for factorial
