@@ -39,6 +39,19 @@ const peopleData = [
     }
 ];
 
+const dogData = [
+    {
+        id: "dlsakdjasda",
+        name: "Tim",
+        breed: "Chihuahua"
+    },
+    {
+        id: "ldksjada",
+        name: "Tom",
+        breed: "Pitbull"
+    }
+];
+
 /**
  * types for the schema
  * the last type (schema) is optional
@@ -46,14 +59,24 @@ const peopleData = [
 const typeDefs = [`
     type Query {
         hello: String,
-        people: [Human]
+        people: [Human],
+        dogs(breed: String): [Dog],
     }
     type Human {
         name: String,
         age: Int
     }
+    type Dog {
+        id: ID!,
+        name: String,
+        breed: String
+    }
+    type Mutation {
+        addDog(name: String!, breed: String): Dog!
+    }
     schema {
-        query: Query
+        query: Query,
+        mutation: Mutation
     }
 `];
 
@@ -74,6 +97,24 @@ const resolvers = {
         },
         people(root, args, context) {
             return peopleData;
+        },
+        dogs(root, {breed}, context) {
+            if (typeof(breed) == "undefined")
+                return dogData;
+            return dogData.filter(dog => dog.breed == breed);
+        }
+    },
+    Mutation: {
+        addDog(root, {name, breed}, context) {
+            const newDog = {id: Math.random().toString(), name, breed};
+            dogData.forEach(dog => {
+                console.log(dog.name);
+                if (dog.name === name) {
+                    throw new Error("Dog already exists");
+                }
+            });
+            dogData.push(newDog);
+            return newDog;
         }
     }
 };

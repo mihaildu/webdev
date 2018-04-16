@@ -70,6 +70,31 @@ http://localhost:4000/graphql
   }
 }
 
+# TODO document variables on the frontend in some tests
+# e.g. make a graphiql-refs file or something
+# for now here
+# you can also use (local) variables in your queries
+# like define the query somewhere and the call it with
+# some variables
+# notice that you need to use the word "query"
+query HeroNameAndFriends($episode: Episode) {
+  hero(episode: $episode) {
+    name
+    friends {
+      name
+    }
+  }
+}
+
+# $episode is a variable, to pass something you need to
+# specify the variables field (in graphiql you can edit the variables section)
+{
+  "episode": "JEDI"
+}
+
+# in a POST you need to set the variables variable/data
+# example with setting variables in apollo-client in src/index.js
+
 # I guess you can nest these as much as you like
 # you can also be more explicit that it's a query
 query {
