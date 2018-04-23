@@ -11,10 +11,17 @@ var test9_global_var = 10;
 test9_global_var2 = 20;
 var test9_global_var3;
 
+let lodash = require("lodash");
+let objFilter = require("obj-filter");
+let diff = require("deep-diff");
+
 main();
 
+
+
 function main(){
-    test39_random_color();
+    test40_apply_pattern();
+    //test39_random_color();
     //test38_filter();
     //test37_str_int();
     //test36_saving_this();
@@ -61,6 +68,86 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test40_apply_pattern() {
+    /**
+     * apply values from one 'values' object (1) to another
+     * 'empty' object (2) only if keys exists in object (2)
+     */
+    const emptyObj = {
+        a: 0,
+        b: 0,
+        c: {
+            d: 0,
+            e: 0
+        },
+        f: {
+            g: 0,
+            h: {
+                i: 0
+            }
+        }
+    };
+    const values = {
+        a: 10,
+        c: {
+            d: 100
+        },
+        f: {
+            h: {
+                i: 101,
+                y: 200
+            }
+        },
+        x: 1001
+    };
+    const expectedResult = {
+        a: 10,
+        b: 0,
+        c: {
+            d: 100,
+            e: 0
+        },
+        f: {
+            g: 0,
+            h: {
+                i: 101
+            }
+        }
+    };
+
+    function applyObj(obj1, obj2) {
+        const obj3 = { ...obj1 };
+        if (typeof obj2 !== "object") {
+            return obj3;
+        }
+        Object.keys(obj3).forEach(key => {
+            if (key in obj2) {
+                if (typeof obj2[key] === "object") {
+                    obj3[key] = applyObj(obj3[key], obj2[key]);
+                } else {
+                    obj3[key] = obj2[key];
+                }
+            }
+        });
+        return obj3;
+    }
+
+    /* applyObj works */
+    const res1 = applyObj(emptyObj, values);
+    console.log(diff(res1, expectedResult));
+
+    /* obj-filter works as well */
+    const filteredObj = objFilter(emptyObj, values);
+    const res2 = objFilter.merge(emptyObj, filteredObj);
+    console.log(diff(res2, expectedResult));
+
+    /* lodash merge doesn't work */
+    const res3 = lodash.merge(emptyObj, values);
+    console.log(diff(res3, expectedResult));
+
+    //console.log(JSON.stringify(res, null, 2));
 }
 
 function test39_random_color() {
