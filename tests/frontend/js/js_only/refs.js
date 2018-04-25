@@ -20,7 +20,8 @@ main();
 
 
 function main(){
-    test40_apply_pattern();
+    test41_promises();
+    //test40_apply_pattern();
     //test39_random_color();
     //test38_filter();
     //test37_str_int();
@@ -68,6 +69,166 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test41_promises() {
+    /**
+     * Promises in javascript
+     *
+     * apparently built-in
+     * seems like an easier way to wait for async functions to finish
+     */
+    //test41_promises1();
+    //test41_promises2();
+    //test41_promises3();
+    test41_promises4();
+}
+
+function test41_promises4() {
+    /**
+     * maybe the functions return promises already
+     * then code is even easier to read
+     */
+    function fcn1() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("fcn1 was called");
+                resolve();
+            }, 1000);
+        });
+    }
+    function fcn2() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("fcn2 was called");
+                resolve();
+            }, 1000);
+        });
+    }
+    function fcn3() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("fcn3 was called");
+                resolve();
+            }, 1000);
+        });
+    }
+    fcn1().then(() => {
+        return fcn2();
+    }).then(() => {
+        return fcn3();
+    }).then(() => {
+        console.log("done");
+    });
+}
+
+function test41_promises3() {
+    /**
+     * making the code a little clearer
+     * let's say we have a couple of functions fcn1, fcn2, fcn3
+     * all async and want them to run in order
+     */
+    function fcn1(callback) {
+        setTimeout(() => {
+            console.log("fcn1 was called");
+            callback();
+        }, 1000);
+    }
+    function fcn2(callback) {
+        setTimeout(() => {
+            console.log("fcn2 was called");
+            callback();
+        }, 1000);
+    }
+    function fcn3(callback) {
+        setTimeout(() => {
+            console.log("fcn3 was called");
+            callback();
+        }, 1000);
+    }
+    new Promise((resolve, reject) => {
+        /* maybe wrap resolve to treat errors */
+        fcn1(resolve);
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            fcn2(resolve);
+        });
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            fcn3(resolve);
+        });
+    }).then(() => {
+        console.log("done");
+    });
+}
+
+function test41_promises2() {
+    /* chaining some promises */
+    let promise2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log("this will get called first");
+            resolve();
+        }, 1000);
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("this will get called second");
+                resolve();
+            }, 1000);
+        });
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("this will get called third");
+                resolve();
+            }, 1000);
+        });
+    }).then(() => {console.log("this will get called fourth");});
+}
+
+function test41_promises1() {
+    let promise1 = new Promise((resolve, reject) => {
+        /**
+         * this will run straight away
+         */
+        console.log("hello");
+        /**
+         * do something async in here
+         * when the async op is finished - call resolve()
+         */
+        function myThrow() {
+            throw new Error("some error");
+        }
+        setTimeout(resolve, 1000, "foo");
+        //setTimeout(reject, 1000, "foo");
+        //setTimeout(myThrow, 1000, "foo");
+    }).then((successResult) => {
+        /**
+         * this will run after the promise finished
+         * if resolve() ends up being called
+         */
+        console.log("success: ", successResult);
+    }, (failureError) => {
+        /**
+         * this will run after the promise finished
+         * if reject() ends up being called
+         */
+        console.log("failure: ", failureError);
+    });
+    /**
+     * this will run straight away and show Promise { < pending > }
+     * other possible values: < fulfilled >, < rejected >
+     */
+    console.log(promise1);
+
+    /* instead of using 2 handlers, you can use catch */
+    new Promise((resolve, reject) => {
+        setTimeout(reject, 1000, "bad");
+    }).then(arg => {
+        console.log("success: ", arg);
+    }).catch(arg => {
+        console.log("failure: ", arg);
+    });
 }
 
 function test40_apply_pattern() {
@@ -136,16 +297,18 @@ function test40_apply_pattern() {
 
     /* applyObj works */
     const res1 = applyObj(emptyObj, values);
-    console.log(diff(res1, expectedResult));
+    //console.log(diff(res1, expectedResult));
 
     /* obj-filter works as well */
     const filteredObj = objFilter(emptyObj, values);
     const res2 = objFilter.merge(emptyObj, filteredObj);
-    console.log(diff(res2, expectedResult));
+    //console.log(diff(res2, expectedResult));
 
     /* lodash merge doesn't work */
     const res3 = lodash.merge(emptyObj, values);
-    console.log(diff(res3, expectedResult));
+    //const res4 = {...emptyObj, ...values};
+    console.log(res3);
+    //console.log(diff(res3, expectedResult));
 
     //console.log(JSON.stringify(res, null, 2));
 }
