@@ -1,0 +1,19 @@
+# official page
+https://facebook.github.io/jest/
+
+# installation
+npm install --save-dev jest
+# or yarn
+yarn add --dev jest
+
+# jest will look for files like *.test.js and run them
+# it will also use some jest specific stuff, so you can use
+# new syntax in those files
+test("description", (args) => {expect(fcn(args)).toBe(expected)});
+
+# examples in refs.test.js
+
+# then just run jest
+./node_modules/.bin/jest
+
+# or add it to "scripts": {"test": "jest"} to avoide node_modules/.bin
