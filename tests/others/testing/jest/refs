@@ -17,3 +17,51 @@ test("description", (args) => {expect(fcn(args)).toBe(expected)});
 ./node_modules/.bin/jest
 
 # or add it to "scripts": {"test": "jest"} to avoide node_modules/.bin
+
+# so jest is built on some smaller packages you can use directly like
+
+# checks changes in files since last git
+jest-changed-files
+
+# shows a nice diff e.g. between objects
+jest-diff
+
+# getting doc blocks from a chunk of code (string)
+jest-docblock
+
+# alternative to typeof(); returns null for null
+jest-get-type
+
+# validating config submitted by user?
+jest-validate
+
+# some workpool thing
+jest-worker
+
+# print javascript values in a nice format
+pretty-format
+
+# you can configure jest in package.json/jest.config.js/--config
+https://facebook.github.io/jest/docs/en/configuration.html
+
+# api
+https://facebook.github.io/jest/docs/en/api.html
+
+# each file is a test suite
+# test suites are tested in parallel
+# jest will run files like
+*.test.js
+*.spec.js
+__tests__/*
+
+# to run an individual suite specify the name
+npm run test refs.test.js
+
+# apparently it does some pattern matching
+# only()/skip() is suite/file level
+
+# you can also generate tests coverage
+jest --coverage
+
+# TODO continue here
+https://facebook.github.io/jest/docs/en/snapshot-testing.html
