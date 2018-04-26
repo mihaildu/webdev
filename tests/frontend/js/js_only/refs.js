@@ -20,7 +20,8 @@ main();
 
 
 function main(){
-    test41_promises();
+    test42_async();
+    //test41_promises();
     //test40_apply_pattern();
     //test39_random_color();
     //test38_filter();
@@ -69,6 +70,166 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test42_async() {
+    /**
+     * it seems we can use await for generic async functions
+     * e.g. instead of then() for promises
+     * I guess this only works with promises anyway
+     * and it's meant to simplify the code (instead of doing then() etc)
+     */
+    //test42_async1();
+    //test42_async2();
+    test42_async3();
+}
+
+async function test42_async3() {
+    /* more generic async functions */
+    function fcn1(callback) {
+        setTimeout(() => {
+            console.log("fcn1 was called");
+            callback();
+        }, 1000);
+    }
+    function fcn2(callback) {
+        setTimeout(() => {
+            console.log("fcn2 was called");
+            callback();
+        }, 1000);
+    }
+    function fcn3(callback) {
+        setTimeout(() => {
+            console.log("fcn3 was called");
+            callback();
+        }, 1000);
+    }
+
+    /**
+     * to use await on these - first wrap in promises
+     */
+    function promiseWrap(fcn) {
+        /**
+         * assuming fcn receives one argument - callback
+         * a more generic implementation could be done
+         */
+        return new Promise((resolve, reject) => {
+            fcn((err) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve();
+            });
+        });
+    }
+
+    /**
+     * then we can just wait for them
+     * we don't need a callback now since the code will resume
+     * execution when the promise finishes
+     *
+     * just to make it clear, this doesn't block execution
+     * it does some eventemitter stuff behind the scenes
+     * so test42_async3 returns and it keeps running code straight away
+     */
+    await promiseWrap(fcn1);
+    await promiseWrap(fcn2);
+    await promiseWrap(fcn3);
+    console.log("done");
+
+    /**
+     * we can also wrap it on the fly like so (if args are not the same)
+     */
+    function fcn4(str, callback) {
+        setTimeout(() => {
+            console.log("fcn4 was called with", str);
+            callback();
+        }, 1000);
+    }
+    const res = await new Promise(resolve => {
+        /**
+         * in this case I guess you don't need both resolve
+         * and reject, since you don't use then()
+         */
+        fcn4("my string", (err) => {
+            if (err) {
+                /**
+                 * resolve doesn't return...
+                 * but you can do "return resolve" to avoid doing return
+                 * everything after resolve I guess
+                 */
+                resolve("error");
+                return;
+                // return resolve("error");
+            }
+            resolve("success");
+            // return resolve("success");
+        });
+    });
+    // res = "success"
+    console.log(res);
+}
+
+async function test42_async2() {
+    /* same promise problem, with async */
+    function fcn1() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("fcn1 was called");
+                resolve();
+            }, 1000);
+        });
+    }
+    function fcn2() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("fcn2 was called");
+                resolve();
+            }, 1000);
+        });
+    }
+    function fcn3() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("fcn3 was called");
+                resolve();
+            }, 1000);
+        });
+    }
+    /* simpler code */
+    await fcn1();
+    await fcn2();
+    await fcn3();
+    console.log("done");
+}
+
+function test42_async1() {
+    function fcn() {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log("fcn was executed");
+                resolve("message");
+            }, 1000);
+        });
+    }
+    /**
+     * we can only use await in async functions
+     */
+    async function fcn2() {
+        /**
+         * I assume this is like fcn().then()
+         * everything that follows await will be placed in then() block
+         * works for functions that don't return promises?
+         * for promises the function will return whatever is passed to resolve
+         */
+        const res = await fcn();
+        /* this will run after promise */
+        console.log("code after await");
+        console.log(res);
+    }
+    fcn2();
+    /* this will run before promise */
+    console.log("code before await");
 }
 
 function test41_promises() {
