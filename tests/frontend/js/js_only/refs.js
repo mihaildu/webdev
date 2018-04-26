@@ -14,13 +14,13 @@ var test9_global_var3;
 let lodash = require("lodash");
 let objFilter = require("obj-filter");
 let diff = require("deep-diff");
+let jestDiff = require("jest-diff");
 
 main();
 
-
-
 function main(){
-    test42_async();
+    test43_jest_diff();
+    //test42_async();
     //test41_promises();
     //test40_apply_pattern();
     //test39_random_color();
@@ -70,6 +70,27 @@ function main(){
     //test3_fac(5);
     //test2_sum(10, 2);
     //test1();
+}
+
+function test43_jest_diff() {
+    const obj1 = {
+        a: 10,
+        b: {
+            c: 100,
+            d: {
+                e: 2
+            }
+        }
+    };
+    const obj2 = {
+        a: 10,
+        h: 12,
+        b: {
+            d: 11
+        }
+    };
+
+    console.log(jestDiff(obj1, obj2));
 }
 
 function test42_async() {

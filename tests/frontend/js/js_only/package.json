@@ -5,6 +5,7 @@
   "main": "test1.js",
   "dependencies": {
     "deep-diff": "^1.0.0",
+    "jest-diff": "^22.4.3",
     "lodash": "^4.17.5",
     "obj-filter": "^1.3.1",
     "underscore": "^1.8.3"
