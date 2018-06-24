@@ -24,76 +24,265 @@ import Joi from "joi";
 main();
 
 function main() {
-    test10_joi();
-    //test9_humps();
-    //test8_import_vars();
-    //test7_componse();
-    //test6();
-    //test5_iterators();
-    //test4();
-    //test3();
-    //test2();
-    //test1();
+  test12_joi_or();
+  //test11_joi_when();
+  //test10_joi();
+  //test9_humps();
+  //test8_import_vars();
+  //test7_componse();
+  //test6();
+  //test5_iterators();
+  //test4();
+  //test3();
+  //test2();
+  //test1();
+}
+
+function test12_joi1() {
+  const manuscript = {
+    "type": "manuscript",
+    "files": [
+      {
+        "url": "uploads/20223827-e6e1-486a-a4a0-ca82bf959cc3/0f8a31a4a4e2b79a29b9592153680f14.pdf",
+        "name": "Deliveroo___Status___Order_5620.pdf",
+        "type": "MANUSCRIPT_SOURCE"
+      }
+    ],
+    "title": "lkdla",
+    "subjectAreas": [
+      "cancer-biology"
+    ],
+    "manuscriptType":"research-article",
+    "submissionMeta":
+    {
+      "stage": "QA",
+      "author":
+      {
+        "email": "elife@mailinator.com",
+        "lastName": "User",
+        "firstName": "",
+        "institution": "University of eLife"
+      },
+      "createdBy": "59afaaee-fdfa-4be2-b35b-fbefad46b74d",
+      "discussion": "",
+      "coverLetter": "<p>ddddd</p>",
+      "cosubmission": false,
+      "correspondent":
+      {
+        "email": "",
+        "lastName": "",
+        "firstName": "",
+        "institution": ""
+      },
+      "cosubmissionId": "",
+      "previousArticle": "",
+      "hasCorrespondent": false,
+      "cosubmissionTitle": "",
+      "discussedPreviously": false,
+      "consideredPreviously": false
+    },
+    "opposedReviewers": [],
+    "suggestedReviewers": [
+      {
+        "name": "odijsaodija",
+        "email": "oijdsaodisja@mail.com"
+      },
+      {
+        "name": "osijaoidjad",
+        "email": "oijsoidja@mail.com"
+      },
+      {
+        "name": "oidjoaidjsad",
+        "email": "oijoifjs@mail.com"
+      }],
+    "noConflictOfInterest": true,
+    "opposedSeniorEditors": [],
+    "suggestedSeniorEditors": ["kajdlkajdal", "oijsoaijda"],
+    "opposedReviewingEditors": [],
+    "suggestedReviewingEditors": ["odisjad", "oijsoidaj@mail.com"]
+  }
+}
+
+function test12_joi_or() {
+  /**
+   * testing or in joi
+   * when a is true, we need either b or c
+   * when a is false we don't care
+   */
+  const tests = [
+    {
+      a: true,
+      b: "lol1",
+      c: "lol2"
+    },
+    {
+      a: true,
+      b: "lol1"
+    },
+    {
+      a: true,
+      c: "lol2"
+    },
+    {
+      a: false,
+      b: "lol1",
+      c: "lol2"
+    },
+    {
+      a: false
+    },
+    {
+      a: false,
+      b: "lol1"
+    },
+    {
+      a: false,
+      c: "lol2"
+    },
+    /* { */
+    /*   a: true */
+    /* } */
+  ];
+
+  const schema = Joi.object().keys({
+    a: Joi.boolean(),
+    b: Joi.string(),
+    c: Joi.string()
+  }).or("b", "c");
+
+  /* const schema7 = Joi.object().keys({ */
+  /*   a: Joi.boolean(), */
+  /*   b: Joi.string(), */
+  /*   c: Joi.string() */
+  /* }).when("a", { */
+  /*   is: true, */
+  /*   then: Joi.or("b", "c") */
+  /* }); */
+
+  const schema2 = Joi.alternatives().try(
+    Joi.object().keys({
+      a: Joi.boolean().required(),
+      b: Joi.string().when("a", {
+        is: true,
+        then: Joi.required()
+      }),
+      c: Joi.string()
+    }),
+    Joi.object().keys({
+      a: Joi.boolean().required(),
+      b: Joi.string(),
+      c: Joi.string().when("a", {
+        is: true,
+        then: Joi.required()
+      })
+    })
+  );
+
+  test11_test_schema(tests, schema);
+  return;
+
+  /* extending schema 2 */
+  const schema3 = schema2.keys({
+    d: Joi.number().required()
+  });
+  const {error: err10} = Joi.validate({d: 100}, schema3);
+  console.log(err10);
+  return;
+}
+
+function test11_test_schema(tests, schema) {
+  tests.forEach((test, index) => {
+    const {error} = Joi.validate(test, schema);
+    console.log("error " + index, error);
+  })
+}
+
+function test11_joi_when() {
+  /* testing when in joi */
+  const schema = {
+    a: Joi.boolean(),
+    b: Joi.when("a", {
+      is: true,
+      then: Joi.string().required()
+      /* I guess optional is implicit in Joi */
+      //otherwise: Joi.optional()
+    })
+  };
+  const {error, value} = Joi.validate({a: true, b: "lol"}, schema);
+  console.log(error);
 }
 
 function test10_joi() {
-    /**
-     * Joi is this object scheme/key validation
-     * https://github.com/hapijs/joi
-     *
-     * To make it work with webpack, add this to webpack.config
-     * node: {
-     *   net: "empty",
-     * }
-     */
+  /**
+   * Joi is this object scheme/key validation
+   * https://github.com/hapijs/joi
+   *
+   * To make it work with webpack, add this to webpack.config
+   * node: {
+   *   net: "empty",
+   * }
+   */
 
-    /* first, define a schema */
-    const schema = {
-        username: Joi.string()
-    };
+  /* first, define a schema */
+  const schema = {
+    username: Joi.string()
+  };
 
-    /**
-     * then validate something against it
-     * the error is null if input ok
-     * otherwise it's an error object
-     */
-    const {error, value} = Joi.validate({username: "User1"}, schema);
-    console.log(error);
-    console.log(Joi.validate({username: 100}, schema).error);
+  /**
+   * then validate something against it
+   * the error is null if input ok
+   * otherwise it's an error object
+   */
+  const {error, value} = Joi.validate({username: "User1"}, schema);
+  console.log(error);
+  console.log(Joi.validate({username: 100}, schema).error);
 
-    const schema2 = {
-        username: Joi.string(),
-        password: Joi.string(),
-        age: Joi.number(),
-        child: Joi.object()
-    };
-    const obj2 = {
-        username: "user2",
-        password: "user2",
-        age: 10,
-        child: {}
-    };
-    console.log(Joi.validate(obj2, schema2).error);
+  const schema2 = {
+    username: Joi.string(),
+    password: Joi.string(),
+    age: Joi.number(),
+    child: Joi.object()
+  };
+  const obj2 = {
+    username: "user2",
+    password: "user2",
+    age: 10,
+    child: {}
+  };
+  console.log(Joi.validate(obj2, schema2).error);
 
-    /**
-     * however, this still passes is prop is not defined
-     * to force the existence of props use .required()
-     */
-    const schema3 = Joi.object().keys({
-        username: Joi.string().required(),
-        password: Joi.string().required()
-    });
-    const obj3 = {
-        username: "username3",
-    }
-    console.log(Joi.validate(obj3, schema3).error);
+  /**
+   * however, this still passes is prop is not defined
+   * to force the existence of props use .required()
+   */
+  const schema3 = Joi.object().keys({
+    username: Joi.string().required(),
+    password: Joi.string().required()
+  });
+  const obj3 = {
+    username: "username3",
+  }
+  console.log(Joi.validate(obj3, schema3).error);
 
-    const obj4 = {
-        username: "user4",
-        password: "pss4",
-        other: "extra"
-    }
-    console.log(Joi.validate(obj4, schema3).error);
+  const obj4 = {
+    username: "user4",
+    password: "pss4",
+    other: "extra"
+  }
+  console.log(Joi.validate(obj4, schema3).error);
+
+  /* validating arrays */
+  const schema4 = Joi.array().items(Joi.string()).required();
+  const obj5 = ["sda", "dsada"];
+  //const obj5 = ["test", ""];
+  //const obj5 = undefined;
+  console.log(Joi.validate(obj5, schema4).error);
+
+  /**
+   * to force a value to be in a list use valid(value 1, value 2, ...)
+   */
+  const schema5 = Joi.string().valid("value 1", "value 2");
+  console.log(Joi.validate("value 1", schema5).error);
 }
 
 function test9_humps() {
@@ -151,12 +340,12 @@ function test5_iterators() {
     var item;
 
     while(true) {
-	item = it2.next();
-	/* last element has value = undefined */
-	if (item.done === true)
-	    break;
-	[key, value] = item.value;
-	console.log(key + ":" + value);
+      item = it2.next();
+      /* last element has value = undefined */
+      if (item.done === true)
+        break;
+      [key, value] = item.value;
+      console.log(key + ":" + value);
     }
 
     /* ...iterator will put all the values in a list */
@@ -190,11 +379,11 @@ function test4() {
     const it1 = map1.entries();
     var item, value, key;
     while(true) {
-	item = it1.next();
-	if (item.done === true)
-	    break;
-	[key, value] = item.value;
-	console.log(key + ":" + value);
+      item = it1.next();
+      if (item.done === true)
+        break;
+      [key, value] = item.value;
+      console.log(key + ":" + value);
     }
 
     /*
@@ -203,11 +392,11 @@ function test4() {
      * */
     const it2 = omap1.entries();
     while(true) {
-	item = it2.next();
-	if (item.done === true)
-	    break;
-	[key, value] = item.value;
-	console.log(key + ":" + value);
+      item = it2.next();
+      if (item.done === true)
+        break;
+      [key, value] = item.value;
+      console.log(key + ":" + value);
     }
 }
 

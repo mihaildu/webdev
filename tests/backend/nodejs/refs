@@ -202,4 +202,5 @@ npm link
 # to "install" a package from the local registry, run this from root dir
 npm link [local-package-name]
 
-
+# removing a linked package (npm link) - from same directory
+npm unlink

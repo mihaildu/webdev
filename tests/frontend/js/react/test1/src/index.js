@@ -31,10 +31,28 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 main();
 
 function main(){
-    //test1();
-    //test2_docs();
-    //test3_styled_components();
-    test4_react_router();
+  test5_random();
+  //test1();
+  //test2_docs();
+  //test3_styled_components();
+  //test4_react_router();
+}
+
+function test5_random() {
+  class MyComp extends React.Component {
+    constructor(props) {
+      console.log(props);
+      super(props);
+    }
+    render() {
+      return <p>Hi</p>;
+    }
+  }
+  const reactComp = <MyComp test={123} />;
+  ReactDOM.render(
+    reactComp,
+    document.getElementById("root")
+  );
 }
 
 function test1(){
@@ -1680,10 +1698,10 @@ function test3_styled_components(){
      * */
 
     /* basics */
-    //styled_components_basics();
+    styled_components_basics();
 
     /* advanced */
-    styled_components_advanced();
+    //styled_components_advanced();
 }
 
 function styled_components_advanced() {
@@ -1995,6 +2013,29 @@ function styled_components_basics() {
     );
 
     /* styled components also work with React Native */
+
+    /* accessing stuff in original component */
+    class MyComp7 extends React.Component {
+        constructor() {
+            super();
+            this.myFunc = this.myFunc.bind(this);
+        }
+        myFunc() {
+            console.log("hello from my func");
+        }
+        render() {
+            return<p className={this.props.className}>Hello from my original comp</p>;
+        }
+    }
+    const StyledComp7 = styled(MyComp7)`
+        background-color: blue;
+        color: red;
+        font-weight: bold;
+    `;
+    ReactDOM.render(
+        <StyledComp7 innerRef={node => node.myFunc()} >Test 2</StyledComp7>,
+        document.getElementById("root")
+    );
 }
 
 function test4_react_router() {
