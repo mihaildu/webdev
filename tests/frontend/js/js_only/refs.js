@@ -22,7 +22,8 @@ main();
 
 function main(){
 
-  // test49_colors();
+  //test50_case_sensitive();
+  //test49_colors();
   //test48_shuffle([1, 4, 8, 10]);
   //test47_deep_clone();
   //test46_deep_equal();
@@ -79,6 +80,19 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test50_case_sensitive() {
+  /**
+   * javascript is case sensitive
+   * the following are 2 diff objects
+   */
+  const readonly = {
+    a: 100
+  };
+  const readOnly = 200;
+  console.log(readonly);
+  console.log(readOnly);
 }
 
 function test49_colors() {
