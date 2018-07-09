@@ -204,3 +204,8 @@ npm link [local-package-name]
 
 # removing a linked package (npm link) - from same directory
 npm unlink
+
+# to see all the default values from npm config
+# first, change editor
+export EDITOR=emacs
+npm config edit
