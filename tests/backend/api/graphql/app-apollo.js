@@ -27,6 +27,21 @@ const bodyParser = require("body-parser");
 const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
 const { makeExecutableSchema } = require("graphql-tools");
 
+// subscriptions
+const { createServer } = require('http');
+const { SubscriptionServer } = require('subscriptions-transport-ws');
+const { execute, subscribe } = require('graphql');
+
+const { PubSub } = require("graphql-subscriptions");
+const pubsub = new PubSub();
+
+const NEW_SERVER_EVENT = 'newServerEvent';
+let cnt = 0;
+setInterval(() => {
+  pubsub.publish(NEW_SERVER_EVENT, { newServerEvent: cnt++ });
+  console.log('new event published');
+}, 30000);
+
 /* some data */
 const peopleData = [
     {
@@ -74,10 +89,10 @@ const typeDefs = [`
     type Mutation {
         addDog(name: String!, breed: String): Dog!
     }
-    schema {
-        query: Query,
-        mutation: Mutation
+    type Subscription {
+        newServerEvent: Int!
     }
+
 `];
 
 /**
@@ -88,35 +103,44 @@ const typeDefs = [`
  * context = initialized on connection
  */
 const resolvers = {
-    Query: {
-        hello(root, args, context) {
-            console.log(root);
-            console.log(args);
-            console.log(context);
-            return "world";
-        },
-        people(root, args, context) {
-            return peopleData;
-        },
-        dogs(root, {breed}, context) {
-            if (typeof(breed) == "undefined")
-                return dogData;
-            return dogData.filter(dog => dog.breed == breed);
-        }
+  Query: {
+    hello(root, args, context) {
+      console.log(root);
+      console.log(args);
+      console.log(context);
+      return "world";
     },
-    Mutation: {
-        addDog(root, {name, breed}, context) {
-            const newDog = {id: Math.random().toString(), name, breed};
-            dogData.forEach(dog => {
-                console.log(dog.name);
-                if (dog.name === name) {
-                    throw new Error("Dog already exists");
-                }
-            });
-            dogData.push(newDog);
-            return newDog;
-        }
+    people(root, args, context) {
+      return peopleData;
+    },
+    dogs(root, {breed}, context) {
+      if (typeof(breed) == "undefined")
+        return dogData;
+      return dogData.filter(dog => dog.breed == breed);
     }
+  },
+  Mutation: {
+    addDog(root, {name, breed}, context) {
+      const newDog = {id: Math.random().toString(), name, breed};
+      dogData.forEach(dog => {
+        console.log(dog.name);
+        if (dog.name === name) {
+          throw new Error("Dog already exists");
+        }
+      });
+      dogData.push(newDog);
+      return newDog;
+    }
+  },
+  Subscription: {
+    newServerEvent: {
+      subscribe: () => {
+        console.log("subscribed");
+        //return 10;
+        return pubsub.asyncIterator(NEW_SERVER_EVENT);
+      }
+    }
+  }
 };
 
 /**
@@ -154,6 +178,43 @@ app.use(
 
 // graphiql
 app.use("/graphiql", graphiqlExpress({endpointURL: "/graphql"}));
+
+const WS_PORT = 5000;
+const websocketServer = createServer((req, res) => {
+  res.writeHead(404);
+  res.end();
+});
+
+websocketServer.listen(WS_PORT, () => {
+  console.log("WebSocket Server running on port 5000");
+});
+
+const subscriptionServer = SubscriptionServer.create(
+  {
+    schema,
+    execute,
+    subscribe
+  },
+  {
+    server: websocketServer,
+    path: '/subscriptions'
+  }
+);
+
+// wrap app for web sockets
+//const ws = createServer(app);
+
+/* ws.listen(4000, () => { */
+/*   console.log("Listening on port 4000"); */
+/*   new SubscriptionServer({ */
+/*     execute, */
+/*     subscribe, */
+/*     schema, */
+/*   }, { */
+/*     server: ws, */
+/*     path: '/subscriptions' */
+/*   }); */
+/* }); */
 
 // start express server
 app.listen(4000, () => console.log("Listening on port 4000"));
