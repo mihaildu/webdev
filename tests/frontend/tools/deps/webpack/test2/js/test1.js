@@ -21,10 +21,16 @@ import { decamelize } from "humps";
 import Joi from "joi";
 //const Joi = require("joi");
 
+import { fileFn } from "./export2";
+
+import fcn4 from "./export3";
+
 main();
 
 function main() {
-  test12_joi_or();
+  test14_import2();
+  //test13_export();
+  //test12_joi_or();
   //test11_joi_when();
   //test10_joi();
   //test9_humps();
@@ -36,6 +42,15 @@ function main() {
   //test3();
   //test2();
   //test1();
+}
+
+function test14_import2() {
+  fcn4.val = 20;
+  console.log(fcn4);
+}
+
+function test13_export() {
+  fileFn();
 }
 
 function test12_joi1() {

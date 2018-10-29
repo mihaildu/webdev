@@ -1,0 +1,24 @@
+1. graphql - done
+2. graphql + backend implementation
+  2.1 graphql-js - done
+  2.2 apollo-server - done
+  2.3 graphql + node.js - tutorial - go through it fast - kinda done
+
+3. graphql + frontend implementation
+  3.1 apollo-client ------
+  3.2 apollo-client + react - maybe look over this from howtographql
+
+3. go through howtographql tutorial??
+   * rewatch videos (own time)
+   * graphql + node.js tutorial - go
+     https://www.howtographql.com/graphql-js/0-introduction/
+     * it uses apollo server anyway
+   * apollo
+     * server - done
+     https://www.apollographql.com/docs/apollo-server/
+     https://github.com/apollographql/apollo-server
+     * client - 
+     * engine - not sure if I need this
+   * react + apollo tutorial (frontend)
+     https://www.howtographql.com/react-apollo/0-introduction/
+4. more on apollo?

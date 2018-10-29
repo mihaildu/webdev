@@ -17,6 +17,7 @@ let diff = require("deep-diff");
 let jestDiff = require("jest-diff");
 let uuid = require("uuid");
 let color = require("color");
+let { differenceInCalendarDays } = require("date-fns");
 
 main();
 
@@ -80,6 +81,14 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test51_custom_sort() {
+  /**
+   * sorting array with custom comparator
+   */
+  const lst = [{ value: "v a" }, { value: "b c" }]
+  lst.sort((a, b) => a.value > b.value)
 }
 
 function test50_case_sensitive() {
@@ -2252,6 +2261,11 @@ function test10_date(){
   console.log(d4);
   // this looks nicer
   console.log(d4.toString());
+
+  // to compute the date difference you can use date-fns
+  let oldDate = new Date('2018-10-20T16:10:00.000Z')
+  let currentDate = new Date()
+  console.log(differenceInCalendarDays(currentDate, oldDate))
 }
 
 function test9_math(){

@@ -5,6 +5,7 @@
   "main": "test1.js",
   "dependencies": {
     "color": "^3.0.0",
+    "date-fns": "^1.29.0",
     "deep-diff": "^1.0.0",
     "jest-diff": "^22.4.3",
     "lodash": "^4.17.5",
