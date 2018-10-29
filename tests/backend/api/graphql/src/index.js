@@ -10,7 +10,7 @@ import {
     Mutation
 } from "react-apollo";
 
-/* first, create a client */
+// first, create a client
 const client = new ApolloClient({
     uri: "http://localhost:4000/graphql"
 });
@@ -324,9 +324,9 @@ const AddDogs = () => {
 };
 
 const App5 = () => (
-    <ApolloProvider client={client}>
-      <AddDogs />
-    </ApolloProvider>
+  <ApolloProvider client={client}>
+    <AddDogs />
+  </ApolloProvider>
 );
 
 ReactDOM.render(
