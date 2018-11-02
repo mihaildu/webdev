@@ -22,7 +22,8 @@ let { differenceInCalendarDays } = require("date-fns");
 main();
 
 function main(){
-
+  //test52_memory();
+  //test51_custom_sort();
   //test50_case_sensitive();
   //test49_colors();
   //test48_shuffle([1, 4, 8, 10]);
@@ -81,6 +82,17 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test52_memory() {
+  /**
+   * to check memory usage in node app
+   * https://www.valentinog.com/blog/memory-usage-node-js/
+   * https://nodejs.org/api/process.html#process_process_memoryusage
+   */
+  console.log(process.memoryUsage());
+  // rss is the big one
+  //console.log(process.memoryUsage().rss / 1024 / 1024)
 }
 
 function test51_custom_sort() {

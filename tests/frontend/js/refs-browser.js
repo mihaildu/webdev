@@ -17,6 +17,18 @@ function main(){
     //test1_console();
 }
 
+function test8_current_url() {
+  /**
+   * getting current url
+   * everything in window.location
+   */
+  console.log(location.host);
+  console.log(window.location);
+
+  /* this is the full path (protocol included) */
+  console.log(window.origin);
+}
+
 function test7_write_something(){
     // this just prints something at the end of body
     document.write("Hello from test 7");
