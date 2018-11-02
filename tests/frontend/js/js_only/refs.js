@@ -22,6 +22,11 @@ let { differenceInCalendarDays } = require("date-fns");
 main();
 
 function main(){
+
+  // TODO you can change String.prototype and have functions in
+  // all strings
+  //String.prototype.splice = (test) => console.log(test);
+
   //test52_memory();
   //test51_custom_sort();
   //test50_case_sensitive();
@@ -1187,6 +1192,56 @@ function test30_regex(){
   /*
    * Regular expressions in javascript
    */
+
+  /**
+   * modifiers at the end
+   * /RE/g - g means it doesn't stop after the first match
+   * /RE/i - case insensitive matching
+   * /RE/m - multiline matching
+   */
+
+  /**
+   * special chars
+   *
+   * brackets
+   * [abc] = a OR b OR c
+   * [^abc] = any that's not a/b/c
+   * [0-9] = any digit between 0 and 9
+   * [^0-9] = non-digit
+   * (string1|string2) = same as [] but with strings
+   *
+   * quantifiers
+   * n* = n 0 or inf times (n, nn, ...)
+   * n+ = at least once then *
+   * ^n = n at beginning of string
+   * n$ = n at end of string
+   * n? = at most 1 occurrence of n
+   * n{X} = X occurrences of n's in a row
+   * n{X,Y} = X to Y occ
+   * ?=n = string that is followed by n
+   * ?!n = string that is not followed by n
+   *
+   * metachars
+   * . = single character expect \n
+   * \w = word
+   * \W = non-word
+   * \d = digit
+   * \D = non-digit
+   * \s = whitespace (tabs too)
+   * \S = non-whitespace
+   * \b = beginning/end of word
+   * \B = not beginning/end
+   * \0 = NUL char
+   * \n = newline
+   * \f = form feed
+   * \r = carriage return
+   * \t = table char
+   * \v = vertical tab
+   * \xxx = octal number 'xxx'
+   * \xdd = hexadecimal number 'dd'
+   * \uxxxx = unicode char 'xxxx'
+   */
+
   let re;
 
   // this is a regular exp that will match a
@@ -1194,6 +1249,9 @@ function test30_regex(){
   console.log("type of regexp = " + typeof(re));
   console.log("/^a$/ matches a: " + re.test("a"));
   console.log("/^a$/ matches ab: " + re.test("ab"));
+
+  // you also have exec() which returns first match
+  console.log(re.exec("a"));
 
   /*
    * I guess /re/ will automatically convert to RegExp (js object)
@@ -2455,6 +2513,8 @@ function test4_arrays(){
    * TODO check this, it seems to work just fine on node, maybe
    * it's true just for browsers
    * nope, maybe it was fixed
+   *
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
    * */
   var a = new Array();
   a[0] = 5;
@@ -2462,35 +2522,8 @@ function test4_arrays(){
   a[2] = "hello";
   console.log(a);
 
-  // we can sort the array
-  a.sort();
-  console.log(a);
-
-  // adding one element at the end
-  a.push("x");
-  console.log(a);
-
-  // removes last element
-  a.pop();
-  console.log(a);
-
-  // splice removes elements
-  // splice(index, howmany)
-  a.splice(1, 1);
-  console.log(a);
-
-  // splice also adds elements
-  // splice(index, 0, elem1, elem2 ...)
-  a.splice(1, 0, "new elem");
-  console.log(a);
-
   // this is also an array
   b = [10, -2, 7, 3];
-  console.log(b);
-  b.sort();
-  console.log(b);
-  console.log(b.length);
-
   // b is an object with 0, 1 ... props
   console.log(b["0"]);
   // type coercion for this one
@@ -2499,7 +2532,6 @@ function test4_arrays(){
   b[100] = 14;
   console.log(b);
   b["pizza"] = "good";
-
   // length seems to work just fine under node.js
   console.log(b);
   console.log(b.length);
@@ -2509,13 +2541,146 @@ function test4_arrays(){
   marr.unshift(0);
   console.log(marr);
 
-  // you can also add multiple elements
-  marr.unshift(-1, -2);
-  console.log(marr);
+  let arr1 = [1, 2, 3];
 
-  // remove specific element from array
-  let arr = [1, 2];
-  arr.splice(arr.indexOf(2), 1);
+  // check length
+  console.log(arr1.length);
+
+  // look at some index
+  console.log(arr1[1]);
+
+  // add element at the end
+  arr1.push(10);
+  console.log(arr1);
+
+  // remove from the end
+  arr1.pop();
+  console.log(arr1);
+
+  // remove from the front of the array
+  arr1.shift();
+  console.log(arr1);
+
+  // add to the front of the array
+  arr1.unshift(5);
+  console.log(arr1);
+
+  // you can also add multiple elements
+  arr1.unshift(6, 7);
+  console.log(arr1);
+
+  // find index of element
+  console.log(arr1.indexOf(2));
+
+  /**
+   * remove from random position - splice(pos, num_elems)
+   * splice will return the removed elements
+   * and the original array is updated
+   */
+  const res = arr1.splice(0, 1);
+  console.log(res);
+  console.log(arr1);
+
+  /**
+   * removing specific element from array
+   * first find its index with indexOf
+   * then splice
+   */
+  const elemToRemove = 2;
+  arr1.splice(arr1.indexOf(elemToRemove), 1);
+  console.log(arr1);
+
+  // shallow copy of array
+  const arr2 = arr1.slice();
+  console.log(arr2);
+
+  /**
+   * adding elem at a random position - use splice again
+   * go to position, remove 0 elements, and insert one
+   */
+  arr1.push(7);
+  console.log(arr1);
+  // (pos, 0, newElem)
+  arr1.splice(1, 0, 20);
+  console.log(arr1);
+
+  // checking if an obj is an array
+  console.log(Array.isArray([1, 2, 3]));
+  console.log(Array.isArray({ name: "x" }));
+
+  // concat 2 arrays
+  const arr3 = [1, 2, 3];
+  const arr4 = [4, 5, 6];
+  const res2 = arr3.concat(arr4);
+  console.log(res2);
+
+  // finding elem that has a prop (first)
+  const arr5 = [1, 5, -1, 10, -2];
+  console.log(arr5.find(elem => elem < 0));
+
+  /**
+   * another way to check if an element is in an array
+   * one way would be with indexOf() > 0
+   * or use includes()
+   */
+  console.log(arr1.includes(20));
+
+  // changing each elem
+  console.log(arr1.map(elem => elem + 1));
+
+  // filtering stuff
+  console.log(arr1.filter(elem => elem < 10));
+
+  // joining values (concat)
+  console.log(arr1.join(" "));
+
+  // getting iterator
+  let arrKeys = arr1.keys();
+  for (let key of arrKeys) {
+    console.log(key);
+  }
+
+  // reduce(fcn, initial acc)
+  const res3 = arr1.reduce((acc, value) => {
+    // this returns the new acc
+    return acc + value;
+  }, 0)
+  console.log(res3);
+
+  // reverting an array - this mutates original array
+  console.log(arr1.reverse());
+  console.log(arr1);
+
+  // checking some elements have a prop
+  console.log(arr1.some(elem => elem < 5));
+
+  /**
+   * sorting an array
+   * by default it converts elems to strings, then compares
+   * you should use a custom function
+   */
+  //arr1.sort()
+  arr1.sort((elem1, elem2) => {
+    return elem1 > elem2;
+  });
+  console.log(arr1);
+
+  function iterating() {
+    for (let elem of arr1) {
+      console.log(elem);
+    }
+
+    for (let key in arr1) {
+      console.log(arr1[key]);
+    }
+
+    /**
+     * forEach((item, index, array) => {})
+     */
+    arr1.forEach(elem => {
+      console.log(elem);
+    })
+  }
 }
 
 // wrapper for factorial
