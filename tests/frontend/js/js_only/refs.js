@@ -2192,12 +2192,8 @@ function test15_events(){
 }
 
 function test14_template_strings(){
-  /*
-   * this only works in node v4 I guess
-   * I only tested with v8.2.1 and it doesn't work
-   * */
   var my_name = "john";
-  var str = "hello ${my_name}";
+  var str = `hello ${my_name}`;
   console.log(str);
 }
 
@@ -2375,7 +2371,7 @@ function test8_statements(){
   var all_cars = "";
 
   // for loop statement
-  for (var i = 0; i < cars.length; i++) {
+  for (let i = 0; i < cars.length; i++) {
     all_cars = all_cars + cars[i] + " ";
   }
   console.log(all_cars);
@@ -2482,12 +2478,11 @@ function test6_numbers(){
 
   // some functions
   console.log(Number.MAX_VALUE);
-  sd = c.toString();
+  var sd = c.toString();
   console.log(typeof(sd));
 
   console.log(Number.isInteger(10.2));
 }
-
 
 function test5_string(){
   let s = "this is a string";
@@ -2606,9 +2601,6 @@ function test5_string(){
   // splitting after space and comma
   const s4 = "Name1, Name2,Name3 Name4";
   console.log(s4.split(/[ ,]+/));
-
-  // [ab] = a or b
-  // + = at least once and *
 
   // by default it doesn't split after anything
   console.log(s4.split());
