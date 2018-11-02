@@ -2488,19 +2488,141 @@ function test6_numbers(){
   console.log(Number.isInteger(10.2));
 }
 
-// strings
+
 function test5_string(){
-  var s1 = "This is a string";
-  console.log(s1);
-  var s2 = 'This is also a string';
+  let s = "this is a string";
+  console.log(s);
+
+  // accessing an element at some position
+  console.log(s[0]);
+  console.log(s.charAt(0));
+
+  // it's also iterable
+  for (let c of s) {
+    console.log(c);
+  }
+
+  // checking length
+  console.log(s.length);
+
+  // there is primitive string type e.g. s
+  // and String objects
+  let s2 = new String(s);
   console.log(s2);
 
-  // these are objects
-  var c = s1.charAt(0);
-  console.log(c);
-  console.log(s1.concat(s2));
-  console.log(s1.substr(3, 5));
-  console.log(s1.search("is a"));
+  console.log(typeof(s));
+  console.log(typeof(s2));
+
+  // going String obj -> primitive type - valueOf()
+  console.log(typeof(s2.valueOf()));
+
+  // inserting something at the end - concat()
+  let newS = s.concat(" something extra");
+  console.log(newS);
+
+  // same to insert at the front
+  let newerS = "at the front ".concat(s);
+  console.log(newerS);
+
+  // you can also concat with +
+  let newS2 = s + " at the end";
+  console.log(newS2);
+
+  // to insert in the middle
+  // inserting at position 5 'some text'
+  const pos = 5;
+  let newS3 = s.slice(0, pos) + "some text" + s.slice(pos);
+  console.log(newS3);
+
+  // slice() is the same as substr()
+  // substr() might get deprecated
+  // substr(start, length)
+  let newS4 = s.substr(0, pos) + "some text" + s.substr(pos);
+  console.log(newS4);
+
+  // you can also use substring(start, end)
+  console.log(s.substring(0, pos));
+
+  // deleting something from the string - substring
+  // remove first char
+  console.log(s.substr(1));
+  // remove last char
+  console.log(s.substr(0, s.length - 1));
+
+  // remove from pos1 to pos2
+  let pos1 = 3;
+  let pos2 = 6;
+  let newS5 = s.substr(0, pos1) + s.substr(pos2);
+  console.log(newS5);
+
+  // searching for a substring
+  // this returns position of match or -1
+  console.log(s.search("is a"));
+  console.log(s.search("xx"));
+
+  // for true/false you can also use includes()
+  console.log(s.includes("is a"));
+  console.log(s.includes("xx"));
+
+  // you can also create strings from templates (template strings)
+  let nr = 10;
+  let ss = "extra";
+  let s3 = `This is a template string with nr = ${nr} and ss = ${ss}`;
+  console.log(s3);
+
+  // repeating a string several times
+  console.log(ss.repeat(2));
+
+  // checking if a string starts with a substr
+  console.log(s.startsWith("this"));
+  console.log(s.startsWith("xx"));
+
+  // converting to all caps
+  console.log(s.toUpperCase());
+  console.log("UPPER CASE".toLowerCase());
+
+  // removing whitespaces from beginning and end
+  console.log("start " + "  middle middle    ".trim() + " end");
+
+  /**
+   * you can also only trim left/right with
+   * trimStart()/trimLeft() and trimEnd()/trimRight()
+   */
+
+  /**
+   * split() - splits after string provided
+   */
+
+  // after space
+  console.log(s.split(" "));
+
+  // after space and s
+  console.log(s.split(" s"));
+
+  // if you want to split after multiple chars - use regexp
+  // splitting after space
+  console.log(s.split(/ /));
+
+  // splitting after space and comma
+  const s4 = "Name1, Name2,Name3 Name4";
+  console.log(s4.split(/[ ,]+/));
+
+  // [ab] = a or b
+  // + = at least once and *
+
+  // by default it doesn't split after anything
+  console.log(s4.split());
+
+  // you can check if a string matches a regexp
+  const m = s.match(/i/);
+  // m is null if no match or has info about match {index, input}
+  console.log(m.index);
+
+  // if you use /g you'll get all matches as array
+
+  // replace() - replace all matches of regexp with new string
+  console.log(s.replace(/t/g, "x"));
+  console.log(s.replace(/\bs/g, "x"));
 }
 
 function test4_arrays(){
