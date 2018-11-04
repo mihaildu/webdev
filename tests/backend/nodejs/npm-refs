@@ -209,3 +209,13 @@ npm unlink
 # first, change editor
 export EDITOR=emacs
 npm config edit
+
+# updating npm to its latest version
+npm install npm@latest -g
+
+# running a package you installed locally (without -g)
+./node_modules./.bin/jest
+# or (better version)
+npx jest
+
+# npx will look for binaries in node_modules/.bin along the tree

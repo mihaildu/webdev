@@ -1,16 +1,3 @@
-* check promises
-  * bluebird
-    https://www.npmjs.com/package/bluebird
-  * async.js
-    https://www.npmjs.com/package/async
-  * await
-
-* check body-parser
-  * for parsing post data (instead of querystring)
-
-* check mongoose
-  https://www.npmjs.com/package/mongoose
-
 * check passport
   * instead of the local login/signup system I wrote
   * try oauth
