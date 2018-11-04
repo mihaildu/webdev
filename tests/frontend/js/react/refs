@@ -1,40 +1,41 @@
-# TODO move this to proj/webdev
-
 # react is a js library (like jquery)
-# to use it you need to import/load it in your js files
-# I guess you can also generate a react.min.js and use that
-# but the default development process is using imports
-# so you need webpack (frontend/tools/deps/webpack)
+# main reasons people use it: speed (virtual dom) and modularity (components)
 
-# react uses more stuff than just import that is not supported by js
-# at least that's how the documentation/tutorials are written
-# it uses ES6 style and JSX (some other type of style)
-# so you need something to convert from ES6 and JSX to normal javascript
-# babel can do that; you can use it by itself or use the babel-loader in webpack
-# this process of converting from one src code to another is called transpiling
+# multiple ways to set it up
+# 1. using react.min.js (similar to jquery) and basic javascript
+# 2. using react.min.js + JSX syntax (you need babel for this)
+# 3. using a bundler (like webpack) + npm install + import (ES6)
 
-# react init
-# install webpack (npm init etc)
+# 1. react.min.js on cdn
+https://unpkg.com/react@16/umd/react.development.js
+https://unpkg.com/react-dom@16/umd/react-dom.development.js
+
+
+
+# 2. using jsx (without es6)
+npm install babel-cli@6 babel-preset-react-app@3
+
+# place source javascript in ./src/
+# output will be in ./dst/
+npx babel (--watch) ./src --out-dir ./dst --presets react-app/prod
+
+
+
+# 3. using es6 + jsx
 npm init
-npm install webpack --save
+npm install webpack webpack-cli --save-dev
+npm install react react-dom
+npm install babel-loader @babel/core @babel/preset-env @babel/preset-react --save-dev
 
-# install the babel loader (along with the react preset)
-# just like normal babel, install it on the dev side (and not production)
-# https://github.com/babel/babel-loader
-npm install --save-dev babel-loader babel-core babel-preset-env babel-preset-react
+# configure your webpack.config.js (test1/webpack.config.js.new)
 
-# install react
-npm install react react-dom --save
-
-# also immutable
+# if might need immutable
 npm install immutable --save
 
-# then configure the babel loader in webpack config file
-# add the "react" preset as well (for jsx)
-"presets": ["env", "react"]
-
 # then run webpack and it should work
-webpack
+npx webpack
+webpack (if installed globally)
+./node_modules/.bin/webpack
 
 # to avoid running webpack everytime you change the js file
 webpack --watch
