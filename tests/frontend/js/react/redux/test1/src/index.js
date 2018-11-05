@@ -7,10 +7,70 @@ import PropTypes from "prop-types";
 main();
 
 function main() {
-  test4_react();
+  test5_react_fast();
+  //test4_react();
   //test3_combining_reducers();
   //test2_recap();
   //test1_basics();
+}
+
+function test5_react_fast() {
+  // store = Number
+
+  // create actions
+  const ActionTypes = {
+    INCREMENT_NUMBER: 'INCREMENT_NUMBER',
+  }
+
+  // reducer
+  function mainReducer(state = 0, action) {
+    switch(action.type) {
+    case ActionTypes.INCREMENT_NUMBER:
+      return state + 1;
+    default:
+      return state;
+    }
+  }
+
+  const store = createStore(mainReducer);
+
+  // store -> props
+  const MapStateToProps = state => {
+    return {
+      value: state
+    };
+  }
+
+  // actions -> props
+  const MapDispatchToProps = dispatch => {
+    return {
+      incrementNumber() {
+        dispatch({type: ActionTypes.INCREMENT_NUMBER});
+      }
+    };
+  }
+
+  // component using props from above
+  const MyComponent = ({value, incrementNumber}) => (
+    <div>
+      <p>Value is {value}</p>
+      <button onClick={incrementNumber}>Increment</button>
+    </div>
+  )
+
+  // connect everything together
+  const MyCompWrapper = connect(
+    MapStateToProps,
+    MapDispatchToProps
+  )(MyComponent);
+
+  // render
+  ReactDOM.render(
+    <Provider store={store}>
+      <MyCompWrapper />
+    </Provider>,
+    document.querySelector('#root')
+  );
 }
 
 function test4_react() {
