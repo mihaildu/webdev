@@ -5,7 +5,7 @@ module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : false,
     entry: {
-	index: "./src/index.js"
+	index: "./src/refs-redux.js"
     },
     module: {
 	rules: [
@@ -23,7 +23,7 @@ module.exports = {
     },
     output: {
 	path: __dirname + "/dist",
-	filename: debug ? "[name].js" : "[name].min.js"
+	filename: debug ? "index.js" : "index.min.js"
     },
     plugins: debug ? [] : [
 	new webpack.optimize.OccurrenceOrderPlugin(),

@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : null,
-    entry: "./src/root.js",
+    entry: "./src/refs-flux.js",
     module: {
 	rules: [
 	    {
