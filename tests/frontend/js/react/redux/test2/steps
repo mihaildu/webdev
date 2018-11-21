@@ -1,0 +1,6 @@
+1. npm init
+2. yarn add webpack webpack-cli --dev
+3. yarn add react react-dom
+4. yarn add babel-loader @babel/core @babel/preset-env @babel/preset-react --dev
+5. yarn add redux
+6. yarn add react-redux
