@@ -1,0 +1,30 @@
+# use version 3 of docker-compose
+version: "3"
+
+# what docker images (services) to run
+services:
+  # service named web
+  web:
+    # use my first image
+    image: dryhten/test:my-first-image
+    deploy:
+      # this will do load balancing with 5 containers
+      replicas: 5
+      # limit resources - 10% cpu, 50m of ram
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      # if on container failes - restarts
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    # is this how the docker containers talk to eachother?
+    networks:
+      - webnet
+
+# define networks + configs here
+networks:
+  # use default settings - load-balanced overlay network
+  webnet:

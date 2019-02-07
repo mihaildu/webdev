@@ -1,0 +1,131 @@
+# run apps in a container
+https://www.docker.com/
+https://docs.docker.com/
+
+# community edition + enterprise edition
+
+# installation on debian
+# first, make sure you don't have a version installed
+sudo apt-get remove docker docker-engine docker.io
+
+# install some packages
+sudo apt-get install \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common
+
+# add gpg key
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+# verify that you have the right key (docker should show up)
+sudo apt-key fingerprint 0EBFCD88
+
+# add the stable repo
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   stretch \
+   stable"
+
+# update apt package index
+sudo apt-get update
+
+# install docker ce
+sudo apt-get install docker-ce
+
+# check if installed correctly
+sudo docker run hello-world
+
+# my docker version
+Docker version 17.12.0-ce, build c97c6d6
+
+# more help with docker
+docker --help
+
+# listing all running containers
+docker ps
+
+# listing all containers
+docker ps -a
+
+# removing a container
+docker rm [id]
+docker container rm [id]
+
+# listing the images
+docker images
+docker image ls
+
+# removing an image
+docker rmi [id]
+
+# starting/stopping a docker container
+docker start/stop [id]
+
+# more info on a container
+docker inspect [id]
+
+# show more details about docker setup
+docker info
+
+# to define a container/image - write a Dockerfile
+
+# then build the image
+docker build --tag=my-first-image .
+
+# check the image you built
+docker image ls
+
+# images are stored somewhere in `/var/lib/docker/`
+
+# running the image (port 4000 on host maps to 80 on container)
+# I assume this also creates a container
+docker run -p 4000:80 my-first-image
+
+# you can also run it in detach mode
+docker run -p 4000:80 -d my-first-image
+
+# then check your container up
+docker ps
+
+# you can also publish images online on
+https://hub.docker.com/
+
+# you can login locally
+docker login
+
+# tag the remote image before pushing
+docker tag my-first-image dryhten/test:my-first-image
+
+# then push
+docker push dryhten/test:my-first-image
+
+# after this you can run it straight from the repo
+docker run -p 4000:80 dryhten/test:my-first-image
+
+# defining multiple docker images and how to run them (services)
+# using docker-compose - create a docker-compose.yml
+
+# turn your host macine into swarm mode first
+docker swarm init
+
+# this will enable other machines (real/virtual) to join your host (the manager)
+# you need token, ip & port
+docker swarm join
+
+# starting all the docker containers according to docker-compose.yml
+# you can re-run this several times without killing it (e.g. to rescale)
+docker stack deploy -c docker-compose.yml my-first-docker-app
+
+# seeing that your service is running
+docker service ls
+
+# looking at the containers running inside your service
+docker service ps my-first-docker-app_web
+
+# taking down all the services
+docker stack rm my-first-docker-app
+
+# also take down the swarm
+docker swarm leave --force
