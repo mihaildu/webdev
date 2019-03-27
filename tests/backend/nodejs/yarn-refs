@@ -1,0 +1,5 @@
+# installing a package with yarn
+yarn add [package-name]
+
+# on dev
+yarn add --dev [package-name]
