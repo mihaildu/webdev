@@ -1,1 +1,5 @@
 node_modules
+blocked_script.js
+tmp-stderr
+tmp-stdout
+tmp.js
