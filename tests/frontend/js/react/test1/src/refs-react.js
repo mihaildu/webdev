@@ -22,6 +22,8 @@ import styled, { keyframes, ThemeProvider, withTheme, css } from 'styled-compone
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+
 /*
  * you can also import CSS files
  * TODO figure out why this doesn't work
@@ -31,11 +33,164 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 main();
 
 function main(){
-  test5_random();
+  test8_react_matrix();
+  //test7_react_map();
+  //test6_render();
+  //test5_random();
   //test1();
   //test2_docs();
   //test3_styled_components();
   //test4_react_router();
+}
+
+function test8_react_matrix() {
+  class Box extends React.Component {
+    constructor(props) {
+      super(props);
+      this.boxStyle = {
+        width: "100px",
+        height: "100px",
+        border: "1px solid red",
+        display: "inline-block",
+        margin: "5px"
+      };
+      console.log(`Box with index (${this.props.i}, ${this.props.j})`);
+    }
+    render() {
+      return (
+        <div style={this.boxStyle}>
+          Test
+        </div>
+      );
+    }
+  }
+
+  class Line extends React.Component {
+    constructor(props) {
+      super(props);
+      console.log(`Line with number: ${this.props.lineNumber}`);
+    }
+    render() {
+      for (let i = 0; i < this.props.numCols; i++) {
+      }
+    }
+  }
+
+  class Matrix extends React.Component {
+    render() {
+      console.log(this.props);
+      return (
+        [
+          <Box key={1} i={0} j={0}/>,
+          <Box key={2} i={0} j={1}/>
+        ]
+      );
+    }
+  }
+
+  ReactDOM.render(
+    <Matrix />,
+    document.getElementById("root")
+  );
+}
+
+function test7_react_map() {
+  class MyMap extends React.Component {
+    render() {
+      const mapStyle = {
+        width: '100%',
+        height: '100%'
+      };
+      const position = {
+        lat: 100,
+        lng: 100,
+      };
+      const zoom = 10;
+
+      /* <Map */
+      /*   google={this.props.google} */
+      /*   zoom={zoom} */
+      /*   center={position} */
+      /*   style={mapStyle} */
+      /*   draggable={true} */
+      /*   zoomControl={true}> */
+      /*   <Marker position={position} /> */
+      /* </Map> */
+
+      /* initialCenter={{ */
+      /*   lat: 48.854885, */
+      /*   lng: 2.081807 */
+      /* }} */
+      const style = {
+        width: '100%',
+        height: '100%'
+      }
+      return (
+        <Map
+          google={this.props.google}
+          style={style}
+          initialCenter={{
+            lat: 48.854885,
+            lng: 2.081807
+          }}
+          zoom={10}
+        >
+        </Map>
+      );
+    }
+  }
+  const MyGoogleMap = GoogleApiWrapper({
+    apiKey: 'TODO'
+  })(MyMap);
+  ReactDOM.render(
+    <MyGoogleMap />,
+    document.getElementById("root")
+  );
+}
+
+function test6_render() {
+  class SmallComp extends React.Component {
+    shouldComponentUpdate(prevProps) {
+      for (let key in prevProps) {
+        if (prevProps[key] != this.props[key]) {
+          return true;
+        }
+      }
+      return false;
+    }
+    render() {
+      console.log('small comp rendered');
+      return (
+        <p>Val = {this.props.name}</p>
+      );
+    }
+  }
+  class BigComp extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        obj: { val: 10 },
+        name: "x"
+      };
+      this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick() {
+      this.setState(prevState => ({ obj: { val: prevState.obj.val + 1 } }));
+    }
+    render() {
+      console.log('big comp rendered');
+      return (
+        <div>
+          <button onClick={this.handleClick}>Click</button>
+          <SmallComp name={this.state.name}/>
+        </div>
+      );
+    }
+  }
+  ReactDOM.render(
+    <BigComp />,
+    document.getElementById("root")
+  );
 }
 
 function test5_random() {
@@ -70,8 +225,8 @@ function test1(){
      * add "<h1>Hello, world!</h1>" to its inner html
      * */
     ReactDOM.render(
-	<h1>Hello, world!</h1>,
-	document.getElementById("react-elem1")
+      <h1>Hello, world!</h1>,
+      document.getElementById("react-elem1")
     );
 
     /*
