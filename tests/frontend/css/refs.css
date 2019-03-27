@@ -247,3 +247,8 @@ img.pic_class {
     /* this doesn't seem to work */
     //margin: 0 auto;
 }
+
+/* get rid of page shifts because of scroll bar */
+html {
+    margin-left: calc(100vw - 100%);
+}
