@@ -131,3 +131,9 @@ docker stack rm my-first-docker-app
 
 # also take down the swarm
 docker swarm leave --force
+
+# where to find config for docker containers
+/var/lib/docker/containers/
+
+# ssh into docker container
+docker exec -it <container name> /bin/bash
