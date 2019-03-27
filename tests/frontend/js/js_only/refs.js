@@ -18,15 +18,30 @@ let jestDiff = require("jest-diff");
 let uuid = require("uuid");
 let color = require("color");
 let { differenceInCalendarDays } = require("date-fns");
+let moment = require("moment-timezone");
+let cn = require("classnames");
+const path = require("path");
+
+const axios = require("axios");
+const { parse } = require("node-html-parser");
+const cheerio = require("cheerio");
+var $ = require("jquery");
+
+const util = require("util");
+
+const momento = require("moment");
 
 main();
 
 function main(){
 
-  // TODO you can change String.prototype and have functions in
-  // all strings
-  //String.prototype.splice = (test) => console.log(test);
-
+  test61_destructuring();
+  //test60_lodash();
+  //test59_util();
+  //test58_path();
+  //test57_moment();
+  //test56_generators();
+  //test53_parsing_html();
   //test52_memory();
   //test51_custom_sort();
   //test50_case_sensitive();
@@ -87,6 +102,219 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test61_destructuring() {
+
+  // deep destructuring
+  const mobj = {
+    test: {
+      insideTest: 100
+    },
+    a : 20,
+  }
+  const {
+    test: { insideTest: myTest },
+    a
+  } = mobj;
+
+  //console.log(test);
+  //console.log(insideTest);
+  //console.log(myTest);
+}
+
+function test60_lodash() {
+  /**
+   * various lodash functions
+   */
+
+  // this doesn't exist in lodash anymore
+  function startCase(str) {
+    return str.split(' ').map(elem => lodash.upperFirst(elem)).join(' ');
+  }
+  console.log(startCase("women's final, match"));
+
+  console.log(lodash.upperFirst("women's final"));
+  console.log(lodash.deburr("Women's Final"));
+  console.log(lodash.startCase(lodash.deburr("Women's Final")));
+}
+
+function test59_axios() {
+  /**
+   * doing GET/POST requests from node with axios
+   */
+  const url2 = 'http://52.90.177.196:5000/get-city-code';
+
+  for (let i = 0; i < 1; i++) {
+    axios.get(url2, {
+      params: {
+        keyword: 'London',
+        country: 'United Kingdom'
+      }
+    }).then(res => {
+      console.log('got response', res.data);
+    }).catch(err => {
+      console.log('error: ', err.message)
+    });
+  }
+
+  const url3 = 'https://10times.com/ajax?for=scroll&path=/usa/medical-pharma/conferences&ajax=1&page=7&month=february'
+  axios.get(url3, { headers: { 'x-requested-with': 'XMLHttpRequest' } }).then(res => {
+    console.log('success')
+    //console.log('got response', res.data);
+  }).catch(err => {
+    console.log('error')
+    //console.log('error: ', err.response)
+  });
+
+  axios.get('http://127.0.0.1:3000/timeout', { timeout: 5000 })
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      // ECONNABORTED
+      console.log(err.code)
+      console.log(err.code === 'ECONNABORTED')
+      //console.log('error')
+      //console.log(err.message)
+    });
+
+}
+
+function test59_util() {
+  // TODO write doc for this
+  // right now util.inspect only prints the obj
+  var someObj = {
+    a: 10,
+    b: someObj
+  }
+
+  console.log(util.inspect(someObj));
+}
+
+function test58_path() {
+  // resolving paths
+  console.log(path.resolve(__dirname, "test1", "test2"));
+}
+
+function test57_moment() {
+  /**
+   * working with dates
+   * moment = moment-timezone
+   * momento = moment
+   */
+  const now = moment();
+  console.log(now);
+  console.log(typeof(now));
+
+  // loading a date from a string
+  // object
+  const tmpDate = momento('01/2018', 'MM/YYYY');
+
+  // then printing in some other format
+  console.log(tmpDate.format('MM/YY'));
+
+  // from timestamp
+  console.log(momento(1551199867447));
+
+  const tmp9 = {$date: 1551199867447};
+  const tmp10 = momento(tmp9)
+  console.log(tmp10);
+
+  // iterating from one month to another one
+  const startDate = momento('01/18', 'MM/YY');
+  const endDate = momento('03/18', 'MM/YY');
+  const months = [];
+
+  while (startDate < endDate || startDate.format('M') === endDate.format('M')) {
+    months.push(startDate.format('MM/YYYY'));
+    startDate.add(1, 'month');
+  }
+  console.log(months);
+
+  // changing language for moment dates (e.g. when changing to string)
+  momento.locale('de');
+  momento.locale('en');
+  console.log(momento.locale());
+  console.log(momento().format('LLLL'))
+
+  // moment works as keys
+  const obj = {};
+  obj[startDate] = 10;
+  obj[endDate] = 100;
+  console.log(obj);
+}
+
+function test56_generators() {
+  // a generator function
+  function* gen() {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+
+  const g = gen();
+  console.log(g.next().value) // 1
+  console.log(g.next().value) // 2
+  console.log(g.next().value) // 3
+
+  function* gen2() {
+    let index = 0;
+    while (true) {
+      yield index;
+      index++;
+    }
+  }
+
+  const g2 = gen2();
+  console.log(g2.next().value);
+  console.log(g2.next().value);
+}
+
+function test55_cheerio(html) {
+  // TODO
+  const selector = cheerio.load(html);
+
+  //console.log(selector.root().html())
+  //console.log(''.startsWith('<!DOCTYPE html>'))
+  console.log(selector.root().html().startsWith('<!DOCTYPE html>'))
+
+  //console.log(selector.root().children().html());
+  //console.log(selector.root().next());
+
+  const selector2 = cheerio.load('dlsakd');
+  //console.log(selector2.root().children());
+  //console.log(selector2.root().next().get(0));
+
+  return;
+  const errorCode = parseInt(selector('#af-error-container p b').text());
+  if (errorCode === 429) {
+    console.log('need to restart');
+  }
+}
+
+function test54_node_html_parser(html) {
+  const root = parse(html);
+  const errorCode = parseInt(root.querySelector('#af-error-container b').firstChild.toString());
+
+  if (errorCode === 429) {
+    console.log('need to restart');
+  }
+
+  //console.log(errorCode)
+  //console.log(root);
+  //console.log(root.firstChild);
+  //console.log(root)
+}
+
+function test53_parsing_html() {
+  const someHtml = `<!DOCTYPE html><div id="af-error-container">
+    <a href=//www.google.com><span id=logo aria-label=Google></span></a>
+    <p><b>429.</b><ins>That’s an error.</ins><p>We're sorry,
+    but you have sent too many requests to us recently. Please try again later.
+    <ins>That’s all we know.</ins></div>`;
+  //test54_node_html_parser(someHtml);
+  test55_cheerio(someHtml);
 }
 
 function test52_memory() {
@@ -847,16 +1075,16 @@ function test35_scope_closures(){
     /* place public functions in obj that will be returned */
     var ret = {
       get_first_name: function(){
-	return first_name;
+        return first_name;
       },
       get_last_name: function(){
-	return last_name;
+        return last_name;
       },
       set_first_name: function(name){
-	first_name = name;
+        first_name = name;
       },
       set_last_name: function(name){
-	last_name = name;
+        last_name = name;
       },
     };
     return ret;
@@ -1134,6 +1362,9 @@ function test33_prototypes_revised(){
    *
    * the thing to remember is that prototypes link objects together
    * */
+
+  // adding a function to all strings
+  String.prototype.splice = (test) => console.log(test);
 }
 
 function test32_this(){
@@ -1478,7 +1709,7 @@ function test26_fs(){
       console.log("There has been an error: " + err);
     } else {
       console.log("Stats for file 'test':\n" +
-		  JSON.stringify(stats, null, 2));
+                  JSON.stringify(stats, null, 2));
     }
   });
 
@@ -1527,10 +1758,10 @@ function test26_fs(){
 
   // reading from fd
   fs.read(fd, buff, offset, length, position,
-	  (err, bytes_read, buffer) => {
-	    console.log("Num byte read: " + bytes_read);
-	    console.log("buffer: " + buffer);
-	  });
+          (err, bytes_read, buffer) => {
+            console.log("Num byte read: " + bytes_read);
+            console.log("buffer: " + buffer);
+          });
 }
 
 function test25_default_arg(){
@@ -1739,13 +1970,13 @@ function test21_prototypes(){
   // this is also an object
   // the prototyp is specified when creating the object
   var Sam =
-	{
-	  first: "Sam",
-	  last: "Samuel",
-	  age: 15,
-	  eyecolor: "brown",
-	  1: "one",
-	};
+      {
+        first: "Sam",
+        last: "Samuel",
+        age: 15,
+        eyecolor: "brown",
+        1: "one",
+      };
   console.log(Sam);
 
   // you can change the prototype of an object as you go
@@ -1860,6 +2091,9 @@ function test21_prototypes(){
 
   // example of pretty printing
   console.log(JSON.stringify(pobj, null, 2));
+
+  // printing to stderr
+  console.error("some error");
 }
 
 function test20_streams(){
@@ -1971,7 +2205,7 @@ function test17_classes(){
     // a getter function
     get type(){
       if (this.age > 10)
-	return "old";
+        return "old";
       return "young";
     }
 
@@ -2028,22 +2262,22 @@ function test16_json(){
   // json = javascript object notation
   // similar to dicts in python
   var json1 =
-	{
-	  "name": "tim",
-	  "age": 100
-	};
+      {
+        "name": "tim",
+        "age": 100
+      };
   console.log(json1);
 
   // you can also have functions inside json
   var json2 =
-	{
-	  "name": "john",
-	  "age": 10,
-	  "say_hello": function(){
-	    console.log("hello");
-	  },
-	  "sex": "male",
-	};
+      {
+        "name": "john",
+        "age": 10,
+        "say_hello": function(){
+          console.log("hello");
+        },
+        "sex": "male",
+      };
   console.log(json2);
 
   // accessing one element
@@ -2270,7 +2504,7 @@ function get_methods(obj){
   for(var m in obj) {
     if(typeof obj[m] == "function") {
       if (m.search("height") >= 0) {
-	res.push(m);
+        res.push(m);
       }
     }
   }
@@ -2476,6 +2710,9 @@ function test6_numbers(){
     console.log("Infinity is greater!");
   }
 
+  // this also works
+  var d2 = Infinity;
+
   // some functions
   console.log(Number.MAX_VALUE);
   var sd = c.toString();
@@ -2531,7 +2768,7 @@ function test5_string(){
 
   // slice() is the same as substr()
   // substr() might get deprecated
-  // substr(start, length)
+  // substr(start, num_chars)
   let newS4 = s.substr(0, pos) + "some text" + s.substr(pos);
   console.log(newS4);
 
@@ -2772,6 +3009,8 @@ function test4_arrays(){
    * sorting an array
    * by default it converts elems to strings, then compares
    * you should use a custom function
+   *
+   * sorting happens in place in the same array
    */
   //arr1.sort()
   arr1.sort((elem1, elem2) => {
