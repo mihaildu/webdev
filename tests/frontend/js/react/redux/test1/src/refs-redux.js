@@ -7,11 +7,102 @@ import PropTypes from "prop-types";
 main();
 
 function main() {
-  test5_react_fast();
+  test6_combine_reducers();
+  //test5_react_fast();
   //test4_react();
   //test3_combining_reducers();
   //test2_recap();
   //test1_basics();
+}
+
+function test6_combine_reducers() {
+  const ActionTypes = {
+    INCREMENT_NUMBER: 'INCREMENT_NUMBER',
+    DECREMENT_NUMBER: 'DECREMENT_NUMBER',
+  }
+
+  function firstReducer(state = {val1: 10}, action) {
+    switch(action.type) {
+    case ActionTypes.INCREMENT_NUMBER:
+      return {val1: state.val1 + 1}
+    default:
+      return state;
+    }
+  }
+
+  function secondReducer(state = {val2: 20}, action) {
+    switch(action.type) {
+    case ActionTypes.DECREMENT_NUMBER:
+      return {val2: state.val2 - 1};
+    default:
+      return state;
+    }
+  }
+
+  const store = createStore(combineReducers({firstReducer, secondReducer}));
+  const MapStateToProps1 = state => {
+    return {
+      value: state
+    };
+  };
+  const MapDispatchToProps1 = dispatch => {
+    return {
+      incrementNumber() {
+        dispatch({type: ActionTypes.INCREMENT_NUMBER});
+      }
+    };
+  }
+
+  const MapStateToProps2 = state => {
+    return {
+      value: state
+    };
+  }
+  const MapDispatchToProps2 = dispatch => {
+    return {
+      decrementNumber() {
+        dispatch({type: ActionTypes.DECREMENT_NUMBER});
+      }
+    };
+  }
+
+  /* <p>Value is {value}</p> */
+  const MyComponent1 = ({value, incrementNumber}) => {
+    console.log(value);
+    return (
+      <div>
+        <button onClick={incrementNumber}>Increment</button>
+      </div>
+    )
+  }
+  const MyCompWrapper1 = connect(
+    MapStateToProps1,
+    MapDispatchToProps1
+  )(MyComponent1);
+
+  /* <p>Value is {value}</p> */
+  const MyComponent2 = ({value, decrementNumber}) => {
+    console.log(value);
+    return (
+      <div>
+        <button onClick={decrementNumber}>Decrement</button>
+      </div>
+    )
+  }
+  const MyCompWrapper2 = connect(
+    MapStateToProps2,
+    MapDispatchToProps2
+  )(MyComponent2);
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <div>
+        <MyCompWrapper1 />
+        <MyCompWrapper2 />
+      </div>
+    </Provider>,
+    document.querySelector('#root')
+  );
 }
 
 function test5_react_fast() {
