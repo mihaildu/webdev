@@ -31,11 +31,14 @@ const util = require("util");
 
 const momento = require("moment");
 
+const Holidays = require('date-holidays');
+
 main();
 
 function main(){
 
-  test61_destructuring();
+  test62_holidays();
+  //test61_destructuring();
   //test60_lodash();
   //test59_util();
   //test58_path();
@@ -102,6 +105,22 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test62_holidays() {
+  /* testing date-holidays package */
+  const hd = new Holidays();
+  // 143 countries
+  const countries = hd.getCountries();
+
+  // change country for hd
+  const countryCode = 'GB';
+  const year = 2010;
+
+  hd.init(countryCode);
+  //hd.init('US', 'la', 'no')
+  const hds = hd.getHolidays(year)
+  console.log(hds);
 }
 
 function test61_destructuring() {
