@@ -23,7 +23,7 @@ import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Bar, BarChart } from 'recharts';
 
 /*
  * you can also import CSS files
@@ -47,18 +47,109 @@ function main(){
 
 function test9_recharts() {
 
-  test9_recharts_2();
+  // API/docs http://recharts.org/en-US/api
+
+  test9_recharts_4();
+  //test9_recharts_3();
+  //test9_recharts_2();
+  //test9_recharts_1();
+
+  function test9_recharts_4() {
+    // bar charts
+    const data = [
+      {name: 'Page A', uv: 400},
+      {name: 'Page B', uv: 800},
+      {name: 'Page C', uv: 650},
+      {name: 'Page D', uv: 300}
+    ];
+    const customBarLabel = ({ payload, x, y, width, height, value }) => {
+      //return 'x';
+      return (
+        <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>
+          {`value: ${value}`}
+        </text>
+      );
+    }
+    const BarChartComponent = () => (
+      <BarChart width={500} height={500} data={data}>
+        <Bar
+          type="monotone"
+          dataKey="uv"
+          barSize={30}
+          fill="#8884d8"
+          label={customBarLabel}
+        />
+        <XAxis dataKey="name" />
+        <YAxis />
+      </BarChart>
+    );
+    ReactDOM.render(
+      <BarChartComponent />,
+      document.getElementById("root")
+    );
+  }
+
+  function test9_recharts_3() {
+    // customizing ticks
+    const data = [
+      {name: 'Page A', uv: 400},
+      {name: 'Page B', uv: 800},
+      {name: 'Page C', uv: 650},
+      {name: 'Page D', uv: 300}
+    ];
+
+    const customTick = ({x, y, payload}) => {
+      let circle = null;
+      if (payload.value === "Page A") {
+        circle = <circle cx="512" cy="512" r="400" stroke="black" strokeWidth="3" fill="red" />;
+      }
+      if (payload.value === "Page B") {
+        circle = <circle cx="512" cy="512" r="400" stroke="black" strokeWidth="3" fill="blue" />;
+      }
+      if (payload.value === "Page C") {
+        circle = <circle cx="512" cy="512" r="400" stroke="black" strokeWidth="3" fill="green" />;
+      }
+      if (payload.value === "Page D") {
+        circle = <circle cx="512" cy="512" r="400" stroke="black" strokeWidth="3" fill="orange" />;
+      }
+      return (
+        <svg x={x - 12} y={y + 4} width={24} height={24} viewBox="0 0 1024 1024" fill="#666">
+          {circle}
+        </svg>
+      );
+    }
+
+    const LineChartComponent = () => (
+      <LineChart width={500} height={500} data={data}>
+        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <XAxis dataKey="name" tick={customTick} />
+        <YAxis />
+        <Tooltip />
+      </LineChart>
+    );
+    ReactDOM.render(
+      <LineChartComponent />,
+      document.getElementById("root")
+    );
+  }
 
   function test9_recharts_2() {
     // adding more stuff to the plot
-    const data = [{name: 'Page A', uv: 400}, {name: 'Page B', uv: 800}];
+    const data = [
+      {name: 'Page A', uv: 400},
+      {name: 'Page B', uv: 800},
+      {name: 'Page C', uv: 650}
+    ];
 
+    // <CartesianGrid stroke="#ccc" />
     const LineChart1 = () => (
       <LineChart width={1000} height={1000} data={data}>
         <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" />
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis dataKey="name" />
         <YAxis />
+        <Tooltip />
       </LineChart>
     );
     ReactDOM.render(
