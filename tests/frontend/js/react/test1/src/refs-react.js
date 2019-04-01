@@ -23,6 +23,7 @@ import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 /*
  * you can also import CSS files
@@ -33,7 +34,8 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 main();
 
 function main(){
-  test8_react_matrix();
+  test9_recharts();
+  //test8_react_matrix();
   //test7_react_map();
   //test6_render();
   //test5_random();
@@ -41,6 +43,47 @@ function main(){
   //test2_docs();
   //test3_styled_components();
   //test4_react_router();
+}
+
+function test9_recharts() {
+
+  test9_recharts_2();
+
+  function test9_recharts_2() {
+    // adding more stuff to the plot
+    const data = [{name: 'Page A', uv: 400}, {name: 'Page B', uv: 800}];
+
+    const LineChart1 = () => (
+      <LineChart width={1000} height={1000} data={data}>
+        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+        <CartesianGrid stroke="#ccc" />
+        <XAxis dataKey="name" />
+        <YAxis />
+      </LineChart>
+    );
+    ReactDOM.render(
+      <LineChart1 />,
+      document.getElementById("root")
+    );
+  }
+
+  function test9_recharts_1() {
+    // doing a line between 2 points
+    const point1 = {name: 'Page A', uv: 400};
+    const point2 = {name: 'Page B', uv: 800};
+
+    const data = [point1, point2];
+
+    const LineChart1 = () => (
+      <LineChart width={1000} height={1000} data={data}>
+        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+      </LineChart>
+    );
+    ReactDOM.render(
+      <LineChart1 />,
+      document.getElementById("root")
+    );
+  }
 }
 
 function test8_react_matrix() {
