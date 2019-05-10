@@ -1,0 +1,20 @@
+<!-- using services = js code that can be used in multiple controllers -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+<script src="controller3.js"></script>
+<script src="service3.js"></script>
+
+<!-- mctrl will be in scope -->
+<div ng-app="my-app" ng-controller="MyController as mctrl">
+    <div>
+        Var 1: <input type="number" min="0" ng-model="mctrl.var1">
+    </div>
+    <div>
+        Var 2: <input type="number" min="0" ng-model="mctrl.var2">
+    </div>
+
+    <div>
+        Sum: {{mctrl.sum}}
+    </div>
+    <button class="btn" ng-click="mctrl.add()">Add</button>
+    <button class="btn" ng-click="mctrl.logSomething()">Log</button>
+</div>

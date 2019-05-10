@@ -1,0 +1,19 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+
+<div ng-app ng-init="var1=3;var2=2">
+    <!-- data binding -->
+    <div>
+        Var 1: <input type="number" min="0" ng-model="var1">
+    </div>
+    <div>
+        Var 2: <input type="number" min="0" ng-model="var2">
+    </div>
+    <div>
+        <span>Var 1 * Var 2 =</span>{{var1 * var2}}
+    </div>
+    <!-- same stuff with a filter -->
+    <div>
+        <span>Var 1 * Var 2 =</span>{{var1 * var2 | currency}}
+    </div>
+</div>
+
