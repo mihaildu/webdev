@@ -1,12 +1,17 @@
+import store from "../../store";
+
+const MapStateToProps = state => ({
+    data: state.data,
+    secretValue: state.secretValue
+});
+
+const MapDispatchToProps = null;
+
 class MainController {
     constructor($scope) {
-        /**
-         * passing down data:
-         *   pass reference to this.data via prop
-         *   store it in scope and child can access it via $parent
-         */
-        this.data = 100;
-        $scope.secretValue = 10;
+        const { data, secretValue } = MapStateToProps(store.getState());
+        this.data = data;
+        $scope.secretValue = secretValue;
     }
 }
 
