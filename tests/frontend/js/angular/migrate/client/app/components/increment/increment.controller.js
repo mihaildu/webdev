@@ -1,11 +1,30 @@
+import store from "../../store";
+import ActionTypes from "../../actions";
+
+const MapStateToProps = state => ({
+    data: state.data
+});
+
+const MapDispatchToProps = dispatch => ({
+    incrementNumber() {
+        dispatch({type: ActionTypes.INCREMENT_NUMBER});
+    }
+});
+
 class IncrementController {
-    constructor($scope) {
+    constructor() {
+        this.computeComponentState();
+        const { incrementNumber } = MapDispatchToProps(store.dispatch);
         this.increment = function() {
-            $scope.$parent.secretValue = $scope.$parent.secretValue + 1;
+            incrementNumber();
+        }
+    }
+    computeComponentState = () => {
+        const { data } = MapStateToProps(store.getState());
+        if (this.data !== data) {
+            this.data = data;
         }
     }
 }
-
-IncrementController.$inject = ['$scope'];
 
 export default IncrementController;
