@@ -7,17 +7,12 @@ const MapStateToProps = state => ({
 const MapDispatchToProps = null;
 
 class MainController {
-    constructor($rootScope) {
-        this.$rootScope = $rootScope;
-    }
-    $onInit() {
-        reduxComponentInit(this, MapStateToProps, MapDispatchToProps);
-    }
-    $onDestroy() {
-        reduxComponentDestroy(this);
+    constructor($ngRedux, $scope) {
+        let unsubscribe = $ngRedux.connect(MapStateToProps, MapDispatchToProps)(this);
+        $scope.$on('$destroy', unsubscribe);
     }
 }
 
-MainController.$inject = ['$rootScope'];
+MainController.$inject = ['$ngRedux', '$scope'];
 
 export default MainController;

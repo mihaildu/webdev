@@ -13,12 +13,12 @@ const MapDispatchToProps = dispatch => ({
 });
 
 class IncrementController {
-    $onInit() {
-        reduxComponentInit(this, MapStateToProps, MapDispatchToProps);
-    }
-    $onDestroy() {
-        reduxComponentDestroy(this);
+    constructor($ngRedux, $scope) {
+        let unsubscribe = $ngRedux.connect(MapStateToProps, MapDispatchToProps)(this);
+        $scope.$on('$destroy', unsubscribe);
     }
 }
+
+IncrementController.$inject = ['$ngRedux', '$scope'];
 
 export default IncrementController;

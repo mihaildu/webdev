@@ -1,10 +1,13 @@
 import React from "react";
 import createReactClass from "create-react-class";
+
 import { reduxComponentInit, reduxComponentDestroy } from "../../reduxMisc";
 import ActionTypes from "../../actions";
+import { connect } from "../../store";
 
 const MapStateToProps = state => ({
-    data: state.data
+    data: state.data,
+    secretValue: state.secretValue
 });
 
 const MapDispatchToProps = dispatch => ({
@@ -13,29 +16,20 @@ const MapDispatchToProps = dispatch => ({
     }
 });
 
-const Increment = createReactClass({
-    componentWillMount() {
-        reduxComponentInit(this, MapStateToProps, MapDispatchToProps);
-    },
-    componentWillUnmount() {
-        reduxComponentDestroy(this);
-    },
-    handleClick() {
-        this.incrementNumber();
-        // TODO embed this into action dispatching
-        this.forceUpdate();
-    },
+class NewIncrement extends React.Component {
     render() {
-        const reactStyles = {
-            //marginTop: '10px'
-        };
+        const { data, secretValue } = this.props;
         return (
-            <div style={reactStyles}>
-              <button onClick={this.handleClick}>Increment</button>
-              <div>Data has a value of {this.data}</div>
+            <div>
+              <button onClick={() => this.props.incrementNumber()}>Increment</button>
+              <div>Data has a value of {data}</div>
+              <div>Secret value {secretValue}</div>
             </div>
         );
     }
-});
+}
 
-export default Increment;
+export default connect(
+    MapStateToProps,
+    MapDispatchToProps
+)(NewIncrement);

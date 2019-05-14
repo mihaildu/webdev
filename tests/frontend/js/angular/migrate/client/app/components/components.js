@@ -1,4 +1,5 @@
 import angular from 'angular';
+import { react2angular } from "react2angular";
 
 import Home from './home/home';
 import About from './about/about';
@@ -12,14 +13,12 @@ let angularComponents = angular.module('app.components', [
     Home,
     About,
     MainComponent,
-    IncrementComponent
-])
-
-.name;
+    IncrementComponent,
+]).name;
 
 let reactComponents = {
-    ReactIncrement,
-    ReactComp
+    ReactIncrement: react2angular(ReactIncrement),
+    ReactComp: react2angular(ReactComp)
 };
 
 export { angularComponents, reactComponents };
