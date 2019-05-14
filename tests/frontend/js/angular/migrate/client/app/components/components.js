@@ -4,7 +4,9 @@ import About from './about/about';
 import MainComponent from './maincomponent/maincomponent';
 import IncrementComponent from './increment/increment';
 
-let componentModule = angular.module('app.components', [
+import ReactComp from './reactcomp/ReactComp';
+
+let angularComponents = angular.module('app.components', [
     Home,
     About,
     MainComponent,
@@ -13,4 +15,8 @@ let componentModule = angular.module('app.components', [
 
 .name;
 
-export default componentModule;
+let reactComponents = {
+    ReactComp
+};
+
+export { angularComponents, reactComponents };
