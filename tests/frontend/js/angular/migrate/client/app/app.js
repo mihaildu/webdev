@@ -1,5 +1,6 @@
 import angular from 'angular';
 import createReactClass from "create-react-class";
+import lodash from "lodash";
 
 import { angularComponents, reactComponents } from './components/components';
 import AppComponent from './app.component';
@@ -14,5 +15,7 @@ app.config(($locationProvider) => {
 app.component('app', AppComponent);
 
 for (let reactComponent in reactComponents) {
-    app.value(reactComponent, reactComponents[reactComponent]);
+    app.directive(lodash.lowerFirst(reactComponent), ['reactDirective', function(reactDirective) {
+        return reactDirective(reactComponents[reactComponent]);
+    }]);
 }
