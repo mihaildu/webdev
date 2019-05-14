@@ -1,4 +1,4 @@
-import store from "../../store";
+import { reduxComponentInit, reduxComponentDestroy } from "../../reduxMisc";
 
 const MapStateToProps = state => ({
     secretValue: state.secretValue
@@ -7,18 +7,11 @@ const MapStateToProps = state => ({
 const MapDispatchToProps = null;
 
 class MainController {
-    constructor() {
-        this.computeComponentState();
-        store.subscribe(this.computeComponentState);
+    $onInit() {
+        reduxComponentInit(this, MapStateToProps, MapDispatchToProps);
     }
-    // TODO this function is the same for each component
-    // write it at a higher level/in common (e.g. component init)
-    // component.componentInit(MapStateToProps)
-    computeComponentState = () => {
-        const { secretValue } = MapStateToProps(store.getState());
-        if (this.secretValue !== secretValue) {
-            this.secretValue = secretValue;
-        }
+    $onDestroy() {
+        reduxComponentDestroy(this);
     }
 }
 

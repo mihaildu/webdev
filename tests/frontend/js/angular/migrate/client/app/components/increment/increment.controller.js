@@ -1,5 +1,6 @@
 import store from "../../store";
 import ActionTypes from "../../actions";
+import { reduxComponentInit, reduxComponentDestroy } from "../../reduxMisc";
 
 const MapStateToProps = state => ({
     data: state.data
@@ -12,18 +13,11 @@ const MapDispatchToProps = dispatch => ({
 });
 
 class IncrementController {
-    constructor() {
-        this.computeComponentState();
-        const { incrementNumber } = MapDispatchToProps(store.dispatch);
-        this.increment = function() {
-            incrementNumber();
-        }
+    $onInit() {
+        reduxComponentInit(this, MapStateToProps, MapDispatchToProps);
     }
-    computeComponentState = () => {
-        const { data } = MapStateToProps(store.getState());
-        if (this.data !== data) {
-            this.data = data;
-        }
+    $onDestroy() {
+        reduxComponentDestroy(this);
     }
 }
 
