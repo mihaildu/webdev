@@ -7,6 +7,9 @@ const MapStateToProps = state => ({
 const MapDispatchToProps = null;
 
 class MainController {
+    constructor($rootScope) {
+        this.$rootScope = $rootScope;
+    }
     $onInit() {
         reduxComponentInit(this, MapStateToProps, MapDispatchToProps);
     }
@@ -14,5 +17,7 @@ class MainController {
         reduxComponentDestroy(this);
     }
 }
+
+MainController.$inject = ['$rootScope'];
 
 export default MainController;

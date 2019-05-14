@@ -30,6 +30,12 @@ function computeComponentState(component, MapStateToProps) {
             component[prop] = values[prop];
         }
     }
+    // TODO only do once per action dispatched
+    if (typeof(component['$rootScope']) !== 'undefined') {
+        if(!component.$rootScope.$$phase) {
+            component.$rootScope.$apply();
+        }
+    }
 }
 
 export { reduxComponentInit, reduxComponentDestroy };

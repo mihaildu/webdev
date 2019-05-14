@@ -1,9 +1,11 @@
 import angular from 'angular';
+
 import Home from './home/home';
 import About from './about/about';
 import MainComponent from './maincomponent/maincomponent';
 import IncrementComponent from './increment/increment';
 
+import ReactIncrement from './reactincrement/Increment';
 import ReactComp from './reactcomp/ReactComp';
 
 let angularComponents = angular.module('app.components', [
@@ -16,6 +18,7 @@ let angularComponents = angular.module('app.components', [
 .name;
 
 let reactComponents = {
+    ReactIncrement,
     ReactComp
 };
 
