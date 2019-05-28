@@ -35,9 +35,10 @@ const Holidays = require('date-holidays');
 
 main();
 
-function main(){
 
-  test62_holidays();
+function main(){
+  test63_obj_filter();
+  //test62_holidays();
   //test61_destructuring();
   //test60_lodash();
   //test59_util();
@@ -105,6 +106,25 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test63_obj_filter() {
+  function filterObject(mobj, filterKeys) {
+    return Object.keys(mobj).reduce((acc, val) => {
+      if (filterKeys.indexOf(val) >= 0) {
+        acc[val] = mobj[val];
+      }
+      return acc;
+    }, {});
+  }
+
+  const mobj = {
+    key1: 'val1',
+    key2: 'val2',
+    key3: 'val3'
+  };
+  const filterKeys = ['key1', 'key2'];
+  console.log(filterObject(mobj, filterKeys));
 }
 
 function test62_holidays() {
