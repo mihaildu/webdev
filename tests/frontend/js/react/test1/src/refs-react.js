@@ -25,6 +25,16 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Bar, BarChart } from 'recharts';
 
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import { Admin, Resource } from 'react-admin';
+import restProvider from 'ra-data-simple-rest';
+
 /*
  * you can also import CSS files
  * TODO figure out why this doesn't work
@@ -34,7 +44,9 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Bar, BarChart } 
 main();
 
 function main(){
-  test9_recharts();
+  test11_react_admin();
+  //test10_material_ui();
+  //test9_recharts();
   //test8_react_matrix();
   //test7_react_map();
   //test6_render();
@@ -43,6 +55,85 @@ function main(){
   //test2_docs();
   //test3_styled_components();
   //test4_react_router();
+}
+
+function test11_react_admin() {
+  // TODO
+  // <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
+  ReactDOM.render(
+    <Admin dataProvider={restProvider('http://localhost:3000')}>
+        <p>Hi</p>
+    </Admin>,
+    document.getElementById("root")
+  );
+}
+
+function test10_material_ui() {
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
+
+  function SimpleSelect() {
+
+    const classes = useStyles();
+    const [values, setValues] = React.useState({
+      age: '',
+      name: 'hai',
+    });
+
+    const inputLabel = React.useRef(null);
+    const [labelWidth, setLabelWidth] = React.useState(0);
+    React.useEffect(() => {
+      setLabelWidth(inputLabel.current.offsetWidth);
+    }, []);
+
+    function handleChange(event) {
+      setValues(oldValues => {
+        const newValues = {...oldValues};
+        newValues[event.target.name] = event.target.value
+        return newValues;
+      });
+    }
+
+    return (
+      <form className={classes.root} autoComplete="off">
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-simple">Age</InputLabel>
+          <Select
+          value={values.age}
+          onChange={handleChange}
+          inputProps={{
+            name: 'age',
+            id: 'age-simple',
+          }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+      </form>
+    );
+  }
+
+  ReactDOM.render(
+    <SimpleSelect />,
+    document.getElementById("root")
+  );
 }
 
 function test9_recharts() {

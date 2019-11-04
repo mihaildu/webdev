@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.1.0",
     "google-maps-react": "^2.0.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "ra-data-simple-rest": "^2.9.8",
+    "react": "16.8.0",
+    "react-admin": "^2.9.8",
+    "react-dom": "16.8.0",
     "react-router-dom": "^4.2.2",
     "recharts": "^1.5.0",
     "styled-components": "^3.1.6",
@@ -21,6 +24,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7"
