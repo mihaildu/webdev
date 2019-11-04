@@ -2,11 +2,24 @@
  * Sending a POST to graphql api from client side
  */
 
-graphql_mutation();
+graphql_react_admin();
+//graphql_mutation();
 //graphql_obj();
 //graphql_escaping();
 //graphql_jquery();
 //graphql_xhr();
+
+function graphql_react_admin() {
+  $.ajax({
+    type : "POST",
+    dataType : "json",
+    contentType: "application/json; charset=utf-8",
+    data : {query: "{ hello }"},
+    success : function(result) {
+      console.log(result);
+    },
+  });
+}
 
 function graphql_mutation() {
     /**
