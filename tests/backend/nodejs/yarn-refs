@@ -3,3 +3,6 @@ yarn add [package-name]
 
 # on dev
 yarn add --dev [package-name]
+
+# listing packages
+yarn list --pattern [name]
