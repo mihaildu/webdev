@@ -5,7 +5,8 @@ module.exports = {
   context: __dirname,
   devtool: debug ? "inline-sourcemap" : null,
   //entry: "./src/refs-apollo-client.js",
-  entry: "./src/subscriptions.js",
+  //entry: "./src/subscriptions.js",
+  entry: "./src/refs-react-admin.js",
   module: {
     rules: [
       {
