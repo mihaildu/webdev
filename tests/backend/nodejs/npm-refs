@@ -219,3 +219,9 @@ npm install npm@latest -g
 npx jest
 
 # npx will look for binaries in node_modules/.bin along the tree
+
+# listing the dependency tree
+npm list
+
+# listing all versions for a package
+npm list <package>
