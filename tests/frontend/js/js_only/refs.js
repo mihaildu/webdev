@@ -21,23 +21,24 @@ let { differenceInCalendarDays } = require("date-fns");
 let moment = require("moment-timezone");
 let cn = require("classnames");
 const path = require("path");
-
 const axios = require("axios");
 const { parse } = require("node-html-parser");
 const cheerio = require("cheerio");
 var $ = require("jquery");
-
 const util = require("util");
-
 const momento = require("moment");
-
 const Holidays = require('date-holidays');
+const libphonenumber = require('libphonenumber-js');
 
 main();
 
 
 function main(){
-  test63_obj_filter();
+
+  test66_truthy();
+  //test65_time();
+  //test64_libphonenumber_js();
+  //test63_obj_filter();
   //test62_holidays();
   //test61_destructuring();
   //test60_lodash();
@@ -106,6 +107,54 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test66_truthy() {
+  // truthy value = converting values to true/false
+  // type coercion by applying not !
+  // going back to the true value by applying it again
+  console.log(!!null);
+}
+
+function test65_time() {
+  // measuring time in javascript
+  const t0 = performance.now();
+  console.log(t0);
+}
+
+function test64_libphonenumber_js() {
+
+  //const myPhoneNumber = '+12345678910';
+  const myPhoneNumber = '+1 234 567 8910';
+  //const myPhoneNumber = '+1 234 567 8';
+
+
+  console.log(libphonenumber.isValidNumber(myPhoneNumber));
+  //console.log(libphonenumber.format(myPhoneNumber, 'E.164'));
+  //console.log(libphonenumber.format(myPhoneNumber, 'E.164'));
+  return;
+  
+  //const myPhoneNumber = '+1234567891';
+  //const parsedNumber = libphonenumber.parse(myPhoneNumber);
+  //const intNumber = libphonenumber.format(parsedNumber, 'International');
+
+  const tmp2121 = 'odsiajdosa';
+  //const tmp2121 = '+1 234 567';
+  console.log(libphonenumber.isValidNumber(tmp2121));
+  console.log(libphonenumber.format(tmp2121, 'E.164'));
+  //console.log(libphonenumber.format(myPhoneNumber, 'E.164'));
+
+  //console.log(libphonenumber.format(intNumber, 'E.164'));
+  //console.log(intNumber);
+  //console.log(libphonenumber.isValidNumber(myPhoneNumber));
+
+
+  //console.log(libphonenumber.parse(myPhoneNumber));
+  //if (libphonenumber.parse(myPhoneNumber)) { console.log('hi'); }
+
+
+  //console.log(libphonenumber.isValidNumber(parsedNumber));
+  //console.log(parsedNumber);
 }
 
 function test63_obj_filter() {
@@ -2578,6 +2627,19 @@ function test12_error(){
     console.log(err);
   }
   console.log(x);
+
+  // try - runs code, if err is encountered -> catch, finally -> both cases
+  // TODO test this
+  try {
+    const a = ldkjsaldka;
+  }
+  catch (err) {
+    console.log('error');
+  }
+  finally {
+    console.log('finally');
+  }
+
 }
 
 function test11_boolean(){
@@ -2673,6 +2735,9 @@ function test8_statements(){
     console.log(elem);
     console.log(index);
   });
+
+  // this also works
+  [].forEach(elem => console.log(elem));
 
   s = 0;
   var j = 0;
