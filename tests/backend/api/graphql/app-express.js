@@ -193,6 +193,16 @@ const dynamicSchema = new GraphQLSchema({query: queryType});
 /*     graphiql: true */
 /* })); */
 
+// adding cors (e.g. when accessing a website via apache -> graphql for queries)
+// this middleware has to be applied before /graphql
+const cors = require("cors");
+// these are optional, by default everything is allowed
+const corsOptions = {
+  origin: 'http://127.0.0.1',
+  credentials: false
+};
+
+app.use(cors(corsOptions));
 
 /**
  * you can change the context (e.g. to add a db)
