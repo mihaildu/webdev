@@ -1,0 +1,34 @@
+query firstQuery {
+  users {
+    id,
+    name,
+    email
+  }
+}
+
+query secondQuery {
+  user(id: 1) {
+    name,
+    email
+  }
+}
+
+mutation firstMutation {
+  createUser(user:	{
+    name: "Third User",
+    email: "thirduser@mail.com"
+  }) {
+    name,
+    email
+  }
+}
+
+mutation secondMutation {
+  updateUser(id: 1, user:	{
+    name: "X User",
+    email: "xuser@mail.com"
+  }) {
+    name,
+    email
+  }
+}
