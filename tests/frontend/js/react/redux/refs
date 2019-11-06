@@ -1,6 +1,6 @@
 # so redux is like flux, but it's not tied to react
 
-# to install
+# to install (you need this for react-redux too)
 npm install --save redux
 
 # apparently it should work without any bundler/webpack

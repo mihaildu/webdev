@@ -1,6 +1,11 @@
 import ActionTypes from "./actions";
 import * as _ from "lodash";
 
+// TODO use
+/* Object.assign({}, state, { */
+/*         someVar: action.someVar */
+/*       }) */
+
 function mainReducer(state, action) {
   //const newState = _.cloneDeep(state);
   const newState = _.clone(state);
