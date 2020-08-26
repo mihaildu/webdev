@@ -225,3 +225,31 @@ npm list
 
 # listing all versions for a package
 npm list <package>
+
+# using multiple versions of node - nvm
+# install
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+# install a new version of node
+nvm install 6.14.4
+
+# listing installed versions
+nvm list
+
+# uninstalling a version
+nvm uninstall 6.14.4
+
+# listing all possible versions to install
+nvm ls-remote
+
+# using a version you installed
+nvm use 6.14.4
+
+# going back to system node
+nvm deactivate
+
+# running a script with a specific version
+nvm run node 6.14.4 script.js
+
+# setting default node version to use
+nvm alias default 8.1.0
