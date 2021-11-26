@@ -1,0 +1,35 @@
+# install prisma
+npm install -g prisma
+
+# make sure you have docker installed (refs-docker)
+
+# init prisma (this will create hello-world directory)
+prisma init hello-world
+
+# make prisma work on linux
+edit docker-compose.yml
+# add network_mode: "host" & replace host with 127.0.0.1
+services:
+  prisma:
+    restart: always
+    network_mode: "host"
+    ...
+    environment:
+      PRISMA_CONFIG: |
+        port: ...
+        ...
+        databases:
+          default:
+            ...
+            host: 127.0.0.1
+            ...
+
+# start prisma
+cd hello-world
+docker-compose up -d
+
+# now you can access it at
+http://localhost:4466/
+
+# deploy??
+prisma deploy
