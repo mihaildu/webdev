@@ -27,6 +27,10 @@ npm install webpack webpack-cli --save-dev
 npm install react react-dom
 npm install babel-loader @babel/core @babel/preset-env @babel/preset-react --save-dev
 
+# optional: might need babel transform runtime plugin
+# if so, add it to .babelrc (example in test4)
+npm install @babel/plugin-transform-runtime --save-dev
+
 # optional: install transform class properties too
 npm install @babel/plugin-proposal-class-properties --save-dev
 
@@ -42,6 +46,15 @@ webpack (if installed globally)
 
 # to avoid running webpack everytime you change the js file
 webpack --watch
+
+# to server the file, from dist
+python -m SimpleHTTPServer
+
+# you can also use webpack-dev-server
+npm install webpack-dev-server --save-dev
+
+# check
+webpack.config.js.new.devserver
 
 # more on react
 
