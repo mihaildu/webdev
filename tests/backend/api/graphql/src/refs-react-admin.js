@@ -5,7 +5,7 @@ import ApolloClient from "apollo-boost";
 
 import { Admin, Resource, Delete } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql';
-
+import buildPostgraphileProvider from 'ra-postgraphile-client';
 import {
   List,
   Datagrid,
@@ -17,6 +17,8 @@ import {
   DisabledInput,
   TextInput
 } from 'react-admin';
+
+import Members from './Members';
 
 function queryGraphql() {
   const client = new ApolloClient({
@@ -69,6 +71,7 @@ const UserCreate = (props) => (
 );
 
 const handleUserAction = (action, params) => {
+
   const handleGetList = params => ({
     query: gql`query {
       users {
@@ -199,6 +202,8 @@ const handleUserAction = (action, params) => {
     DELETE_MANY: handleDeleteMany,
     GET_MANY_REFERENCE: handleGetManyReference
   };
+
+  return actionHandlers[action](params);
 }
 
 const buildQuery = introspectionResults => (raFetchType, resourceName, params) => {
@@ -228,6 +233,12 @@ const buildQuery = introspectionResults => (raFetchType, resourceName, params) =
   return null;
 };
 
+const UsersAdmin = ({ dataProvider }) => (
+  <Admin dataProvider={dataProvider}>
+    <Resource name="User" list={UserList} edit={UserEdit} create={UserCreate} />
+  </Admin>
+);
+
 class App extends React.Component {
   constructor() {
     super();
@@ -235,21 +246,34 @@ class App extends React.Component {
   }
   componentDidMount() {
     const client = new ApolloClient({
-      uri: "http://127.0.0.1:3000/graphql"
+      //uri: "http://127.0.0.1:3000/graphql"
+      uri: "http://127.0.0.1:5000/graphql"
     });
-    buildGraphQLProvider({ client, buildQuery })
-      .then(dataProvider => {
-        this.setState({ dataProvider });
-      });
+
+    buildPostgraphileProvider({
+      apolloHttpLinkOptions: {
+        uri: `http://127.0.0.1:5000/graphql`
+      }
+    }).then(dataProvider => {
+      this.setState({ dataProvider });
+    });
+    /* buildGraphQLProvider({ client, buildQuery }) */
+    /*   .then(dataProvider => { */
+    /*     this.setState({ dataProvider }); */
+    /*   }); */
   }
   render() {
+    //console.log
     const { dataProvider } = this.state;
     if (!dataProvider) {
       return <div>Loading</div>;
     }
+
+    //return (<p>Hi</p>);
+    // <UsersAdmin dataProvider={dataProvider} />
     return (
       <Admin dataProvider={dataProvider}>
-        <Resource name="User" list={UserList} edit={UserEdit} create={UserCreate} />
+        {Members}
       </Admin>
     );
   }
