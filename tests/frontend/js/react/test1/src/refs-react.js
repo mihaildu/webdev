@@ -50,6 +50,8 @@ import Select from "@material-ui/core/Select";
 import { Admin, Resource } from "react-admin";
 import restProvider from "ra-data-simple-rest";
 
+import { Auth0Provider } from '@auth0/auth0-react';
+
 /*
  * you can also import CSS files
  * TODO figure out why this doesn't work
@@ -59,7 +61,9 @@ import restProvider from "ra-data-simple-rest";
 main();
 
 function main() {
-  test12_perf();
+  test14_children();
+  //test13_auth0();
+  //test12_perf();
   //test11_react_admin();
   //test10_material_ui();
   //test9_recharts();
@@ -71,6 +75,38 @@ function main() {
   //test2_docs();
   //test3_styled_components();
   //test4_react_router();
+}
+
+function test14_children() {
+  const MyComp = ({ children }) => {
+    console.log(children);
+    console.log(typeof children);
+    return (<div>Hi</div>);
+  };
+
+  ReactDOM.render(
+    <MyComp>
+      Hi
+    </MyComp>,
+    document.getElementById("root")
+  );
+}
+
+function test13_auth0() {
+
+  const MyComp = () => {
+    return (<div>Hi</div>);
+  };
+
+  ReactDOM.render(
+    <Auth0Provider
+       domain='domain'
+       clientId='clientId'
+       redirectUri={window.location.origin}>
+      <MyComp />
+    </Auth0Provider>,
+    document.getElementById("root")
+  );
 }
 
 function test12_perf() {
@@ -290,9 +326,9 @@ function test10_material_ui() {
 
     function handleChange(event) {
       setValues(oldValues => {
-        const newValues = { ...oldValues };
-        newValues[event.target.name] = event.target.value;
-        return newValues;
+        //const newValues = { ...oldValues };
+        //newValues[event.target.name] = event.target.value;
+        //return newValues;
       });
     }
 
