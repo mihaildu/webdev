@@ -1,0 +1,37 @@
+https://github.com/lerna/lerna
+
+npm init
+npm i lerna
+npx lerna init
+
+# adding packages - using lerna
+npx lerna create <name>
+
+# manual
+create directory in packages/<name>
+cd packages/<name> && npm init
+create index.js
+make sure package.json has "main": "index.js"
+in index.js: module.exports = { ... }
+
+# add package 1 as a dep to package 2
+# linking all package together if needed (adds symlinks and stuff)
+# also adds package as a requirement
+npx lerna add my-package-1
+
+# this also adds it to all the other packages...
+# maybe if I run from inside local package - nope
+
+# running `npm i` won't work anymore
+# instead run this
+# this will link all packages in every other package
+npx lerna bootstrap --hoist
+
+# to remove all node_modules from packages
+npx lerna clean -y
+
+# starting one app
+npx lerna run start --scope=my-package-1
+
+# you can add packages common to every package like this
+npx lerna add react@^16.6.3
