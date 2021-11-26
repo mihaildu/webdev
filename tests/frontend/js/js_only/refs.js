@@ -32,10 +32,9 @@ const libphonenumber = require('libphonenumber-js');
 
 main();
 
-
 function main(){
-
-  test66_truthy();
+  //test67_if_statement_eval();
+  //test66_truthy();
   //test65_time();
   //test64_libphonenumber_js();
   //test63_obj_filter();
@@ -107,6 +106,26 @@ function main(){
   //test3_fac(5);
   //test2_sum(10, 2);
   //test1();
+}
+
+function test67_if_statement_eval() {
+  // short-circuit evaluation
+  // https://en.wikipedia.org/wiki/Short-circuit_evaluation
+  function cond1() {
+    console.log('cond1');
+    return true;
+  }
+
+  function cond2() {
+    console.log('cond2');
+    return false;
+  }
+
+  if(cond1() || cond2()) {}
+  console.log('-----');
+  if(cond2() && cond1()) {}
+  console.log('-----');
+  if(cond1() && cond2()) {}
 }
 
 function test66_truthy() {
@@ -438,6 +457,12 @@ function test50_case_sensitive() {
 }
 
 function test49_colors() {
+
+  const tmpc = color('#a4947d').lighten(0.09);
+  console.log(tmpc.string());
+  return;
+
+  
   /**
    * color package allows you to play with colors
    * https://www.npmjs.com/package/color
