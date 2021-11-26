@@ -6,3 +6,9 @@ yarn add --dev [package-name]
 
 # listing packages
 yarn list --pattern [name]
+
+# linking a package - in src code
+yarn link
+
+# linking a package - in dst
+yarn link <package-name>
