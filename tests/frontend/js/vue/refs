@@ -1,0 +1,97 @@
+# api
+https://vuejs.org/v2/api/
+
+# docs
+https://vuejs.org/v2/guide
+
+# steps
+npm install vue
+
+# vue cli (fastest way to get started)
+https://cli.vuejs.org/
+vue create my-project
+
+# you have multiple sections in the same .vue file
+<template>
+<script>
+<style>
+
+# you can serve single components with @vue/cli-service-global
+npm install -g @vue/cli @vue/cli-service-global
+vue serve MyComponent.vue
+
+# you can also build it
+vue build MyComponent.vue
+
+# you can add plugins with vue add
+vue add eslint
+
+# presets (default values and stuff)
+~/.vuerc
+
+# remote presets (git repo)
+preset.json
+generator.json
+prompts.js
+
+# to use the presets from there in my-project
+vue create --preset username/repo my-project
+
+# you can also use bitbucket, by scoping
+vue create --preset bitbucket:username/repo my-project
+
+# for private repos use --clone
+vue create --preset bitbucket:username/repo --clone my-project
+
+# webpack analyzer??
+
+# useBuiltIns - for polyfills
+usage - automatically detects
+entry - from es6 -> es5
+false - web components
+
+# modern mode - builds 2 versions, modern one for modern browsers and legacy
+vue-cli-service build --modern
+
+# you can play with the internal vue config by using the file
+vue.config.js
+https://cli.vuejs.org/guide/html-and-static-assets.html#prefetch
+
+# you can look at webpack config
+vue inspect > output.js
+vue inspect --mode production > output.prod.js
+
+# you can also build for dev
+vue-cli-service build --mode development
+
+# it supports .env files by default (project root)
+.env
+.env.local
+.env.[mode]
+.env.[mode].local
+
+# different targets
+app
+library
+web component
+async web component
+
+vue-cli-service build --target app
+
+# you can change data inside app from console
+app.prop1
+
+# you can use props like this
+{{ prop1 }}
+
+# to use them in html attributes use v-bind
+<span v-bind:title="message">
+
+# v-bind = directive
+
+# conditional directives
+v-if="variable-name"
+
+# check more in test1/test2
+
+# vue uses virtual dom
