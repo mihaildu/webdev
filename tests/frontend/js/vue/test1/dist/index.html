@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+        <title>Test 1</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+            <span :title="title">Some span</span>
+            <div v-if="seen">Conditional rendering</div>
+            <div v-else>Oh no!</div>
+            <div>
+                <!-- you can also do (item, index) in items -->
+                For loops: [<span v-for="el in arr" :key="el">{{ el }},</span>]
+            </div>
+
+            <!-- to change arguments, we can still pass down $event -->
+            <!-- keyup for key events -->
+            <button @click="handleClick">Event handling</button>
+            <!-- input binding -->
+            <input v-model="message" />
+
+            <!-- computed prop -->
+            <div>{{ reversedMessage }}</div>
+
+            <!-- class bindings, div will have class active when isActive is true -->
+            <!-- this object can be moved to computed.classObject as a function -->
+            <!-- https://vuejs.org/v2/guide/class-and-style.html -->
+            <!-- we can also use array syntax here, not conditional by default -->
+            <div :class="{ active: isActive }">LOL</div>
+
+            <!-- inline styles -->
+            <!-- could also move this to data.styleObject -->
+            <div :style="{ backgroundColor: 'green' }">Styled inline!</div>
+            
+            <!-- using custom components -->
+            <compi :message="message" @change-message="changeMessage"></compi>
+            <!-- you can spread props from object using v-bind="obj" -->
+            <my-component p1="Prop 1" :p2="dataProp">Kids</my-component>
+
+            <!--
+                 v-once = no binding, just apply value once
+                 v-html = render html instead of plain text
+                 v-bind:[variable] = dynamic arguments
+                 v-on:submit.prevent = prevent is a modifier, it calls preventDefault()
+            -->
+
+            <!-- key works similar to react -->
+
+            <!-- using v-if with v-for not recommended, use computed props -->
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
