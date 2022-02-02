@@ -161,3 +161,6 @@ const mtt: MyTupleType = ['ll', 10];
 // with ts you can export types, interfaces
 // you can import with `import type { ... } from "..."`
 // you also have decorators
+
+// ignoring next line
+// @ts-ignore
