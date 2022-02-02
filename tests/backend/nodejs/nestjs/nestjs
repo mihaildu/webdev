@@ -1,0 +1,128 @@
+* website https://docs.nestjs.com/
+
+* node.js package to deal with arch/infra
+  * multiple node.js servers/micro-services
+
+* install
+  npm i -g @nestjs/cli
+
+* create new project
+  nest new project-name
+
+* start
+  yarn start
+  yarn start:dev (watch mode)
+
+* website
+  http://localhost:3000/
+
+* module
+  * imports
+    * other modules
+  * exports
+    * only providers that can be imported in other modules
+  * controllers
+    * implements requests + responses / routes
+      * get
+      * post
+  * providers / service
+    * internal functions
+
+* they have testing module
+  @nestjs/testing
+
+* works with express & fastify out of the box
+  * platform-express, platform-fastify
+  * can use any node http server
+
+* you can quickly create CRUD functions in controller for a resource with the cli
+  nest g resource <name>
+
+* links
+  * https://nestjs.com/
+  * https://github.com/nestjs/nest
+
+ * presentation (on official website)
+   * @kammysliwiec
+   * platform
+     * similar to angular
+       * it uses modules
+         * like a class @Module({})
+         * props
+           * controllers
+           * imports
+           * exports
+           * providers
+
+       * injectables / providers
+         * @Injectable()
+         * props
+           * provide // token - string, symbol, class
+           * useValue
+
+       * controller
+         * @Controller('string')
+         * methods??
+           * @Post
+             * create
+               * @Body (from request)
+
+       * guards
+         * request -> route // applied here
+         * e.g. auth
+         * class
+         * @Injectable
+         * implements CanActivate interface
+         * prop
+           * canActivate
+
+       * interceptor
+         * class
+         * @Injectable
+         * implements NestInterceptor
+         * prop
+           * intercept
+             * returns Observable
+               * always returns next$?
+             * args: context, next$
+
+       * pipes
+
+       * exceptions, filters
+
+       * swagger
+         * https://swagger.io/
+         * OpenAPI specification / OAS
+         * API for documentation?
+           * execute requests for metadata
+         * documentation?
+         * like clockwork docs
+
+     * built-in support
+       * web sockets
+
+     * web sockets
+       * socket.io is slow
+
+     * microservices support out of the box
+       * caching
+         * redis
+       * queues
+         * rabbitmq
+         * kafka
+
+     * developer workflow
+       * nest cli
+         * based on schematics
+
+     * news
+       * works with stackblitz
+         * https://stackblitz.com/
+
+     * open source
+
+   * scalable systems
+
+* other stuff
+  * nestjs pipeline
+    * https://darraghoriordan.medium.com/a-nest-js-pipeline-cheatsheet-aa991a249aec
