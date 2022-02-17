@@ -254,6 +254,11 @@ nvm run node 6.14.4 script.js
 # setting default node version to use
 nvm alias default 8.1.0
 
+# you can use major versions
+nvm install 16
+nvm install 14
+nvm install 12
+
 # semantic versioning / semver
 ^1.0.0 = 1.x
 >=1.0.0 = 1.x, 2.x but not 0.x etc
