@@ -5,7 +5,7 @@
   "main": "test1.js",
   "dependencies": {
     "axios": "^0.18.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "cheerio": "^1.0.0-rc.2",
     "classnames": "^2.2.6",
     "color": "^3.0.0",
