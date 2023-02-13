@@ -1,0 +1,43 @@
+# getting started (docs on left menu)
+https://reactnative.dev/docs/environment-setup
+
+# install create-expo-app package
+npm i -g create-expo-app
+
+# start new project
+npx create-expo-app my-proj
+
+# core components
+View // div
+Text // p
+Image
+ScrollView
+TextInput
+
+# material ui for react native
+https://reactnativepaper.com/
+
+# native directory - search for react native packages
+https://reactnative.directory/
+
+# turning on dev options on android 12
+tap on build number 7 times
+
+# AppLoading for fetching data??
+
+# react navigation
+https://reactnavigation.org/
+
+# books
+https://www.programming-books.io/essential/reactnative/
+http://browniefed.com/react-native-animation-book/
+https://www.reactnative.express/
+https://goalkicker.com/ReactNativeBook/
+https://www.callstack.com/campaigns/download-the-ultimate-guide-to-react-native-optimization
+
+
+# publishing app on google play / ios store - TODO
+# cica si expo te ajuta
+https://blog.logrocket.com/how-to-deploy-a-react-native-app-to-the-google-play-store/ - TODO
+
+

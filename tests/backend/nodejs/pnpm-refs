@@ -1,0 +1,7 @@
+# https://pnpm.io/
+
+# https://pnpm.io/installation
+npm install -g pnpm
+
+# it creates a new file after you run it
+pnpm-lock.yaml

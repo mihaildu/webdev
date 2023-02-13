@@ -150,3 +150,7 @@ docker inspect <container> > <container>.inspect
 # look for RestartPolicy in the file
 # to disable it
 docker update --restart=no <container>
+
+
+# running all services in a docker componse file
+docker compose up

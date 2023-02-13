@@ -1,0 +1,38 @@
+# to avoid making design myself - use some design packages
+
+# material-ui
+https://mui.com/
+
+# next-ui
+https://nextui.org/
+
+# chakra ui
+https://chakra-ui.com/
+
+# ant design
+https://ant.design/
+
+# polaris
+https://polaris.shopify.com/
+
+# bootstrap
+https://react-bootstrap.github.io/
+
+# blueprintjs
+https://blueprintjs.com/
+
+# rebass
+https://rebassjs.org/
+
+# mantine
+https://mantine.dev/
+
+# prime react
+https://primereact.org/
+
+# for react admin could also use some @expo packages
+@expo/vector-icons
+
+# for custom fonts -> expo-font
+
+# also tailwind colors
