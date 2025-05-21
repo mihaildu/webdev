@@ -1,5 +1,17 @@
 // cheatsheets https://www.typescriptlang.org/cheatsheets
 
+
+enum GrantType {
+    Otp = 'otp',
+    Biometrics = 'biometrics'
+}
+
+//const g: GrantType = 'otp';
+const g2 = GrantType.Otp;
+console.log(g2 === 'otp');
+
+process.exit();
+
 // basic types
 const city: string = 'LOL';
 const price: number = 100;

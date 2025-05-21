@@ -9,6 +9,10 @@ var t3 = require("./test3.js");
 // this is taken from node_modules/
 var us = require("underscore");
 
+var tt = require("./test9.js")
+
+console.log(tt.x)
+
 // other way of importing from different files is using ES6 modules (TODO)
 
 function main(){

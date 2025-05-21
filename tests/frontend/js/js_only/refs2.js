@@ -2,9 +2,10 @@ const fs = require('fs');
 const d3 = require("d3");
 const faker = require('faker');
 const path = require('path');
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const { JWT, JWK } = require('jose');
 const lodash = require("lodash");
+const moment = require("moment");
 //const queryString = require('query-string');
 //const dayjs = require('dayjs');
 
@@ -13,10 +14,197 @@ const lodash = require("lodash");
 //const recharts = require('recharts');
 //const { JSDOM } = require('jsdom');
 
+const joi = require('joi');
+
+const v8 = require('v8')
+
+const blacklistedWords = require('./blacklisted-words.json')
+
+const levenshtein = require('js-levenshtein');
+
+const {
+  isValidPhoneNumber
+} = require('libphonenumber-js');
+
 
 main();
 
 function main() {
+
+  //console.log(lodash.isEqual([2,1], [1,2]));
+  //console.log(isValidPhoneNumber('+447763539849'));
+  console.log(isValidPhoneNumber('+972 52 115 8475'));
+  // +972521158475
+
+  return;
+  const word = 'Brandon_Herwitz_brandon@mail.com';
+  const numAccounts = 1000;
+  const validWords = new Array(numAccounts).fill('Brandon_Horwitz_brandon@mail.com', 0, numAccounts);
+
+  const numIt = 50;
+  const startTime = performance.now()
+  
+  for (it = 0; it < numIt; it++) {
+  const diffs = validWords.map(validWord => ({
+    key: validWord,
+    diff: levenshtein(word, validWord)
+  }))
+  }
+
+  const endTime = performance.now()
+  const ms = endTime - startTime
+
+  console.log(`Time: ${ms} milliseconds`)
+  //console.log(diffs);
+  return;
+
+  //return 
+  // v2.public.
+  //const tmpaa = jwt.decode('')
+
+  const tmpaa = jwt.decode("")
+
+  const twofatoken = "";
+
+  console.log('heloo');
+  console.log(jwt.decode(tmpaa));
+
+  //console.log(tmpaa);
+
+  return;
+
+  const jkjl = {
+    test: {
+      fun: function () { console.log(this) }
+    },
+    //fun: () 
+  }
+
+  jkjl['test'].fun()
+  
+  return
+  const { error: llll } = joi.string().required().validate(12)
+
+  if (llll) {
+    console.log(llll)
+    
+  }
+  return
+
+  const lolx = Buffer.from(
+    JSON.stringify({
+      offset: 10,
+      limit: 1,
+      requestDate: new Date(),
+      page: 2
+    })
+  ).toString('base64')
+
+  const lolx2 = Buffer.from(
+    JSON.stringify({
+      offset: 10,
+      limit: 1,
+      requestDate: new Date(),
+      page: 2
+    })
+  ).toString('base64url')
+
+  console.log(lolx)
+  console.log(lolx2)
+
+  const lolxd = JSON.parse(
+    Buffer.from(lolx, 'base64').toString()
+  )
+  const lolx2d = JSON.parse(
+    Buffer.from(lolx2, 'base64url').toString()
+  )
+
+  console.log(lolxd)
+  console.log(lolx2d)
+  
+  return
+  
+  const tmp = new Intl.DateTimeFormat('en', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: 'numeric',
+                            timeZone: 'UTC',
+                        }).format(new Date())
+
+  console.log(tmp)
+
+  return
+  const blacklistRegex = new RegExp('^' + blacklistedWords.join('$|^') + '$')
+  //console.log(blacklistRegex)
+
+  const nameValidator = joi.string()
+    .min(1)
+    .max(255)
+    .disallow(...blacklistedWords)
+    .insensitive()
+    //.pattern(blacklistRegex)
+    //.pattern(blacklistRegex, { invert: true, name: 'blacklisted' })
+    .required()
+    .trim()
+  
+
+  const tmpValidator = nameValidator.custom((phrase) => {
+    const validity = phrase
+          .split(' ')
+          .map((word) => nameValidator.label(word).validate(word))
+
+    //console.log(validity)
+
+    const error = validity.find(({ error }) => !!error)
+
+    //console.log(error)
+
+    if (error?.error) {
+      //console.log('hi')
+      throw error?.error
+    }
+
+    //console.log(validity.map(({ value }) => value).join(' '))
+
+    return validity.map(({ value }) => value).join(' ')
+  }, 'blacklisted')
+
+  
+  const { error } = tmpValidator.validate('Massachusetts ass')
+  //const { error } = nameValidator.validate('ass')
+  //console.log(error)
+  
+
+  //console.log(v8.getHeapStatistics())
+  
+  //const tmp = moment().add(10, 'minutes').toDate();
+  //console.log(moment().isBefore(tmp))
+  //console.log(tmp)
+
+  //const a = false;
+  //throw new Error(a === true ? 'LOL' : 'XX')
+
+
+  //console.log(isValidPhoneNumber('+44776 353 9849'));
+
+  //const tmp = jwt.decode('');
+  //console.log(tmp);
+
+  //const data = { key1: 10, key2: 'LOL' };
+  //const data = null
+  //const b64encoded = Buffer.from(JSON.stringify(data)).toString('base64')
+  //const b64encoded = Buffer.from(data).toString('base64')
+  
+  //console.log(b64encoded);
+
+  //const b64encoded = null
+  //const decoded = JSON.parse(Buffer.from(b64encoded, 'base64').toString())
+  //console.log(decoded)
+  
+  //.toString('base64'));
+  //Buffer.from()
+  //console.log(tmp);
+  
   //url_test();
   //apply_test();
   //dayjs_test();  
